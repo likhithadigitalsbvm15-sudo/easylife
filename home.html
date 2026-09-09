@@ -2,165 +2,570 @@
 <html>
 <head>
 
+    <title>EasyLife - Free Online Tools</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: #eef5ff;
+            background: #f4f8ff;
+            color: #1f2937;
         }
 
+        /* HEADER */
+
         .header {
-            background: linear-gradient(135deg, #0d47a1, #2196f3);
+            background: linear-gradient(135deg, #0d47a1, #1976d2, #42a5f5);
             color: white;
-            padding: 30px 20px;
+            padding: 45px 20px;
             text-align: center;
         }
 
-        .header h1 {
-            margin: 0;
-            font-size: 34px;
+        .logo {
+            font-size: 38px;
+            font-weight: bold;
+            margin-bottom: 8px;
         }
 
-        .header p {
-            margin: 8px 0 20px;
+        .tagline {
+            font-size: 16px;
+            margin-bottom: 25px;
+            opacity: 0.95;
         }
 
         .search {
-            width: 90%;
-            max-width: 400px;
-            padding: 15px;
+            width: 100%;
+            max-width: 520px;
+            padding: 16px 20px;
             border: none;
-            border-radius: 12px;
+            border-radius: 30px;
             font-size: 16px;
+            outline: none;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
         }
 
+        /* MAIN */
+
+        .container {
+            max-width: 1000px;
+            margin: 35px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .section-title h2 {
+            margin: 0;
+            color: #0d47a1;
+            font-size: 28px;
+        }
+
+        .section-title p {
+            color: #64748b;
+            margin-top: 8px;
+        }
+
+        /* TOOLS */
+
         .tools {
-            padding: 20px;
-            max-width: 500px;
-            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
         }
 
         .tool {
-            background: linear-gradient(135deg, #ffffff, #e3f2fd);
+            background: white;
             padding: 22px;
-            margin-bottom: 12px;
-            border-radius: 15px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.10);
-            font-size: 18px;
+            border-radius: 16px;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.08);
             cursor: pointer;
-transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.25s ease;
+            border: 1px solid #e5edf8;
         }
 
         .tool:hover {
-    background: #e3f2fd;
-    transform: translateY(-10px);
-    box-shadow: 0 14px 28px rgba(25, 118, 210, 0.25);
-}
+            transform: translateY(-5px);
+            box-shadow: 0 12px 28px rgba(13,71,161,0.18);
+            border-color: #90caf9;
+        }
+
+        .tool-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: #e3f2fd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .tool-name {
+            font-size: 17px;
+            font-weight: bold;
+            color: #1e3a5f;
+        }
+
+        .tool-arrow {
+            font-size: 22px;
+            color: #1976d2;
+            font-weight: bold;
+        }
+
+        /* FOOTER */
+
+        .footer {
+            margin-top: 50px;
+            background: #0d47a1;
+            color: white;
+            text-align: center;
+            padding: 25px 15px;
+        }
+
+        .footer h3 {
+            margin: 0 0 8px;
+        }
+
+        .footer p {
+            margin: 5px;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 650px) {
+
+            .header {
+                padding: 35px 15px;
+            }
+
+            .logo {
+                font-size: 32px;
+            }
+
+            .tools {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+
+        }
+
     </style>
+
 </head>
 
 <body>
 
-    <div class="header">
-        <h1>EasyLife ❤️</h1>
-        <p>Simple tools for everyday life</p>
 
-        <input
-            id="searchBox"
-            class="search"
-            type="text"
-            placeholder="What do you need?"
-            oninput="searchTools()">
+<!-- HEADER -->
+
+<div class="header">
+
+    <div class="logo">
+        EasyLife ❤️
     </div>
+
+    <div class="tagline">
+        Simple & Free Tools for Everyday Life
+    </div>
+
+    <input
+        id="searchBox"
+        class="search"
+        type="text"
+        placeholder="🔍 Search a tool..."
+        oninput="searchTools()"
+    >
+
+</div>
+
+
+<!-- MAIN -->
+
+<div class="container">
+
+    <div class="section-title">
+
+        <h2>🧰 Our Tools</h2>
+
+        <p>
+            Useful tools, simple and easy to use
+        </p>
+
+    </div>
+
 
     <div class="tools">
 
-        <div class="tool" onclick="window.location.href='index.html'">
-             📄 <b>Photo → PDF</b> <span>→</span>
+
+        <div class="tool"
+             onclick="window.location.href='photo-pdf.html'">
+
+            <div class="tool-left">
+
+                <div class="icon">📄</div>
+
+                <div class="tool-name">
+                    Photo → PDF
+                </div>
+
+            </div>
+
+            <div class="tool-arrow">→</div>
+
         </div>
 
-        <div class="tool" onclick="window.location.href='pdf-image.html'">
-            🖼️ <b>PDF → Image</b> <span>→</span>
+
+        <div class="tool"
+             onclick="window.location.href='pdf-image.html'">
+
+            <div class="tool-left">
+
+                <div class="icon">🖼️</div>
+
+                <div class="tool-name">
+                    PDF → Image
+                </div>
+
+            </div>
+
+            <div class="tool-arrow">→</div>
+
         </div>
 
-        <div class="tool" onclick="window.location.href='pdf-compress.html'">
-            📦 <b>PDF Compress</b> <span>→</span>
+
+        <div class="tool"
+             onclick="window.location.href='pdf-compress.html'">
+
+            <div class="tool-left">
+
+                <div class="icon">📦</div>
+
+                <div class="tool-name">
+                    PDF Compress
+                </div>
+
+            </div>
+
+            <div class="tool-arrow">→</div>
+
         </div>
 
-        <div class="tool" onclick="window.location.href='photo-resize.html'">
-            📏 <b>Photo Resize</b> <span>→</span>
+
+        <div class="tool"
+             onclick="window.location.href='photo-resize.html'">
+
+            <div class="tool-left">
+
+                <div class="icon">📏</div>
+
+                <div class="tool-name">
+                    Photo Resize
+                </div>
+
+            </div>
+
+            <div class="tool-arrow">→</div>
+
         </div>
 
-        <div class="tool" onclick="window.location.href='emi.html'">
-            🧮 <b>EMI Calculator</b> <span>→</span>
+
+        <div class="tool"
+             onclick="window.location.href='emi.html'">
+
+            <div class="tool-left">
+
+                <div class="icon">🧮</div>
+
+                <div class="tool-name">
+                    EMI Calculator
+                </div>
+
+            </div>
+
+            <div class="tool-arrow">→</div>
+
         </div>
 
-        <div class="tool" onclick="window.location.href='interest.html'">
-            💰 <b>Interest Calculator</b> <span>→</span>
+
+        <div class="tool"
+             onclick="window.location.href='interest.html'">
+
+            <div class="tool-left">
+
+                <div class="icon">💰</div>
+
+                <div class="tool-name">
+                    Interest Calculator
+                </div>
+
+            </div>
+
+            <div class="tool-arrow">→</div>
+
         </div>
 
-        <div class="tool" onclick="window.location.href='translator.html'">
-            🌐 <b>Telugu ↔ English Translator</b> <span>→</span>
+
+        <div class="tool"
+             onclick="window.location.href='translator.html'">
+
+            <div class="tool-left">
+
+                <div class="icon">🌐</div>
+
+                <div class="tool-name">
+                    Telugu ↔ English Translator
+                </div>
+
+            </div>
+
+            <div class="tool-arrow">→</div>
+
         </div>
 
-        <div class="tool" onclick="window.location.href='scanner.html'">
-            📄 <b>Document Scanner</b> <span>→</span>
+
+        <div class="tool"
+             onclick="window.location.href='scanner.html'">
+
+            <div class="tool-left">
+
+                <div class="icon">📄</div>
+
+                <div class="tool-name">
+                    Document Scanner
+                </div>
+
+            </div>
+
+            <div class="tool-arrow">→</div>
+
         </div>
-<div class="tool" onclick="window.location.href='image-converter.html'">
-    🖼️ <b>Image → JPG/PNG</b> <span>→</span>
+
+
+        <div class="tool"
+             onclick="window.location.href='image-converter.html'">
+
+            <div class="tool-left">
+
+                <div class="icon">🖼️</div>
+
+                <div class="tool-name">
+                    Image → JPG/PNG
+                </div>
+
+            </div>
+
+            <div class="tool-arrow">→</div>
+
+        </div>
+
+
+        <div class="tool"
+             onclick="window.location.href='age.html'">
+
+            <div class="tool-left">
+
+                <div class="icon">🎂</div>
+
+                <div class="tool-name">
+                    Age Calculator
+                </div>
+
+            </div>
+
+            <div class="tool-arrow">→</div>
+
+        </div>
+
+
+        <div class="tool"
+             onclick="window.location.href='gst.html'">
+
+            <div class="tool-left">
+
+                <div class="icon">💰</div>
+
+                <div class="tool-name">
+                    GST Calculator
+                </div>
+
+            </div>
+
+            <div class="tool-arrow">→</div>
+
+        </div>
+
+
+        <div class="tool"
+             onclick="window.location.href='qr.html'">
+
+            <div class="tool-left">
+
+                <div class="icon">📱</div>
+
+                <div class="tool-name">
+                    QR Code Generator
+                </div>
+
+            </div>
+
+            <div class="tool-arrow">→</div>
+
+        </div>
+
+
+        <div class="tool"
+             onclick="window.location.href='word-counter.html'">
+
+            <div class="tool-left">
+
+                <div class="icon">📝</div>
+
+                <div class="tool-name">
+                    Word Counter
+                </div>
+
+            </div>
+
+            <div class="tool-arrow">→</div>
+
+        </div>
+
+
+        <div class="tool"
+             onclick="window.location.href='percentage.html'">
+
+            <div class="tool-left">
+
+                <div class="icon">📊</div>
+
+                <div class="tool-name">
+                    Percentage Calculator
+                </div>
+
+            </div>
+
+            <div class="tool-arrow">→</div>
+
+        </div>
+
+
+        <div class="tool"
+             onclick="window.location.href='discount.html'">
+
+            <div class="tool-left">
+
+                <div class="icon">🏷️</div>
+
+                <div class="tool-name">
+                    Discount Calculator
+                </div>
+
+            </div>
+
+            <div class="tool-arrow">→</div>
+
+        </div>
+
+
+        <div class="tool"
+             onclick="window.location.href='password.html'">
+
+            <div class="tool-left">
+
+                <div class="icon">🔐</div>
+
+                <div class="tool-name">
+                    Password Generator
+                </div>
+
+            </div>
+
+            <div class="tool-arrow">→</div>
+
+        </div>
+
+
+    </div>
+
 </div>
 
-<div class="tool" onclick="window.location.href='age.html'">
-    🎂 <b>Age Calculator</b> <span>→</span>
+
+<!-- FOOTER -->
+
+<div class="footer">
+
+    <h3>EasyLife ❤️</h3>
+
+    <p>
+        Simple tools for everyday life
+    </p>
+
+    <p>
+        © 2026 EasyLife. All rights reserved.
+    </p>
+
 </div>
 
-<div class="tool" onclick="window.location.href='gst.html'">
-    💰 <b>GST Calculator</b> <span>→</span>
-</div>
 
-<div class="tool" onclick="window.location.href='qr.html'">
-    📱 <b>QR Code Generator</b> <span>→</span>
-</div>
-<div class="tool" onclick="window.location.href='word-counter.html'">
-    📝 <b>Word Counter</b> <span>→</span>
-</div>
-<div class="tool" onclick="window.location.href='percentage.html'">
-    🧮 <b>Percentage Calculator</b> <span>→</span>
-</div>
-<div class="tool" onclick="window.location.href='discount.html'">
-    🏷️ <b>Discount Calculator</b> <span>→</span>
-</div>
+<script>
 
-    <div class="tool" onclick="window.location.href='password.html'">
-    🔐 <b>Password Generator</b> <span>→</span>
-</div>
+function searchTools() {
 
-    <script>
+    const query =
+        document
+        .getElementById("searchBox")
+        .value
+        .toLowerCase()
+        .trim();
 
-        function searchTools() {
+    const tools =
+        document.querySelectorAll(".tool");
 
-            const query = document
-                .getElementById("searchBox")
-                .value
-                .toLowerCase()
-                .trim();
+    tools.forEach(function(tool) {
 
-            const tools = document.querySelectorAll(".tool");
+        const text =
+            tool.innerText.toLowerCase();
 
-            tools.forEach(function(tool) {
+        if (text.includes(query)) {
 
-                const text = tool.innerText.toLowerCase();
+            tool.style.display = "flex";
 
-                if (text.includes(query)) {
-                    tool.style.display = "block";
-                } else {
-                    tool.style.display = "none";
-                }
+        } else {
 
-            });
+            tool.style.display = "none";
+
         }
 
-    </script>
+    });
+
+}
+
+</script>
+
 
 </body>
 </html>
