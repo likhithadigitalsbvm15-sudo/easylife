@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Age Calculator - EasyLife</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f2f7ff;
+            text-align: center;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1976d2, #42a5f5);
+            color: white;
+            padding: 30px 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 30px;
+        }
+
+        .box {
+            background: white;
+            max-width: 450px;
+            margin: 30px auto;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+        }
+
+        input, button {
+            margin: 10px;
+            padding: 12px;
+            font-size: 16px;
+        }
+
+        button {
+            background: #1976d2;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #125ca8;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>🎂 Age Calculator</h1>
+        <p>Calculate your exact age</p>
+    </div>
+
+    <div class="box">
+
+        <h2>Enter your Date of Birth</h2>
+
+        <input type="date" id="dob">
+
+        <br>
+
+        <button onclick="calculateAge()">Calculate Age</button>
+
+        <div id="result"></div>
+
+    </div>
+
+    <script>
+
+        function calculateAge() {
+
+            const dobValue = document.getElementById("dob").value;
+
+            if (!dobValue) {
+                alert("Please select your date of birth.");
+                return;
+            }
+
+            const dob = new Date(dobValue);
+            const today = new Date();
+
+            let years = today.getFullYear() - dob.getFullYear();
+            let months = today.getMonth() - dob.getMonth();
+            let days = today.getDate() - dob.getDate();
+
+            if (days < 0) {
+                months--;
+                const previousMonth = new Date(
+                    today.getFullYear(),
+                    today.getMonth(),
+                    0
+                );
+                days += previousMonth.getDate();
+            }
+
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
+
+            document.getElementById("result").innerHTML =
+                "Your Age: " + years + " Years, " +
+                months + " Months, " +
+                days + " Days";
+
+        }
+
+    </script>
+
+</body>
+</html>

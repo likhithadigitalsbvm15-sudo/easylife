@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EasyLife - Voice to Text</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f2f7ff;
+            text-align: center;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1976d2, #42a5f5);
+            color: white;
+            padding: 30px 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 30px;
+        }
+
+        .box {
+            background: white;
+            max-width: 500px;
+            margin: 25px auto;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+        }
+
+        select {
+            width: 90%;
+            padding: 12px;
+            margin: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        textarea {
+            width: 90%;
+            height: 180px;
+            padding: 12px;
+            margin: 10px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            font-size: 17px;
+            resize: none;
+        }
+
+        button {
+            background: #1976d2;
+            color: white;
+            border: none;
+            padding: 13px 25px;
+            margin: 8px 5px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #125ca8;
+        }
+
+        #status {
+            margin: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>🎤 Voice → Text</h1>
+        <p>Speak and convert your voice into text</p>
+    </div>
+
+    <div class="box">
+
+        <select id="language">
+            <option value="te-IN">తెలుగు</option>
+            <option value="en-IN">English</option>
+            <option value="hi-IN">हिंदी</option>
+        </select>
+
+        <br>
+
+        <button onclick="startVoice()">🎤 Start Speaking</button>
+
+        <button onclick="stopVoice()">⏹️ Stop</button>
+
+        <div id="status">Ready</div>
+
+        <textarea id="result" placeholder="Your speech will appear here..."></textarea>
+
+        <br>
+
+        <button onclick="copyText()">📋 Copy Text</button>
+
+        <button onclick="goHome()">🏠 Home</button>
+
+    </div>
+
+    <script>
+
+        let recognition;
+
+        function startVoice() {
+
+            const SpeechRecognition =
+                window.SpeechRecognition ||
+                window.webkitSpeechRecognition;
+
+            if (!SpeechRecognition) {
+                alert("Voice recognition is not supported in this browser.");
+                return;
+            }
+
+            recognition = new SpeechRecognition();
+
+            recognition.lang =
+                document.getElementById("language").value;
+
+            recognition.continuous = true;
+            recognition.interimResults = true;
+
+            recognition.onstart = function() {
+                document.getElementById("status").innerText =
+                    "🎤 Listening...";
+            };
+
+            recognition.onresult = function(event) {
+
+                let text = "";
+
+                for (let i = event.resultIndex; i < event.results.length; i++) {
+                    text += event.results[i][0].transcript;
+                }
+
+                document.getElementById("result").value = text;
+            };
+
+            recognition.onerror = function() {
+                document.getElementById("status").innerText =
+                    "Voice recognition error";
+            };
+
+            recognition.onend = function() {
+                document.getElementById("status").innerText =
+                    "Stopped";
+            };
+
+            recognition.start();
+        }
+
+        function stopVoice() {
+
+            if (recognition) {
+                recognition.stop();
+            }
+        }
+
+        function copyText() {
+
+            const text =
+                document.getElementById("result").value;
+
+            if (!text) {
+                alert("No text to copy");
+                return;
+            }
+
+            navigator.clipboard.writeText(text);
+
+            alert("Text copied");
+        }
+
+        function goHome() {
+            window.location.href = "home.html";
+        }
+
+    </script>
+
+</body>
+</html>

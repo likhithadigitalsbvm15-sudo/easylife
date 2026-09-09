@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image → JPG/PNG - EasyLife</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f2f7ff;
+            text-align: center;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1976d2, #42a5f5);
+            color: white;
+            padding: 30px 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 30px;
+        }
+
+        .box {
+            background: white;
+            max-width: 450px;
+            margin: 30px auto;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+        }
+
+        input, select, button {
+            margin: 10px;
+            padding: 12px;
+            font-size: 16px;
+        }
+
+        button {
+            background: #1976d2;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #125ca8;
+        }
+
+        #preview {
+            max-width: 100%;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>🖼️ Image → JPG/PNG</h1>
+        <p>Convert your image easily</p>
+    </div>
+
+    <div class="box">
+
+        <input type="file" id="imageInput" accept="image/*">
+
+        <br>
+
+        <select id="format">
+            <option value="image/jpeg">JPG</option>
+            <option value="image/png">PNG</option>
+        </select>
+
+        <br>
+
+        <button onclick="convertImage()">Convert & Download</button>
+
+        <br>
+
+        <img id="preview">
+
+    </div>
+
+    <script>
+
+        let selectedImage = null;
+
+        document.getElementById("imageInput").addEventListener("change", function(event) {
+
+            const file = event.target.files[0];
+
+            if (!file) return;
+
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+
+                selectedImage = new Image();
+
+                selectedImage.onload = function() {
+                    document.getElementById("preview").src = e.target.result;
+                };
+
+                selectedImage.src = e.target.result;
+            };
+
+            reader.readAsDataURL(file);
+
+        });
+
+        function convertImage() {
+
+            if (!selectedImage) {
+                alert("Please select an image first.");
+                return;
+            }
+
+            const format = document.getElementById("format").value;
+
+            const canvas = document.createElement("canvas");
+
+            canvas.width = selectedImage.width;
+            canvas.height = selectedImage.height;
+
+            const ctx = canvas.getContext("2d");
+
+            ctx.drawImage(selectedImage, 0, 0);
+
+            canvas.toBlob(function(blob) {
+
+                const link = document.createElement("a");
+
+                link.href = URL.createObjectURL(blob);
+
+                if (format === "image/png") {
+                    link.download = "easylife-image.png";
+                } else {
+                    link.download = "easylife-image.jpg";
+                }
+
+                link.click();
+
+                URL.revokeObjectURL(link.href);
+
+            }, format);
+
+        }
+
+    </script>
+
+</body>
+</html>

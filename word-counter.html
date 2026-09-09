@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Word Counter - EasyLife</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #eef5ff;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #0d47a1, #2196f3);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 32px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 25px auto;
+            padding: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 250px;
+            padding: 15px;
+            box-sizing: border-box;
+            border: 2px solid #bbdefb;
+            border-radius: 15px;
+            font-size: 17px;
+            resize: vertical;
+            outline: none;
+        }
+
+        textarea:focus {
+            border-color: #2196f3;
+        }
+
+        .result {
+            margin-top: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.10);
+            font-size: 18px;
+        }
+
+        .back {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            text-decoration: none;
+            color: #0d47a1;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>📝 Word Counter</h1>
+        <p>Count words, characters and sentences</p>
+    </div>
+
+    <div class="container">
+
+        <textarea id="textBox"
+            placeholder="Type or paste your text here..."
+            oninput="countText()"></textarea>
+
+        <div class="result">
+            <p>📝 Words: <b id="words">0</b></p>
+            <p>🔤 Characters: <b id="characters">0</b></p>
+            <p>📄 Sentences: <b id="sentences">0</b></p>
+        </div>
+
+        <a class="back" href="home.html">← Back to EasyLife</a>
+
+    </div>
+
+    <script>
+        function countText() {
+            const text = document.getElementById("textBox").value;
+
+            const words = text.trim()
+                ? text.trim().split(/\s+/).length
+                : 0;
+
+            const characters = text.length;
+
+            const sentences = text.trim()
+                ? text.split(/[.!?]+/).filter(s => s.trim()).length
+                : 0;
+
+            document.getElementById("words").innerText = words;
+            document.getElementById("characters").innerText = characters;
+            document.getElementById("sentences").innerText = sentences;
+        }
+    </script>
+
+</body>
+</html>

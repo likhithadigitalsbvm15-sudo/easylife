@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EasyLife - PDF to Image</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f2f7ff;
+            text-align: center;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1976d2, #42a5f5);
+            color: white;
+            padding: 25px 15px;
+        }
+
+        .header h1 {
+            margin: 0;
+        }
+
+        .box {
+            background: white;
+            max-width: 500px;
+            margin: 25px auto;
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        button {
+            background: #1976d2;
+            color: white;
+            border: none;
+            padding: 14px 22px;
+            border-radius: 10px;
+            font-size: 17px;
+            cursor: pointer;
+            margin: 8px;
+        }
+
+        #fileName {
+            margin: 20px;
+            font-size: 16px;
+        }
+
+        canvas {
+            width: 100%;
+            max-width: 450px;
+            margin-top: 20px;
+            border-radius: 8px;
+        }
+
+        .download {
+            background: #2e7d32;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>🖼️ PDF → Image</h1>
+        <p>Convert PDF pages into images</p>
+    </div>
+
+    <div class="box">
+
+        <input type="file" id="pdfInput" accept=".pdf" hidden>
+
+        <button onclick="document.getElementById('pdfInput').click()">
+            📄 Select PDF
+        </button>
+
+        <div id="fileName">
+            No PDF selected
+        </div>
+
+        <div id="result"></div>
+
+        <br>
+
+        <button onclick="window.location.href='home.html'">
+            🏠 Home
+        </button>
+
+    </div>
+
+    <script>
+
+        pdfjsLib.GlobalWorkerOptions.workerSrc =
+        "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+
+        document.getElementById("pdfInput").addEventListener("change", function() {
+
+            const file = this.files[0];
+
+            if (!file) return;
+
+            document.getElementById("fileName").innerText =
+                "Selected: " + file.name;
+
+            convertPDF(file);
+        });
+
+
+        async function convertPDF(file) {
+
+            const result = document.getElementById("result");
+
+            result.innerHTML = "<p>⏳ Converting PDF...</p>";
+
+            const arrayBuffer = await file.arrayBuffer();
+
+            const pdf = await pdfjsLib.getDocument({
+                data: arrayBuffer
+            }).promise;
+
+            result.innerHTML = "";
+
+            for (let pageNumber = 1; pageNumber <= pdf.numPages; pageNumber++) {
+
+                const page = await pdf.getPage(pageNumber);
+
+                const viewport = page.getViewport({
+                    scale: 2
+                });
+
+                const canvas = document.createElement("canvas");
+
+                const context = canvas.getContext("2d");
+
+                canvas.width = viewport.width;
+                canvas.height = viewport.height;
+
+                await page.render({
+                    canvasContext: context,
+                    viewport: viewport
+                }).promise;
+
+                result.appendChild(canvas);
+
+                const button = document.createElement("button");
+
+                button.className = "download";
+
+                button.innerText =
+                    "⬇️ Download Page " + pageNumber;
+
+                button.onclick = function() {
+
+                    const link = document.createElement("a");
+
+                    link.download =
+                        "EasyLife-Page-" + pageNumber + ".png";
+
+                    link.href =
+                        canvas.toDataURL("image/png");
+
+                    link.click();
+                };
+
+                result.appendChild(button);
+            }
+
+        }
+
+    </script>
+
+</body>
+</html>

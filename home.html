@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #eef5ff;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #0d47a1, #2196f3);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 34px;
+        }
+
+        .header p {
+            margin: 8px 0 20px;
+        }
+
+        .search {
+            width: 90%;
+            max-width: 400px;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+        }
+
+        .tools {
+            padding: 20px;
+            max-width: 500px;
+            margin: auto;
+        }
+
+        .tool {
+            background: linear-gradient(135deg, #ffffff, #e3f2fd);
+            padding: 22px;
+            margin-bottom: 12px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.10);
+            font-size: 18px;
+            cursor: pointer;
+transition: all 0.25s ease;
+        }
+
+        .tool:hover {
+    background: #e3f2fd;
+    transform: translateY(-10px);
+    box-shadow: 0 14px 28px rgba(25, 118, 210, 0.25);
+}
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>EasyLife ❤️</h1>
+        <p>Simple tools for everyday life</p>
+
+        <input
+            id="searchBox"
+            class="search"
+            type="text"
+            placeholder="What do you need?"
+            oninput="searchTools()">
+    </div>
+
+    <div class="tools">
+
+        <div class="tool" onclick="window.location.href='index.html'">
+             📄 <b>Photo → PDF</b> <span>→</span>
+        </div>
+
+        <div class="tool" onclick="window.location.href='pdf-image.html'">
+            🖼️ <b>PDF → Image</b> <span>→</span>
+        </div>
+
+        <div class="tool" onclick="window.location.href='pdf-compress.html'">
+            📦 <b>PDF Compress</b> <span>→</span>
+        </div>
+
+        <div class="tool" onclick="window.location.href='photo-resize.html'">
+            📏 <b>Photo Resize</b> <span>→</span>
+        </div>
+
+        <div class="tool" onclick="window.location.href='emi.html'">
+            🧮 <b>EMI Calculator</b> <span>→</span>
+        </div>
+
+        <div class="tool" onclick="window.location.href='interest.html'">
+            💰 <b>Interest Calculator</b> <span>→</span>
+        </div>
+
+        <div class="tool" onclick="window.location.href='translator.html'">
+            🌐 <b>Telugu ↔ English Translator</b> <span>→</span>
+        </div>
+
+        <div class="tool" onclick="window.location.href='scanner.html'">
+            📄 <b>Document Scanner</b> <span>→</span>
+        </div>
+<div class="tool" onclick="window.location.href='image-converter.html'">
+    🖼️ <b>Image → JPG/PNG</b> <span>→</span>
+</div>
+
+<div class="tool" onclick="window.location.href='age.html'">
+    🎂 <b>Age Calculator</b> <span>→</span>
+</div>
+
+<div class="tool" onclick="window.location.href='gst.html'">
+    💰 <b>GST Calculator</b> <span>→</span>
+</div>
+
+<div class="tool" onclick="window.location.href='qr.html'">
+    📱 <b>QR Code Generator</b> <span>→</span>
+</div>
+<div class="tool" onclick="window.location.href='word-counter.html'">
+    📝 <b>Word Counter</b> <span>→</span>
+</div>
+<div class="tool" onclick="window.location.href='percentage.html'">
+    🧮 <b>Percentage Calculator</b> <span>→</span>
+</div>
+<div class="tool" onclick="window.location.href='discount.html'">
+    🏷️ <b>Discount Calculator</b> <span>→</span>
+</div>
+
+    </div>
+
+    <script>
+
+        function searchTools() {
+
+            const query = document
+                .getElementById("searchBox")
+                .value
+                .toLowerCase()
+                .trim();
+
+            const tools = document.querySelectorAll(".tool");
+
+            tools.forEach(function(tool) {
+
+                const text = tool.innerText.toLowerCase();
+
+                if (text.includes(query)) {
+                    tool.style.display = "block";
+                } else {
+                    tool.style.display = "none";
+                }
+
+            });
+        }
+
+    </script>
+
+</body>
+</html>

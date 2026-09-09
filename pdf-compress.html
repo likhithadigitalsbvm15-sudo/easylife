@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EasyLife - PDF Compress</title>
+
+    <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f2f7ff;
+            text-align: center;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1976d2, #42a5f5);
+            color: white;
+            padding: 25px 15px;
+        }
+
+        .header h1 {
+            margin: 0;
+        }
+
+        .box {
+            background: white;
+            max-width: 450px;
+            margin: 25px auto;
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        button {
+            background: #1976d2;
+            color: white;
+            border: none;
+            padding: 14px 22px;
+            border-radius: 10px;
+            font-size: 17px;
+            cursor: pointer;
+            margin: 8px;
+        }
+
+        #fileName {
+            margin: 20px;
+            font-size: 16px;
+        }
+
+        #status {
+            margin: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>📦 PDF Compress</h1>
+        <p>Reduce your PDF file size</p>
+    </div>
+
+    <div class="box">
+
+        <input type="file" id="pdfInput" accept=".pdf" hidden>
+
+        <button onclick="document.getElementById('pdfInput').click()">
+            📄 Select PDF
+        </button>
+
+        <div id="fileName">
+            No PDF selected
+        </div>
+
+        <div id="status"></div>
+
+        <button onclick="compressPDF()">
+            📦 Compress PDF
+        </button>
+
+        <br>
+
+        <button onclick="window.location.href='home.html'">
+            🏠 Home
+        </button>
+
+    </div>
+
+    <script>
+
+        let selectedPDF = null;
+
+        document.getElementById("pdfInput").addEventListener("change", function() {
+
+            selectedPDF = this.files[0];
+
+            if (selectedPDF) {
+                document.getElementById("fileName").innerText =
+                    "Selected: " + selectedPDF.name;
+            }
+
+        });
+
+        async function compressPDF() {
+
+            if (!selectedPDF) {
+                alert("Please select a PDF first.");
+                return;
+            }
+
+            const status = document.getElementById("status");
+
+            try {
+
+                status.innerText = "⏳ Compressing...";
+
+                const originalBytes = await selectedPDF.arrayBuffer();
+
+                const pdfDoc = await PDFLib.PDFDocument.load(originalBytes);
+
+                const compressedBytes = await pdfDoc.save({
+                    useObjectStreams: true
+                });
+
+                const blob = new Blob(
+                    [compressedBytes],
+                    { type: "application/pdf" }
+                );
+
+                const link = document.createElement("a");
+
+                link.href = URL.createObjectURL(blob);
+
+                link.download = "EasyLife-Compressed.pdf";
+
+                link.click();
+
+                status.innerText = "✅ Compressed PDF downloaded!";
+
+            } catch (error) {
+
+                status.innerText =
+                    "❌ Compression failed. Please try another PDF.";
+
+                console.error(error);
+            }
+
+        }
+
+    </script>
+
+</body>
+</html>

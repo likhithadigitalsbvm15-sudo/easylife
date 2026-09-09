@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EasyLife - Photo to PDF</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f2f7ff;
+            text-align: center;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1976d2, #42a5f5);
+            color: white;
+            padding: 25px 15px;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        .box {
+            background: white;
+            max-width: 450px;
+            margin: 25px auto;
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        button {
+            background: #1976d2;
+            color: white;
+            border: none;
+            padding: 14px 25px;
+            border-radius: 10px;
+            font-size: 17px;
+            cursor: pointer;
+            margin: 8px;
+        }
+
+        #photos {
+            margin-top: 20px;
+        }
+
+        .photo {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            margin: 5px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>📄 Photo → PDF</h1>
+        <p>Convert your photos into PDF</p>
+    </div>
+
+    <div class="box">
+<button onclick="window.location.href='home.html'">🏠 Home</button>
+
+        <input type="file" id="fileInput" accept="image/*" multiple hidden>
+
+        <button onclick="document.getElementById('fileInput').click()">
+            ➕ Add Photos
+        </button>
+
+        <div id="photos"></div>
+
+        <button onclick="createPDF()">
+            📄 Create PDF
+        </button>
+
+    </div>
+
+    <script>
+
+        let selectedFiles = [];
+
+        document.getElementById("fileInput").addEventListener("change", function(event) {
+
+            selectedFiles = Array.from(event.target.files);
+
+            let photos = document.getElementById("photos");
+            photos.innerHTML = "";
+
+            selectedFiles.forEach(file => {
+
+                let img = document.createElement("img");
+
+                img.src = URL.createObjectURL(file);
+                img.className = "photo";
+
+                photos.appendChild(img);
+
+            });
+
+        });
+
+        async function createPDF() {
+
+            if (selectedFiles.length === 0) {
+                alert("Please add photos first.");
+                return;
+            }
+
+            const { jsPDF } = window.jspdf;
+
+            let pdf = new jsPDF();
+
+            for (let i = 0; i < selectedFiles.length; i++) {
+
+                if (i > 0) {
+                    pdf.addPage();
+                }
+
+                let imageURL = URL.createObjectURL(selectedFiles[i]);
+
+                let img = new Image();
+
+                img.src = imageURL;
+
+                await new Promise(resolve => {
+                    img.onload = resolve;
+                });
+
+                let pageWidth = 190;
+                let pageHeight = (img.height / img.width) * pageWidth;
+
+                pdf.addImage(
+                    img,
+                    "JPEG",
+                    10,
+                    10,
+                    pageWidth,
+                    pageHeight
+                );
+
+            }
+
+            pdf.save("EasyLife-Photos.pdf");
+
+        }
+
+    </script>
+
+</body>
+</html>
