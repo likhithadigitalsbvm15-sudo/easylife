@@ -54,25 +54,50 @@
         /* MAIN */
 
         .container {
-            max-width: 1000px;
+            max-width: 1050px;
             margin: 35px auto;
             padding: 0 20px;
         }
 
-        .section-title {
+        .welcome {
             text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: 35px;
         }
 
-        .section-title h2 {
+        .welcome h2 {
             margin: 0;
             color: #0d47a1;
             font-size: 28px;
         }
 
-        .section-title p {
+        .welcome p {
             color: #64748b;
             margin-top: 8px;
+        }
+
+        /* CATEGORY */
+
+        .category {
+            margin-bottom: 35px;
+        }
+
+        .category-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .category-title h3 {
+            margin: 0;
+            color: #0d47a1;
+            font-size: 21px;
+        }
+
+        .category-line {
+            flex: 1;
+            height: 2px;
+            background: #dbeafe;
         }
 
         /* TOOLS */
@@ -80,12 +105,12 @@
         .tools {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 18px;
+            gap: 16px;
         }
 
         .tool {
             background: white;
-            padding: 22px;
+            padding: 20px;
             border-radius: 16px;
             box-shadow: 0 5px 18px rgba(0,0,0,0.08);
             cursor: pointer;
@@ -117,12 +142,19 @@
             align-items: center;
             justify-content: center;
             font-size: 24px;
+            flex-shrink: 0;
         }
 
         .tool-name {
-            font-size: 17px;
+            font-size: 16px;
             font-weight: bold;
             color: #1e3a5f;
+        }
+
+        .tool-description {
+            font-size: 12px;
+            color: #64748b;
+            margin-top: 4px;
         }
 
         .tool-arrow {
@@ -138,7 +170,7 @@
             background: #0d47a1;
             color: white;
             text-align: center;
-            padding: 25px 15px;
+            padding: 28px 15px;
         }
 
         .footer h3 {
@@ -163,12 +195,21 @@
                 font-size: 32px;
             }
 
+            .container {
+                padding: 0 15px;
+                margin-top: 25px;
+            }
+
             .tools {
                 grid-template-columns: 1fr;
             }
 
-            .container {
-                padding: 0 15px;
+            .category-title h3 {
+                font-size: 19px;
+            }
+
+            .tool {
+                padding: 18px;
             }
 
         }
@@ -207,309 +248,517 @@
 
 <div class="container">
 
-    <div class="section-title">
 
-        <h2>🧰 Our Tools</h2>
+    <div class="welcome">
+
+        <h2>🧰 Explore Our Tools</h2>
 
         <p>
-            Useful tools, simple and easy to use
+            Simple, fast and useful tools for everyday needs
         </p>
 
     </div>
 
 
-    <div class="tools">
+    <!-- PDF & DOCUMENT TOOLS -->
 
+    <div class="category">
 
-        <div class="tool"
-             onclick="window.location.href='photo-pdf.html'">
+        <div class="category-title">
 
-            <div class="tool-left">
+            <h3>📄 PDF & Document Tools</h3>
 
-                <div class="icon">📄</div>
-
-                <div class="tool-name">
-                    Photo → PDF
-                </div>
-
-            </div>
-
-            <div class="tool-arrow">→</div>
+            <div class="category-line"></div>
 
         </div>
 
 
-        <div class="tool"
-             onclick="window.location.href='pdf-image.html'">
+        <div class="tools">
 
-            <div class="tool-left">
 
-                <div class="icon">🖼️</div>
+            <div class="tool"
+                 onclick="window.location.href='photo-pdf.html'">
 
-                <div class="tool-name">
-                    PDF → Image
+                <div class="tool-left">
+
+                    <div class="icon">📄</div>
+
+                    <div>
+
+                        <div class="tool-name">
+                            Photo → PDF
+                        </div>
+
+                        <div class="tool-description">
+                            Convert photos into PDF
+                        </div>
+
+                    </div>
+
                 </div>
+
+                <div class="tool-arrow">→</div>
 
             </div>
 
-            <div class="tool-arrow">→</div>
 
-        </div>
+            <div class="tool"
+                 onclick="window.location.href='pdf-image.html'">
 
+                <div class="tool-left">
 
-        <div class="tool"
-             onclick="window.location.href='pdf-compress.html'">
+                    <div class="icon">🖼️</div>
 
-            <div class="tool-left">
+                    <div>
 
-                <div class="icon">📦</div>
+                        <div class="tool-name">
+                            PDF → Image
+                        </div>
 
-                <div class="tool-name">
-                    PDF Compress
+                        <div class="tool-description">
+                            Convert PDF pages to images
+                        </div>
+
+                    </div>
+
                 </div>
+
+                <div class="tool-arrow">→</div>
 
             </div>
 
-            <div class="tool-arrow">→</div>
 
-        </div>
+            <div class="tool"
+                 onclick="window.location.href='pdf-compress.html'">
 
+                <div class="tool-left">
 
-        <div class="tool"
-             onclick="window.location.href='photo-resize.html'">
+                    <div class="icon">📦</div>
 
-            <div class="tool-left">
+                    <div>
 
-                <div class="icon">📏</div>
+                        <div class="tool-name">
+                            PDF Compress
+                        </div>
 
-                <div class="tool-name">
-                    Photo Resize
+                        <div class="tool-description">
+                            Reduce PDF file size
+                        </div>
+
+                    </div>
+
                 </div>
+
+                <div class="tool-arrow">→</div>
 
             </div>
 
-            <div class="tool-arrow">→</div>
 
-        </div>
+            <div class="tool"
+                 onclick="window.location.href='scanner.html'">
 
+                <div class="tool-left">
 
-        <div class="tool"
-             onclick="window.location.href='emi.html'">
+                    <div class="icon">📑</div>
 
-            <div class="tool-left">
+                    <div>
 
-                <div class="icon">🧮</div>
+                        <div class="tool-name">
+                            Document Scanner
+                        </div>
 
-                <div class="tool-name">
-                    EMI Calculator
+                        <div class="tool-description">
+                            Scan documents easily
+                        </div>
+
+                    </div>
+
                 </div>
+
+                <div class="tool-arrow">→</div>
 
             </div>
 
-            <div class="tool-arrow">→</div>
 
         </div>
-
-
-        <div class="tool"
-             onclick="window.location.href='interest.html'">
-
-            <div class="tool-left">
-
-                <div class="icon">💰</div>
-
-                <div class="tool-name">
-                    Interest Calculator
-                </div>
-
-            </div>
-
-            <div class="tool-arrow">→</div>
-
-        </div>
-
-
-        <div class="tool"
-             onclick="window.location.href='translator.html'">
-
-            <div class="tool-left">
-
-                <div class="icon">🌐</div>
-
-                <div class="tool-name">
-                    Telugu ↔ English Translator
-                </div>
-
-            </div>
-
-            <div class="tool-arrow">→</div>
-
-        </div>
-
-
-        <div class="tool"
-             onclick="window.location.href='scanner.html'">
-
-            <div class="tool-left">
-
-                <div class="icon">📄</div>
-
-                <div class="tool-name">
-                    Document Scanner
-                </div>
-
-            </div>
-
-            <div class="tool-arrow">→</div>
-
-        </div>
-
-
-        <div class="tool"
-             onclick="window.location.href='image-converter.html'">
-
-            <div class="tool-left">
-
-                <div class="icon">🖼️</div>
-
-                <div class="tool-name">
-                    Image → JPG/PNG
-                </div>
-
-            </div>
-
-            <div class="tool-arrow">→</div>
-
-        </div>
-
-
-        <div class="tool"
-             onclick="window.location.href='age.html'">
-
-            <div class="tool-left">
-
-                <div class="icon">🎂</div>
-
-                <div class="tool-name">
-                    Age Calculator
-                </div>
-
-            </div>
-
-            <div class="tool-arrow">→</div>
-
-        </div>
-
-
-        <div class="tool"
-             onclick="window.location.href='gst.html'">
-
-            <div class="tool-left">
-
-                <div class="icon">💰</div>
-
-                <div class="tool-name">
-                    GST Calculator
-                </div>
-
-            </div>
-
-            <div class="tool-arrow">→</div>
-
-        </div>
-
-
-        <div class="tool"
-             onclick="window.location.href='qr.html'">
-
-            <div class="tool-left">
-
-                <div class="icon">📱</div>
-
-                <div class="tool-name">
-                    QR Code Generator
-                </div>
-
-            </div>
-
-            <div class="tool-arrow">→</div>
-
-        </div>
-
-
-        <div class="tool"
-             onclick="window.location.href='word-counter.html'">
-
-            <div class="tool-left">
-
-                <div class="icon">📝</div>
-
-                <div class="tool-name">
-                    Word Counter
-                </div>
-
-            </div>
-
-            <div class="tool-arrow">→</div>
-
-        </div>
-
-
-        <div class="tool"
-             onclick="window.location.href='percentage.html'">
-
-            <div class="tool-left">
-
-                <div class="icon">📊</div>
-
-                <div class="tool-name">
-                    Percentage Calculator
-                </div>
-
-            </div>
-
-            <div class="tool-arrow">→</div>
-
-        </div>
-
-
-        <div class="tool"
-             onclick="window.location.href='discount.html'">
-
-            <div class="tool-left">
-
-                <div class="icon">🏷️</div>
-
-                <div class="tool-name">
-                    Discount Calculator
-                </div>
-
-            </div>
-
-            <div class="tool-arrow">→</div>
-
-        </div>
-
-
-        <div class="tool"
-             onclick="window.location.href='password.html'">
-
-            <div class="tool-left">
-
-                <div class="icon">🔐</div>
-
-                <div class="tool-name">
-                    Password Generator
-                </div>
-
-            </div>
-
-            <div class="tool-arrow">→</div>
-
-        </div>
-
 
     </div>
+
+
+    <!-- IMAGE TOOLS -->
+
+    <div class="category">
+
+        <div class="category-title">
+
+            <h3>🖼️ Image Tools</h3>
+
+            <div class="category-line"></div>
+
+        </div>
+
+
+        <div class="tools">
+
+
+            <div class="tool"
+                 onclick="window.location.href='photo-resize.html'">
+
+                <div class="tool-left">
+
+                    <div class="icon">📏</div>
+
+                    <div>
+
+                        <div class="tool-name">
+                            Photo Resize
+                        </div>
+
+                        <div class="tool-description">
+                            Resize your photos
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="tool-arrow">→</div>
+
+            </div>
+
+
+            <div class="tool"
+                 onclick="window.location.href='image-converter.html'">
+
+                <div class="tool-left">
+
+                    <div class="icon">🖼️</div>
+
+                    <div>
+
+                        <div class="tool-name">
+                            Image → JPG/PNG
+                        </div>
+
+                        <div class="tool-description">
+                            Convert image formats
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="tool-arrow">→</div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- CALCULATORS -->
+
+    <div class="category">
+
+        <div class="category-title">
+
+            <h3>🧮 Calculators</h3>
+
+            <div class="category-line"></div>
+
+        </div>
+
+
+        <div class="tools">
+
+
+            <div class="tool"
+                 onclick="window.location.href='emi.html'">
+
+                <div class="tool-left">
+
+                    <div class="icon">🧮</div>
+
+                    <div>
+
+                        <div class="tool-name">
+                            EMI Calculator
+                        </div>
+
+                        <div class="tool-description">
+                            Calculate monthly EMI
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="tool-arrow">→</div>
+
+            </div>
+
+
+            <div class="tool"
+                 onclick="window.location.href='interest.html'">
+
+                <div class="tool-left">
+
+                    <div class="icon">💰</div>
+
+                    <div>
+
+                        <div class="tool-name">
+                            Interest Calculator
+                        </div>
+
+                        <div class="tool-description">
+                            Calculate simple interest
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="tool-arrow">→</div>
+
+            </div>
+
+
+            <div class="tool"
+                 onclick="window.location.href='age.html'">
+
+                <div class="tool-left">
+
+                    <div class="icon">🎂</div>
+
+                    <div>
+
+                        <div class="tool-name">
+                            Age Calculator
+                        </div>
+
+                        <div class="tool-description">
+                            Calculate your exact age
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="tool-arrow">→</div>
+
+            </div>
+
+
+            <div class="tool"
+                 onclick="window.location.href='gst.html'">
+
+                <div class="tool-left">
+
+                    <div class="icon">💰</div>
+
+                    <div>
+
+                        <div class="tool-name">
+                            GST Calculator
+                        </div>
+
+                        <div class="tool-description">
+                            Calculate GST amounts
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="tool-arrow">→</div>
+
+            </div>
+
+
+            <div class="tool"
+                 onclick="window.location.href='percentage.html'">
+
+                <div class="tool-left">
+
+                    <div class="icon">📊</div>
+
+                    <div>
+
+                        <div class="tool-name">
+                            Percentage Calculator
+                        </div>
+
+                        <div class="tool-description">
+                            Calculate percentages quickly
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="tool-arrow">→</div>
+
+            </div>
+
+
+            <div class="tool"
+                 onclick="window.location.href='discount.html'">
+
+                <div class="tool-left">
+
+                    <div class="icon">🏷️</div>
+
+                    <div>
+
+                        <div class="tool-name">
+                            Discount Calculator
+                        </div>
+
+                        <div class="tool-description">
+                            Calculate discounts and prices
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="tool-arrow">→</div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- UTILITY TOOLS -->
+
+    <div class="category">
+
+        <div class="category-title">
+
+            <h3>🛠️ Utility Tools</h3>
+
+            <div class="category-line"></div>
+
+        </div>
+
+
+        <div class="tools">
+
+
+            <div class="tool"
+                 onclick="window.location.href='translator.html'">
+
+                <div class="tool-left">
+
+                    <div class="icon">🌐</div>
+
+                    <div>
+
+                        <div class="tool-name">
+                            Telugu ↔ English Translator
+                        </div>
+
+                        <div class="tool-description">
+                            Translate Telugu and English
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="tool-arrow">→</div>
+
+            </div>
+
+
+            <div class="tool"
+                 onclick="window.location.href='qr.html'">
+
+                <div class="tool-left">
+
+                    <div class="icon">📱</div>
+
+                    <div>
+
+                        <div class="tool-name">
+                            QR Code Generator
+                        </div>
+
+                        <div class="tool-description">
+                            Create QR codes instantly
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="tool-arrow">→</div>
+
+            </div>
+
+
+            <div class="tool"
+                 onclick="window.location.href='word-counter.html'">
+
+                <div class="tool-left">
+
+                    <div class="icon">📝</div>
+
+                    <div>
+
+                        <div class="tool-name">
+                            Word Counter
+                        </div>
+
+                        <div class="tool-description">
+                            Count words and characters
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="tool-arrow">→</div>
+
+            </div>
+
+
+            <div class="tool"
+                 onclick="window.location.href='password.html'">
+
+                <div class="tool-left">
+
+                    <div class="icon">🔐</div>
+
+                    <div>
+
+                        <div class="tool-name">
+                            Password Generator
+                        </div>
+
+                        <div class="tool-description">
+                            Generate strong passwords
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="tool-arrow">→</div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
 
 </div>
 
@@ -521,7 +770,7 @@
     <h3>EasyLife ❤️</h3>
 
     <p>
-        Simple tools for everyday life
+        Simple & Free Tools for Everyday Life
     </p>
 
     <p>
@@ -542,21 +791,42 @@ function searchTools() {
         .toLowerCase()
         .trim();
 
-    const tools =
-        document.querySelectorAll(".tool");
+    const categories =
+        document.querySelectorAll(".category");
 
-    tools.forEach(function(tool) {
+    categories.forEach(function(category) {
 
-        const text =
-            tool.innerText.toLowerCase();
+        const tools =
+            category.querySelectorAll(".tool");
 
-        if (text.includes(query)) {
+        let visibleTools = 0;
 
-            tool.style.display = "flex";
+        tools.forEach(function(tool) {
+
+            const text =
+                tool.innerText.toLowerCase();
+
+            if (text.includes(query)) {
+
+                tool.style.display = "flex";
+
+                visibleTools++;
+
+            } else {
+
+                tool.style.display = "none";
+
+            }
+
+        });
+
+        if (visibleTools === 0) {
+
+            category.style.display = "none";
 
         } else {
 
-            tool.style.display = "none";
+            category.style.display = "block";
 
         }
 
