@@ -1,13 +1,13 @@
 {
-  "background_color": "#77a8f7",
-  "dir": "ltr",
-  "display": "standalone",
   "name": "EasyLife",
-  "orientation": "portrait",
-"scope": "https://likhithadigitalsbvm15-sudo.github.io/easylife/",
-"start_url": "https://likhithadigitalsbvm15-sudo.github.io/easylife/",
-  "start_url": "/",
-  "theme_color": "#1975d1",
+  "short_name": "EasyLife",
   "description": "EasyLife is an all-in-one utility app with useful everyday tools including Photo to PDF, PDF to Image, PDF Compress, Photo Resize, EMI Calculator, Interest Calculator, Age Calculator, GST Calculator, Telugu to English Translator, Document Scanner and Voice to Text",
-  "id": "easylife"
+  "id": "easylife",
+  "start_url": "https://likhithadigitalsbvm15-sudo.github.io/easylife/",
+  "scope": "https://likhithadigitalsbvm15-sudo.github.io/easylife/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "dir": "ltr",
+  "background_color": "#77a8f7",
+  "theme_color": "#1975d1"
 }
