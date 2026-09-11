@@ -9,6 +9,13 @@
         navigator.serviceWorker.register('/easylife/pwabuilder-sw.js');
       }
     </script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/easylife/sw.js')
+        .then((reg) => console.log('Service Worker Registered!', reg))
+        .catch((err) => console.log('Service Worker Error', err});
+  }
+</script>
 </head>
 <body>
     <link rel="manifest" href="manifest.json">
