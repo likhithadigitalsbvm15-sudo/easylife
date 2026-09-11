@@ -5,17 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EasyLife</title>
     
-    <!-- Redirect Link -->
     <meta http-equiv="refresh" content="0; url=home.html">
-    
-    <!-- Manifest Link -->
     <link rel="manifest" href="manifest.json">
 
-    <!-- Service Worker Script -->
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-          navigator.serviceWorker.register('/easylife/sw.js')
+          navigator.serviceWorker.register('./sw.js')
             .then(() => console.log('Service Worker Registered Successfully!'))
             .catch(() => console.log('Service Worker Registration Failed!'));
         });
