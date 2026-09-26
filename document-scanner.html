@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document Scanner - EasyLife</title>
+    <meta name="description" content="Scan documents using your camera or upload an image with EasyLife.">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f2f7ff;
+            text-align: center;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1976d2, #42a5f5);
+            color: white;
+            padding: 25px 15px;
+        }
+
+        .header h1 {
+            margin: 0;
+        }
+
+        .box {
+            background: white;
+            max-width: 600px;
+            margin: 25px auto;
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        button {
+            background: #1976d2;
+            color: white;
+            border: none;
+            padding: 14px 22px;
+            border-radius: 10px;
+            font-size: 17px;
+            cursor: pointer;
+            margin: 8px;
+        }
+
+        .green {
+            background: #2e7d32;
+        }
+
+        .preview {
+            max-width: 100%;
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 20px;
+            color: #0d47a1;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        #fileInput {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>📄 Document Scanner</h1>
+        <p>Scan or upload a document image</p>
+    </div>
+
+    <div class="box">
+
+        <input
+            type="file"
+            id="fileInput"
+            accept="image/*"
+            capture="environment"
+        >
+
+        <button onclick="document.getElementById('fileInput').click()">
+            📷 Scan / Upload Document
+        </button>
+
+        <div id="result"></div>
+
+        <a class="back" href="home.html">
+            ← Back to EasyLife
+        </a>
+
+    </div>
+
+    <script>
+        document.getElementById("fileInput").addEventListener("change", function() {
+
+            const file = this.files[0];
+
+            if (!file) return;
+
+            const result = document.getElementById("result");
+
+            const imageURL = URL.createObjectURL(file);
+
+            result.innerHTML = `
+                <p><strong>Document selected:</strong> ${file.name}</p>
+
+                <img
+                    src="${imageURL}"
+                    class="preview"
+                    alt="Scanned document preview"
+                >
+
+                <br>
+
+                <button class="green" onclick="downloadImage('${imageURL}')">
+                    ⬇️ Download Document
+                </button>
+            `;
+        });
+
+        function downloadImage(url) {
+
+            const link = document.createElement("a");
+
+            link.href = url;
+            link.download = "EasyLife-Scanned-Document.jpg";
+
+            link.click();
+        }
+    </script>
+
+</body>
+</html>
