@@ -19,7 +19,7 @@
         .header {
             background: linear-gradient(135deg, #1976d2, #42a5f5);
             color: white;
-            padding: 25px 15px;
+            padding: 30px 15px;
         }
 
         .header h1 {
@@ -29,25 +29,25 @@
         .box {
             background: white;
             max-width: 600px;
-            margin: 25px auto;
-            padding: 25px;
+            margin: 30px auto;
+            padding: 30px;
             border-radius: 18px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
-        button {
-            background: #1976d2;
-            color: white;
+        .btn {
+            display: inline-block;
+            padding: 14px 24px;
+            margin: 8px;
             border: none;
-            padding: 14px 22px;
             border-radius: 10px;
+            color: white;
             font-size: 17px;
             cursor: pointer;
-            margin: 8px;
         }
 
-        button:hover {
-            opacity: 0.9;
+        .scan-btn {
+            background: #1976d2;
         }
 
         .preview-btn {
@@ -58,27 +58,28 @@
             background: #2e7d32;
         }
 
-        .preview {
-            display: none;
-            max-width: 100%;
-            margin: 20px auto;
-            border-radius: 10px;
-        }
-
-        .back {
-            display: inline-block;
-            margin-top: 20px;
-            color: #0d47a1;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
         #fileInput {
             display: none;
         }
 
-        #status {
-            margin-top: 15px;
+        #previewImage {
+            display: none;
+            width: 100%;
+            max-width: 500px;
+            margin: 25px auto;
+            border-radius: 10px;
+        }
+
+        #message {
+            margin: 20px 0;
+            font-weight: bold;
+        }
+
+        .home-btn {
+            display: inline-block;
+            margin-top: 20px;
+            color: #0d47a1;
+            text-decoration: none;
             font-weight: bold;
         }
     </style>
@@ -96,68 +97,64 @@
         <input
             type="file"
             id="fileInput"
-            accept="image/*"
-            capture="environment"
+            accept="image/jpeg,image/png,image/jpg"
         >
 
-        <button onclick="selectDocument()">
+        <button class="btn scan-btn" onclick="selectFile()">
             📷 Scan / Upload Document
         </button>
 
-        <br>
-
-        <button
-            id="previewBtn"
-            class="preview-btn"
-            style="display:none;"
-            onclick="showPreview()">
-            🖼️ Preview
-        </button>
-
-        <button
-            id="downloadBtn"
-            class="download-btn"
-            style="display:none;"
-            onclick="downloadScan()">
-            ⬇️ Download Scan
-        </button>
-
-        <div id="status">
+        <div id="message">
             No document selected
         </div>
 
-        <img
-            id="previewImage"
-            class="preview"
-            alt="Document preview"
-        >
+        <img id="previewImage" alt="Document Preview">
 
-        <br>
+        <div>
+            <button
+                id="previewBtn"
+                class="btn preview-btn"
+                style="display:none;"
+                onclick="showPreview()">
+                🖼️ Preview
+            </button>
 
-        <a class="back" href="home.html">
-            ← Back to EasyLife
+            <button
+                id="downloadBtn"
+                class="btn download-btn"
+                style="display:none;"
+                onclick="downloadScan()">
+                ⬇️ Download Scan
+            </button>
+        </div>
+
+        <a class="home-btn" href="home.html">
+            🏠 Home
         </a>
 
     </div>
 
     <script>
 
-        let selectedImageURL = "";
+        let selectedFile = null;
+        let imageURL = "";
 
-        function selectDocument() {
+        function selectFile() {
             document.getElementById("fileInput").click();
         }
 
         document.getElementById("fileInput").addEventListener("change", function() {
 
-            const file = this.files[0];
+            selectedFile = this.files[0];
 
-            if (!file) return;
+            if (!selectedFile) {
+                return;
+            }
 
-            selectedImageURL = URL.createObjectURL(file);
+            imageURL = URL.createObjectURL(selectedFile);
 
-            document.getElementById("status").innerText =
-                "Document selected: " + file.name;
+            document.getElementById("message").innerText =
+                "Document selected: " + selectedFile.name;
 
             document.getElementById("previewBtn").style.display =
                 "inline-block";
@@ -166,7 +163,7 @@
                 "inline-block";
 
             document.getElementById("previewImage").src =
-                selectedImageURL;
+                imageURL;
 
             document.getElementById("previewImage").style.display =
                 "none";
@@ -174,7 +171,7 @@
 
         function showPreview() {
 
-            if (!selectedImageURL) {
+            if (!selectedFile) {
                 alert("Please select a document first.");
                 return;
             }
@@ -185,19 +182,22 @@
 
         function downloadScan() {
 
-            if (!selectedImageURL) {
+            if (!selectedFile) {
                 alert("Please select a document first.");
                 return;
             }
 
             const link = document.createElement("a");
 
-            link.href = selectedImageURL;
+            link.href = imageURL;
 
-            link.download =
-                "EasyLife-Scanned-Document.jpg";
+            link.download = "EasyLife-Scanned-Document.jpg";
+
+            document.body.appendChild(link);
 
             link.click();
+
+            document.body.removeChild(link);
         }
 
     </script>
@@ -205,4 +205,3 @@
 </body>
 </html>
 ```
-
