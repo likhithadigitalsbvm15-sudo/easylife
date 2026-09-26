@@ -110,7 +110,17 @@
     document.getElementById("convertBtn").style.display = "inline-block";
 });
 
+function startConversion() {
 
+    const file = document.getElementById("pdfInput").files[0];
+
+    if (!file) {
+        alert("Please select a PDF first.");
+        return;
+    }
+
+    convertPDF(file);
+}
         async function convertPDF(file) {
 
             const result = document.getElementById("result");
