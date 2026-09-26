@@ -100,15 +100,15 @@
 
         document.getElementById("pdfInput").addEventListener("change", function() {
 
-            const file = this.files[0];
+    const file = this.files[0];
 
-            if (!file) return;
+    if (!file) return;
 
-            document.getElementById("fileName").innerText =
-                "Selected: " + file.name;
+    document.getElementById("fileName").innerText =
+        "Selected: " + file.name;
 
-            convertPDF(file);
-        });
+    document.getElementById("convertBtn").style.display = "inline-block";
+});
 
 
         async function convertPDF(file) {
