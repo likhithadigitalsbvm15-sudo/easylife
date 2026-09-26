@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -107,7 +108,17 @@
             No document selected
         </div>
 
-        <img id="previewImage" alt="Document Preview">
+        <img id="previewImage" alt="Document Preview"> 
+    
+      <br>
+
+      <button
+      id="cropBtn"
+      class="btn"
+      style="background:#8e24aa; display:none;"
+      onclick="cropDocument()">
+      ✂️ Crop Document
+          </button>
 
         <div>
             <button
@@ -198,8 +209,22 @@
 
             document.body.removeChild(link);
         }
+        function cropDocument() {
+
+            if (!selectedFile) {
+                alert("Please select a document first.");
+                return;
+            }
+
+            const image = document.getElementById("previewImage");
+
+            image.style.border = "4px solid #8e24aa";
+
+            alert("Crop feature is ready. Advanced crop selection will be added next.");
+        }
 
     </script>
 
 </body>
 </html>
+```
