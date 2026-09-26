@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Document Scanner - EasyLife</title>
-    <meta name="description" content="Scan documents using your camera or upload an image with EasyLife.">
+    <meta name="description" content="Scan, preview and download documents with EasyLife.">
 
     <style>
         body {
@@ -45,13 +46,22 @@
             margin: 8px;
         }
 
-        .green {
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .preview-btn {
+            background: #f9a825;
+        }
+
+        .download-btn {
             background: #2e7d32;
         }
 
         .preview {
+            display: none;
             max-width: 100%;
-            margin-top: 20px;
+            margin: 20px auto;
             border-radius: 10px;
         }
 
@@ -66,6 +76,11 @@
         #fileInput {
             display: none;
         }
+
+        #status {
+            margin-top: 15px;
+            font-weight: bold;
+        }
     </style>
 </head>
 
@@ -73,7 +88,7 @@
 
     <div class="header">
         <h1>📄 Document Scanner</h1>
-        <p>Scan or upload a document image</p>
+        <p>Scan, preview and download your document</p>
     </div>
 
     <div class="box">
@@ -85,11 +100,39 @@
             capture="environment"
         >
 
-        <button onclick="document.getElementById('fileInput').click()">
+        <button onclick="selectDocument()">
             📷 Scan / Upload Document
         </button>
 
-        <div id="result"></div>
+        <br>
+
+        <button
+            id="previewBtn"
+            class="preview-btn"
+            style="display:none;"
+            onclick="showPreview()">
+            🖼️ Preview
+        </button>
+
+        <button
+            id="downloadBtn"
+            class="download-btn"
+            style="display:none;"
+            onclick="downloadScan()">
+            ⬇️ Download Scan
+        </button>
+
+        <div id="status">
+            No document selected
+        </div>
+
+        <img
+            id="previewImage"
+            class="preview"
+            alt="Document preview"
+        >
+
+        <br>
 
         <a class="back" href="home.html">
             ← Back to EasyLife
@@ -98,43 +141,68 @@
     </div>
 
     <script>
+
+        let selectedImageURL = "";
+
+        function selectDocument() {
+            document.getElementById("fileInput").click();
+        }
+
         document.getElementById("fileInput").addEventListener("change", function() {
 
             const file = this.files[0];
 
             if (!file) return;
 
-            const result = document.getElementById("result");
+            selectedImageURL = URL.createObjectURL(file);
 
-            const imageURL = URL.createObjectURL(file);
+            document.getElementById("status").innerText =
+                "Document selected: " + file.name;
 
-            result.innerHTML = `
-                <p><strong>Document selected:</strong> ${file.name}</p>
+            document.getElementById("previewBtn").style.display =
+                "inline-block";
 
-                <img
-                    src="${imageURL}"
-                    class="preview"
-                    alt="Scanned document preview"
-                >
+            document.getElementById("downloadBtn").style.display =
+                "inline-block";
 
-                <br>
+            document.getElementById("previewImage").src =
+                selectedImageURL;
 
-                <button class="green" onclick="downloadImage('${imageURL}')">
-                    ⬇️ Download Document
-                </button>
-            `;
+            document.getElementById("previewImage").style.display =
+                "none";
         });
 
-        function downloadImage(url) {
+        function showPreview() {
+
+            if (!selectedImageURL) {
+                alert("Please select a document first.");
+                return;
+            }
+
+            document.getElementById("previewImage").style.display =
+                "block";
+        }
+
+        function downloadScan() {
+
+            if (!selectedImageURL) {
+                alert("Please select a document first.");
+                return;
+            }
 
             const link = document.createElement("a");
 
-            link.href = url;
-            link.download = "EasyLife-Scanned-Document.jpg";
+            link.href = selectedImageURL;
+
+            link.download =
+                "EasyLife-Scanned-Document.jpg";
 
             link.click();
         }
+
     </script>
 
 </body>
 </html>
+```
+
