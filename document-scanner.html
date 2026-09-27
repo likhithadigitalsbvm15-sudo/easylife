@@ -82,6 +82,30 @@
             text-decoration: none;
             font-weight: bold;
         }
+
+        #cropArea {
+    display: none;
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    height: 350px;
+    margin: 20px auto;
+    border: 3px dashed #8e24aa;
+    background: rgba(142, 36, 170, 0.08);
+    cursor: crosshair;
+}
+
+#cropArea::after {
+    content: "Select crop area";
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #8e24aa;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+}
   
 </style>
 </head>
