@@ -212,7 +212,13 @@
 
             document.body.removeChild(link);
         }
-       function cropDocument() {
+      let cropStartX = 0;
+let cropStartY = 0;
+let cropEndX = 0;
+let cropEndY = 0;
+let isCropping = false;
+
+function cropDocument() {
 
     if (!selectedFile) {
         alert("Please select a document first.");
@@ -221,38 +227,24 @@
 
     const image = document.getElementById("previewImage");
 
-    const canvas = document.createElement("canvas");
-    const ctx = canvas.getContext("2d");
-
-    const cropWidth = image.naturalWidth * 0.8;
-    const cropHeight = image.naturalHeight * 0.8;
-
-    const startX = (image.naturalWidth - cropWidth) / 2;
-    const startY = (image.naturalHeight - cropHeight) / 2;
-
-    canvas.width = cropWidth;
-    canvas.height = cropHeight;
-
-    ctx.drawImage(
-        image,
-        startX,
-        startY,
-        cropWidth,
-        cropHeight,
-        0,
-        0,
-        cropWidth,
-        cropHeight
-    );
-
-    canvas.toBlob(function(blob) {
-
-        imageURL = URL.createObjectURL(blob);
-
-        image.src = imageURL;
+    if (image.style.display === "none") {
         image.style.display = "block";
+    }
 
-        alert("Document cropped successfully!");
+    const cropArea = document.getElementById("cropArea");
 
-    }, "image/jpeg", 0.95);
+    cropArea.innerHTML = "";
+    cropArea.style.display = "block";
+
+    const cropImage = document.createElement("img");
+
+    cropImage.src = image.src;
+    cropImage.style.width = "100%";
+    cropImage.style.height = "100%";
+    cropImage.style.objectFit = "contain";
+
+    cropArea.appendChild(cropImage);
+
+    alert("Crop area is ready. Select the area you want to crop.");
+
 }
