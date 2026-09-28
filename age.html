@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-   
 
     <title>Age Calculator - EasyLife</title>
 
@@ -57,6 +56,7 @@
             font-weight: bold;
         }
     </style>
+
 </head>
 
 <body>
@@ -77,6 +77,10 @@
         <button onclick="calculateAge()">Calculate Age</button>
 
         <div id="result"></div>
+
+        <br>
+
+        <button onclick="goHome()">🏠 Home</button>
 
     </div>
 
@@ -100,11 +104,13 @@
 
             if (days < 0) {
                 months--;
+
                 const previousMonth = new Date(
                     today.getFullYear(),
                     today.getMonth(),
                     0
                 );
+
                 days += previousMonth.getDate();
             }
 
@@ -117,7 +123,10 @@
                 "Your Age: " + years + " Years, " +
                 months + " Months, " +
                 days + " Days";
+        }
 
+        function goHome() {
+            window.location.href = "https://likhithadigitalsbvm15-sudo.github.io/easylife/home.html?v=2";
         }
 
     </script>
