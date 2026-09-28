@@ -1,152 +1,364 @@
-let selectedFile = null;
-let imageURL = "";
+<!DOCTYPE html>
+<html>
+<head>
 
-function selectFile() {
-    document.getElementById("fileInput").click();
-}
+    <title>EasyLife - Document Scanner</title>
 
-document.getElementById("fileInput").addEventListener("change", function () {
-
-    selectedFile = this.files[0];
-
-    if (!selectedFile) {
-        return;
-    }
-
-    imageURL = URL.createObjectURL(selectedFile);
-
-    document.getElementById("message").innerText =
-        "Document selected: " + selectedFile.name;
-
-    document.getElementById("previewBtn").style.display =
-        "inline-block";
-
-    document.getElementById("downloadBtn").style.display =
-        "inline-block";
-
-    document.getElementById("previewImage").src = imageURL;
-
-    document.getElementById("previewImage").style.display =
-        "block";
-});
-
-function showPreview() {
-
-    if (!selectedFile) {
-        alert("Please select a document first.");
-        return;
-    }
-
-    document.getElementById("previewImage").style.display =
-        "block";
-}
-
-function downloadScan() {
-
-    if (!selectedFile) {
-        alert("Please select a document first.");
-        return;
-    }
-
-    const link = document.createElement("a");
-
-    link.href = imageURL;
-    link.download = "EasyLife-Scanned-Document.jpg";
-
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-}
-
-function cropDocument() {
-
-    if (!selectedFile) {
-        alert("Please select a document first.");
-        return;
-    }
-
-    const image = document.getElementById("previewImage");
-
-    image.style.display = "block";
-
-    const cropArea = document.getElementById("cropArea");
-
-    cropArea.innerHTML = "";
-    cropArea.style.display = "block";
-
-    const cropImage = document.createElement("img");
-
-    cropImage.src = image.src;
-
-    cropImage.style.width = "100%";
-    cropImage.style.height = "100%";
-    cropImage.style.objectFit = "contain";
-
-    cropArea.appendChild(cropImage);
-
-    let startX = 0;
-    let startY = 0;
-    let selecting = false;
-
-    const selection = document.createElement("div");
-
-    selection.style.position = "absolute";
-    selection.style.border = "2px solid red";
-    selection.style.background = "rgba(255,0,0,0.15)";
-    selection.style.display = "none";
-
-    cropArea.appendChild(selection);
-
-    cropArea.onmousedown = function(e) {
-
-        const rect = cropArea.getBoundingClientRect();
-
-        startX = e.clientX - rect.left;
-        startY = e.clientY - rect.top;
-
-        selecting = true;
-
-        selection.style.display = "block";
-        selection.style.left = startX + "px";
-        selection.style.top = startY + "px";
-        selection.style.width = "0px";
-        selection.style.height = "0px";
-    };
-
-    cropArea.onmousemove = function(e) {
-
-        if (!selecting) return;
-
-        const rect = cropArea.getBoundingClientRect();
-
-        const currentX = e.clientX - rect.left;
-        const currentY = e.clientY - rect.top;
-
-        const width = Math.abs(currentX - startX);
-        const height = Math.abs(currentY - startY);
-
-        selection.style.left =
-            Math.min(startX, currentX) + "px";
-
-        selection.style.top =
-            Math.min(startY, currentY) + "px";
-
-        selection.style.width = width + "px";
-        selection.style.height = height + "px";
-    };
-
-    cropArea.onmouseup = function() {
-
-        selecting = false;
-
-        if (
-            parseInt(selection.style.width) < 20 ||
-            parseInt(selection.style.height) < 20
-        ) {
-            return;
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f2f7ff;
+            text-align: center;
         }
 
-        alert("Crop area selected successfully!");
-    };
-}
-</script>
+        .header {
+            background: linear-gradient(135deg, #1976d2, #42a5f5);
+            color: white;
+            padding: 30px 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 30px;
+        }
+
+        .box {
+            background: white;
+            max-width: 600px;
+            margin: 25px auto;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+        }
+
+        button {
+            background: #1976d2;
+            color: white;
+            border: none;
+            padding: 13px 22px;
+            margin: 8px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #125ca8;
+        }
+
+        #previewImage {
+            max-width: 100%;
+            margin-top: 20px;
+            border-radius: 8px;
+            display: none;
+        }
+
+        #cropArea {
+            position: relative;
+            max-width: 100%;
+            margin: 20px auto;
+            display: none;
+            cursor: crosshair;
+            overflow: hidden;
+            border: 2px solid #ccc;
+        }
+
+        #cropArea img {
+            display: block;
+            max-width: 100%;
+            user-select: none;
+        }
+
+        #selection {
+            position: absolute;
+            border: 2px solid red;
+            background: rgba(255, 0, 0, 0.15);
+            display: none;
+            pointer-events: none;
+        }
+
+        #message {
+            margin: 15px;
+            font-weight: bold;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>📷 Document Scanner</h1>
+        <p>Scan, Crop and Download Documents</p>
+    </div>
+
+    <div class="box">
+
+        <input type="file" id="fileInput" accept="image/*" hidden>
+
+        <button onclick="selectFile()">
+            📷 Scan / Upload Document
+        </button>
+
+        <div id="message"></div>
+
+        <img id="previewImage">
+
+        <br>
+
+        <button id="previewBtn"
+                onclick="showPreview()"
+                style="display:none;">
+            🖼️ Preview
+        </button>
+
+        <button id="cropBtn"
+                onclick="startCrop()"
+                style="display:none;">
+            ✂️ Crop Document
+        </button>
+
+        <div id="cropArea">
+            <img id="cropImage">
+            <div id="selection"></div>
+        </div>
+
+        <button id="applyCropBtn"
+                onclick="applyCrop()"
+                style="display:none;">
+            ✅ Apply Crop
+        </button>
+
+        <button id="downloadBtn"
+                onclick="downloadScan()"
+                style="display:none;">
+            ⬇️ Download Scan
+        </button>
+
+        <br>
+
+        <button onclick="goHome()">
+            🏠 Home
+        </button>
+
+    </div>
+
+    <script>
+
+        let selectedFile = null;
+        let imageURL = "";
+
+        let startX = 0;
+        let startY = 0;
+        let selecting = false;
+
+        let cropX = 0;
+        let cropY = 0;
+        let cropWidth = 0;
+        let cropHeight = 0;
+
+        function selectFile() {
+            document.getElementById("fileInput").click();
+        }
+
+        document.getElementById("fileInput").addEventListener("change", function () {
+
+            selectedFile = this.files[0];
+
+            if (!selectedFile) {
+                return;
+            }
+
+            imageURL = URL.createObjectURL(selectedFile);
+
+            document.getElementById("message").innerText =
+                "Document selected: " + selectedFile.name;
+
+            document.getElementById("previewImage").src = imageURL;
+            document.getElementById("previewImage").style.display = "block";
+
+            document.getElementById("previewBtn").style.display = "inline-block";
+            document.getElementById("cropBtn").style.display = "inline-block";
+            document.getElementById("downloadBtn").style.display = "inline-block";
+
+        });
+
+        function showPreview() {
+
+            if (!selectedFile) {
+                alert("Please select a document first.");
+                return;
+            }
+
+            document.getElementById("previewImage").style.display = "block";
+        }
+
+        function startCrop() {
+
+            if (!selectedFile) {
+                alert("Please select a document first.");
+                return;
+            }
+
+            const cropArea = document.getElementById("cropArea");
+            const cropImage = document.getElementById("cropImage");
+            const selection = document.getElementById("selection");
+
+            cropImage.src = imageURL;
+
+            cropArea.style.display = "block";
+            selection.style.display = "none";
+
+            document.getElementById("applyCropBtn").style.display = "inline-block";
+
+            cropArea.onmousedown = function(e) {
+
+                const rect = cropArea.getBoundingClientRect();
+
+                startX = e.clientX - rect.left;
+                startY = e.clientY - rect.top;
+
+                selecting = true;
+
+                selection.style.display = "block";
+
+                selection.style.left = startX + "px";
+                selection.style.top = startY + "px";
+
+                selection.style.width = "0px";
+                selection.style.height = "0px";
+            };
+
+            cropArea.onmousemove = function(e) {
+
+                if (!selecting) {
+                    return;
+                }
+
+                const rect = cropArea.getBoundingClientRect();
+
+                const currentX = e.clientX - rect.left;
+                const currentY = e.clientY - rect.top;
+
+                cropX = Math.min(startX, currentX);
+                cropY = Math.min(startY, currentY);
+
+                cropWidth = Math.abs(currentX - startX);
+                cropHeight = Math.abs(currentY - startY);
+
+                selection.style.left = cropX + "px";
+                selection.style.top = cropY + "px";
+
+                selection.style.width = cropWidth + "px";
+                selection.style.height = cropHeight + "px";
+            };
+
+            cropArea.onmouseup = function() {
+
+                selecting = false;
+
+                if (cropWidth < 20 || cropHeight < 20) {
+
+                    alert("Please select a larger crop area.");
+
+                    return;
+                }
+
+                document.getElementById("message").innerText =
+                    "Crop area selected. Click Apply Crop.";
+
+            };
+        }
+
+        function applyCrop() {
+
+            if (cropWidth < 20 || cropHeight < 20) {
+
+                alert("Please select the crop area first.");
+
+                return;
+            }
+
+            const image = new Image();
+
+            image.onload = function() {
+
+                const cropArea = document.getElementById("cropArea");
+
+                const displayedWidth = cropArea.clientWidth;
+                const displayedHeight = cropArea.clientHeight;
+
+                const scaleX = image.naturalWidth / displayedWidth;
+                const scaleY = image.naturalHeight / displayedHeight;
+
+                const canvas = document.createElement("canvas");
+
+                canvas.width = cropWidth * scaleX;
+                canvas.height = cropHeight * scaleY;
+
+                const ctx = canvas.getContext("2d");
+
+                ctx.drawImage(
+                    image,
+                    cropX * scaleX,
+                    cropY * scaleY,
+                    cropWidth * scaleX,
+                    cropHeight * scaleY,
+                    0,
+                    0,
+                    canvas.width,
+                    canvas.height
+                );
+
+                canvas.toBlob(function(blob) {
+
+                    imageURL = URL.createObjectURL(blob);
+
+                    document.getElementById("previewImage").src = imageURL;
+                    document.getElementById("previewImage").style.display = "block";
+
+                    document.getElementById("cropArea").style.display = "none";
+
+                    document.getElementById("applyCropBtn").style.display = "none";
+
+                    document.getElementById("message").innerText =
+                        "✅ Crop applied successfully!";
+
+                }, "image/jpeg", 0.95);
+            };
+
+            image.src = imageURL;
+        }
+
+        function downloadScan() {
+
+            if (!imageURL) {
+
+                alert("Please select a document first.");
+
+                return;
+            }
+
+            const link = document.createElement("a");
+
+            link.href = imageURL;
+            link.download = "EasyLife-Cropped-Document.jpg";
+
+            document.body.appendChild(link);
+
+            link.click();
+
+            document.body.removeChild(link);
+        }
+
+        function goHome() {
+
+            window.location.href = "home.html";
+
+        }
+
+    </script>
+
+</body>
+</html>
