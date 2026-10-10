@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://likhithadigitalsbvm15-sudo.github.io/easylife/sitemap.xml
+Sitemap: Sitemap: https://easylifetoolbox.com/sitemap.xml
