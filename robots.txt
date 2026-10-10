@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: Sitemap: https://easylifetoolbox.com/sitemap.xml
+Sitemap: https://easylifetoolbox.com/sitemap.xml
