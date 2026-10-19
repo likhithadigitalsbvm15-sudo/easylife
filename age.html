@@ -97,8 +97,9 @@
                 return;
             }
 
-            const dob = new Date(dobValue);
-            const today = new Date();
+             const [year, month, day] = dobValue.split("-").map(Number);
+             const dob = new Date(year, month - 1, day);
+             const today = new Date();
 
             let years = today.getFullYear() - dob.getFullYear();
             let months = today.getMonth() - dob.getMonth();
