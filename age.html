@@ -101,6 +101,8 @@
              const dob = new Date(year, month - 1, day);
              const today = new Date();
 
+             today.setHours(0, 0, 0, 0);
+                 
             let years = today.getFullYear() - dob.getFullYear();
             let months = today.getMonth() - dob.getMonth();
             let days = today.getDate() - dob.getDate();
