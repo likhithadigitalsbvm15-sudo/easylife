@@ -1,159 +1,498 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4584641102876506"
-         crossorigin="anonymous"></script>  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>EasyLife - PDF Compress</title>
+    <title>EasyLife - PDF Size Optimizer</title>
+    <meta name="description" content="Try optimizing a PDF with EasyLife. Select a PDF, compare the original and processed file sizes, and download the resulting PDF.">
     <link rel="canonical" href="https://easylifetoolbox.com/pdf-compress.html">
-         
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4584641102876506"
+        crossorigin="anonymous"></script>
+
     <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             font-family: Arial, sans-serif;
             background: #f2f7ff;
-            text-align: center;
+            color: #263238;
+            line-height: 1.6;
         }
 
         .header {
-            background: linear-gradient(135deg, #1976d2, #42a5f5);
+            background: linear-gradient(135deg, #0d47a1, #1976d2, #42a5f5);
             color: white;
-            padding: 25px 15px;
+            padding: 30px 15px;
+            text-align: center;
         }
 
         .header h1 {
             margin: 0;
+            font-size: clamp(26px, 5vw, 34px);
+        }
+
+        .header p {
+            margin-bottom: 0;
+        }
+
+        .box,
+        .content-box {
+            background: white;
+            width: calc(100% - 24px);
+            max-width: 760px;
+            margin: 24px auto;
+            padding: 22px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
         }
 
         .box {
-            background: white;
-            max-width: 450px;
-            margin: 25px auto;
-            padding: 25px;
-            border-radius: 18px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            max-width: 620px;
+            text-align: center;
         }
 
         button {
             background: #1976d2;
             color: white;
             border: none;
-            padding: 14px 22px;
-            border-radius: 10px;
-            font-size: 17px;
+            padding: 12px 18px;
+            border-radius: 9px;
+            font-size: 16px;
             cursor: pointer;
-            margin: 8px;
+            margin: 7px 4px;
+            min-height: 44px;
         }
 
-        #fileName {
-            margin: 20px;
-            font-size: 16px;
+        button:hover {
+            background: #0d47a1;
+        }
+
+        button:focus-visible {
+            outline: 3px solid #ffb300;
+            outline-offset: 3px;
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        #pdfInput {
+            display: none;
+        }
+
+        #fileName,
+        #status {
+            margin: 16px 0;
+            overflow-wrap: anywhere;
         }
 
         #status {
-            margin: 15px;
             font-weight: bold;
+            min-height: 28px;
+        }
+
+        .size-panel {
+            background: #eaf3ff;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 18px 0;
+            text-align: left;
+        }
+
+        .size-panel p {
+            margin: 6px 0;
+        }
+
+        .hint {
+            background: #eaf3ff;
+            border-left: 4px solid #1976d2;
+            border-radius: 6px;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .content-box h2 {
+            color: #0d47a1;
+            line-height: 1.3;
+        }
+
+        .content-box h3 {
+            color: #174a83;
+        }
+
+        .content-box li {
+            margin-bottom: 8px;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #dbe3ee;
+            padding: 12px 0;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-item h3 {
+            margin-bottom: 5px;
+        }
+
+        .footer {
+            background: #12345a;
+            color: white;
+            text-align: center;
+            padding: 20px 12px;
+            margin-top: 30px;
+        }
+
+        .footer a {
+            color: white;
+            margin: 0 8px;
+        }
+
+        @media (max-width: 480px) {
+            .box,
+            .content-box {
+                padding: 16px;
+            }
+
+            .box button {
+                width: 100%;
+                margin: 6px 0;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <div class="header">
-        <h1>📦 PDF Compress</h1>
-        <p>Reduce your PDF file size</p>
-    </div>
+<header class="header">
+    <h1>📦 PDF Size Optimizer</h1>
+    <p>Process a PDF and compare the file sizes.</p>
+</header>
 
-    <div class="box">
+<main>
+    <section class="box" aria-label="PDF optimizer tool">
+        <h2>Optimize Your PDF</h2>
+        <p>Select a PDF file to try optimizing it.</p>
 
-        <input type="file" id="pdfInput" accept=".pdf" hidden>
+        <button type="button" id="homeBtn">🏠 Home</button>
 
-        <button onclick="document.getElementById('pdfInput').click()">
-            📄 Select PDF
-        </button>
+        <div>
+            <input type="file" id="pdfInput" accept=".pdf,application/pdf">
 
-        <div id="fileName">
-            No PDF selected
+            <button type="button" id="selectBtn">📄 Select PDF</button>
         </div>
 
-        <div id="status"></div>
+        <div id="fileName">No PDF selected.</div>
 
-        <button onclick="compressPDF()">
-            📦 Compress PDF
+        <div class="size-panel" id="sizePanel" hidden>
+            <p><strong>Original size:</strong> <span id="originalSize">—</span></p>
+            <p><strong>Processed size:</strong> <span id="processedSize">—</span></p>
+            <p><strong>Size difference:</strong> <span id="sizeDifference">—</span></p>
+        </div>
+
+        <button type="button" id="compressBtn" disabled>
+            📦 Optimize PDF
         </button>
 
-        <br>
+        <button type="button" id="downloadBtn" hidden>
+            ⬇️ Download Processed PDF
+        </button>
 
-       <button onclick="window.location.href='https://easylifetoolbox.com/'">
-    🏠 Home
-</button>
+        <p id="status" role="status" aria-live="polite">
+            Select a PDF to get started.
+        </p>
 
-    </div>
+        <p class="hint">
+            <strong>Important:</strong> This tool re-saves the PDF using
+            PDF-lib. It may reduce the file size, but a smaller file is not
+            guaranteed. Compare the sizes before using the result.
+        </p>
+    </section>
 
-    <script>
+    <section class="content-box">
+        <h2>How to Use the PDF Optimizer</h2>
+        <ol>
+            <li>Select <strong>Select PDF</strong>.</li>
+            <li>Choose a PDF file from your device.</li>
+            <li>Press <strong>Optimize PDF</strong> and wait for processing.</li>
+            <li>Compare the original and processed file sizes.</li>
+            <li>Download the processed PDF if it suits your needs.</li>
+            <li>Open the downloaded file and check its pages before sharing.</li>
+        </ol>
+    </section>
 
-        let selectedPDF = null;
+    <section class="content-box">
+        <h2>What Does PDF Optimization Mean?</h2>
+        <p>
+            A PDF may contain text, images, fonts and other embedded resources.
+            Re-saving a PDF can reorganize some of its internal data, but it
+            does not necessarily compress every embedded image or remove every
+            unused resource.
+        </p>
+        <p>
+            If the processed file is not smaller, the original PDF may already
+            be optimized or may contain data that this method cannot compress.
+        </p>
+    </section>
 
-        document.getElementById("pdfInput").addEventListener("change", function() {
+    <section class="content-box">
+        <h2>Tips for Smaller PDF Files</h2>
+        <ul>
+            <li>If you created the PDF from photos, use appropriately sized images before making the PDF.</li>
+            <li>Avoid adding unnecessarily high-resolution images to documents.</li>
+            <li>Keep a copy of the original PDF before replacing or sharing a processed file.</li>
+            <li>Check that text, images and page layouts remain correct after processing.</li>
+            <li>If a website specifies a maximum upload size, confirm the final file meets that requirement.</li>
+        </ul>
+    </section>
 
-            selectedPDF = this.files[0];
+    <section class="content-box">
+        <h2>Frequently Asked Questions</h2>
 
-            if (selectedPDF) {
-                document.getElementById("fileName").innerText =
-                    "Selected: " + selectedPDF.name;
-            }
+        <div class="faq-item">
+            <h3>1. Will this tool always reduce my PDF size?</h3>
+            <p>
+                No. The file may become smaller, stay nearly the same size,
+                or become larger. This method does not guarantee compression.
+            </p>
+        </div>
 
-        });
+        <div class="faq-item">
+            <h3>2. Will my PDF pages change?</h3>
+            <p>
+                The tool re-saves the PDF. Always open the result and check
+                that its pages and content look correct.
+            </p>
+        </div>
 
-        async function compressPDF() {
+        <div class="faq-item">
+            <h3>3. Why is the processed PDF larger?</h3>
+            <p>
+                Re-saving can change how PDF data is stored. Some files may
+                not benefit from this method.
+            </p>
+        </div>
 
-            if (!selectedPDF) {
-                alert("Please select a PDF first.");
-                return;
-            }
+        <div class="faq-item">
+            <h3>4. Can this tool compress every image inside a PDF?</h3>
+            <p>
+                This version does not specifically recompress all embedded
+                images. Image-heavy PDFs may need a different compression method.
+            </p>
+        </div>
 
-            const status = document.getElementById("status");
+        <div class="faq-item">
+            <h3>5. Can I use this on a mobile phone?</h3>
+            <p>
+                Yes, in a supported mobile browser. Processing large PDFs may
+                require more memory and may take longer.
+            </p>
+        </div>
 
-            try {
+        <div class="faq-item">
+            <h3>6. Is my PDF uploaded to an EasyLife server?</h3>
+            <p>
+                This page's JavaScript processes the selected file in the
+                browser and does not include code that uploads the PDF to an
+                EasyLife server. The page does load external resources,
+                including the PDF library and advertising script. For sensitive
+                documents, use a trusted device and review the site's Privacy Policy.
+            </p>
+        </div>
+    </section>
+</main>
 
-                status.innerText = "⏳ Compressing...";
+<footer class="footer">
+    <p>EasyLife — Simple &amp; Free Tools for Everyday Life</p>
+    <p>
+        <a href="https://easylifetoolbox.com/">Home</a>
+        <a href="https://easylifetoolbox.com/privacy.html">Privacy Policy</a>
+        <a href="https://easylifetoolbox.com/contact.html">Contact Us</a>
+    </p>
+</footer>
 
-                const originalBytes = await selectedPDF.arrayBuffer();
+<script>
+    const pdfInput = document.getElementById("pdfInput");
+    const selectBtn = document.getElementById("selectBtn");
+    const compressBtn = document.getElementById("compressBtn");
+    const downloadBtn = document.getElementById("downloadBtn");
+    const fileName = document.getElementById("fileName");
+    const status = document.getElementById("status");
+    const sizePanel = document.getElementById("sizePanel");
+    const originalSize = document.getElementById("originalSize");
+    const processedSize = document.getElementById("processedSize");
+    const sizeDifference = document.getElementById("sizeDifference");
+    const homeBtn = document.getElementById("homeBtn");
 
-                const pdfDoc = await PDFLib.PDFDocument.load(originalBytes);
+    let selectedPDF = null;
+    let processedBlob = null;
+    let processedURL = "";
+    let originalFileSize = 0;
 
-                const compressedBytes = await pdfDoc.save({
-                    useObjectStreams: true
-                });
+    selectBtn.addEventListener("click", () => {
+        pdfInput.click();
+    });
 
-                const blob = new Blob(
-                    [compressedBytes],
-                    { type: "application/pdf" }
-                );
+    homeBtn.addEventListener("click", () => {
+        window.location.href = "https://easylifetoolbox.com/";
+    });
 
-                const link = document.createElement("a");
+    pdfInput.addEventListener("change", () => {
+        const file = pdfInput.files && pdfInput.files[0];
 
-                link.href = URL.createObjectURL(blob);
+        if (!file) return;
 
-                link.download = "EasyLife-Compressed.pdf";
+        const isPDF = file.type === "application/pdf" ||
+            file.name.toLowerCase().endsWith(".pdf");
 
-                link.click();
-
-                status.innerText = "✅ Compressed PDF downloaded!";
-
-            } catch (error) {
-
-                status.innerText =
-                    "❌ Compression failed. Please try another PDF.";
-
-                console.error(error);
-            }
-
+        if (!isPDF) {
+            selectedPDF = null;
+            compressBtn.disabled = true;
+            fileName.textContent = "Please select a PDF file.";
+            status.textContent = "The selected file is not a PDF.";
+            return;
         }
 
-    </script>
+        selectedPDF = file;
+        originalFileSize = file.size;
+        processedBlob = null;
+
+        if (processedURL) {
+            URL.revokeObjectURL(processedURL);
+            processedURL = "";
+        }
+
+        fileName.textContent =
+            "Selected: " + file.name + " (" + formatBytes(file.size) + ")";
+
+        originalSize.textContent = formatBytes(file.size);
+        processedSize.textContent = "—";
+        sizeDifference.textContent = "—";
+
+        sizePanel.hidden = false;
+        downloadBtn.hidden = true;
+        compressBtn.disabled = false;
+
+        status.textContent = "PDF selected. Press Optimize PDF to continue.";
+        pdfInput.value = "";
+    });
+
+    compressBtn.addEventListener("click", optimizePDF);
+
+    async function optimizePDF() {
+        if (!selectedPDF) {
+            status.textContent = "Please select a PDF first.";
+            return;
+        }
+
+        if (!window.PDFLib || !window.PDFLib.PDFDocument) {
+            status.textContent =
+                "The PDF library could not load. Check your internet connection and refresh the page.";
+            return;
+        }
+
+        compressBtn.disabled = true;
+        selectBtn.disabled = true;
+        downloadBtn.hidden = true;
+        status.textContent = "⏳ Processing PDF...";
+
+        try {
+            const originalBytes = await selectedPDF.arrayBuffer();
+
+            const pdfDoc = await PDFLib.PDFDocument.load(originalBytes);
+
+            const processedBytes = await pdfDoc.save({
+                useObjectStreams: true
+            });
+
+            processedBlob = new Blob(
+                [processedBytes],
+                { type: "application/pdf" }
+            );
+
+            processedSize.textContent = formatBytes(processedBlob.size);
+
+            const difference = originalFileSize - processedBlob.size;
+
+            if (difference > 0) {
+                const percentage = (difference / originalFileSize) * 100;
+                sizeDifference.textContent =
+                    formatBytes(difference) + " smaller (" + percentage.toFixed(1) + "%)";
+                status.textContent =
+                    "Processing complete. The resulting PDF is smaller.";
+            } else if (difference < 0) {
+                sizeDifference.textContent =
+                    formatBytes(Math.abs(difference)) + " larger";
+                status.textContent =
+                    "Processing complete, but the resulting PDF is larger. Compare both files before using it.";
+            } else {
+                sizeDifference.textContent = "No size change";
+                status.textContent =
+                    "Processing complete. The file size did not change.";
+            }
+
+            downloadBtn.hidden = false;
+
+        } catch (error) {
+            console.error(error);
+            processedBlob = null;
+            downloadBtn.hidden = true;
+
+            status.textContent =
+                "Could not process this PDF. It may be protected, damaged or unsupported.";
+        } finally {
+            compressBtn.disabled = false;
+            selectBtn.disabled = false;
+        }
+    }
+
+    downloadBtn.addEventListener("click", () => {
+        if (!processedBlob) {
+            status.textContent = "Please process a PDF first.";
+            return;
+        }
+
+        if (processedURL) {
+            URL.revokeObjectURL(processedURL);
+        }
+
+        processedURL = URL.createObjectURL(processedBlob);
+
+        const link = document.createElement("a");
+        link.href = processedURL;
+        link.download = "EasyLife-Processed.pdf";
+
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+
+        status.textContent =
+            "Download started. Open the PDF and check its contents.";
+    });
+
+    function formatBytes(bytes) {
+        if (bytes < 1024) return bytes + " bytes";
+        if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + " KB";
+        return (bytes / (1024 * 1024)).toFixed(2) + " MB";
+    }
+
+    window.addEventListener("beforeunload", () => {
+        if (processedURL) {
+            URL.revokeObjectURL(processedURL);
+        }
+    });
+</script>
 
 </body>
 </html>
+```
