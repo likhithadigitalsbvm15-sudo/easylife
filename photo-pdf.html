@@ -1,159 +1,578 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4584641102876506"
-         crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>EasyLife - Photo to PDF</title>   
+    <title>EasyLife - Free Photo to PDF Converter</title>
+    <meta name="description" content="Convert multiple photos into a PDF with EasyLife. Select images, preview them, choose a page size and download your PDF with this simple online tool.">
     <link rel="canonical" href="https://easylifetoolbox.com/photo-pdf.html">
-    
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4584641102876506"
+        crossorigin="anonymous"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             font-family: Arial, sans-serif;
             background: #f2f7ff;
-            text-align: center;
-        }
-        .header {
-            background: linear-gradient(135deg, #1976d2, #42a5f5);
-            color: white;
-            padding: 25px 15px;
+            color: #263238;
+            line-height: 1.6;
         }
 
-        h1 {
+        .header {
+            background: linear-gradient(135deg, #0d47a1, #1976d2, #42a5f5);
+            color: white;
+            text-align: center;
+            padding: 30px 15px;
+        }
+
+        .header h1 {
             margin: 0;
+            font-size: clamp(26px, 5vw, 34px);
+        }
+
+        .header p {
+            margin-bottom: 0;
+        }
+
+        .box,
+        .content-box {
+            background: white;
+            width: calc(100% - 24px);
+            max-width: 760px;
+            margin: 24px auto;
+            padding: 22px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
         }
 
         .box {
-            background: white;
-            max-width: 450px;
-            margin: 25px auto;
-            padding: 25px;
-            border-radius: 18px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            max-width: 650px;
+            text-align: center;
+        }
+
+        button,
+        select {
+            font-size: 16px;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin: 6px 3px;
         }
 
         button {
             background: #1976d2;
             color: white;
             border: none;
-            padding: 14px 25px;
-            border-radius: 10px;
-            font-size: 17px;
             cursor: pointer;
-            margin: 8px;
+            min-height: 44px;
         }
 
-        #photos {
+        button:hover {
+            background: #0d47a1;
+        }
+
+        button:focus-visible,
+        select:focus-visible {
+            outline: 3px solid #ffb300;
+            outline-offset: 3px;
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        #fileInput {
+            display: none;
+        }
+
+        .controls {
+            margin: 16px 0;
+        }
+
+        .photo-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
+            gap: 12px;
             margin-top: 20px;
+            text-align: left;
         }
 
-        .photo {
-            width: 100px;
-            height: 100px;
-            object-fit: cover;
-            margin: 5px;
-            border-radius: 8px;
+        .photo-card {
+            min-width: 0;
+            border: 1px solid #d8e3f0;
+            border-radius: 10px;
+            padding: 8px;
+            background: #f8fbff;
+            overflow-wrap: anywhere;
+        }
+
+        .photo-card img {
+            display: block;
+            width: 100%;
+            height: 125px;
+            object-fit: contain;
+            background: #edf2f7;
+            border-radius: 6px;
+        }
+
+        .photo-name {
+            font-size: 13px;
+            margin: 8px 0 4px;
+        }
+
+        .remove-btn {
+            width: 100%;
+            padding: 8px;
+            margin: 4px 0 0;
+            font-size: 14px;
+            background: #b3261e;
+        }
+
+        .remove-btn:hover {
+            background: #851a14;
+        }
+
+        #status {
+            min-height: 28px;
+            margin: 14px 0;
+            font-weight: bold;
+            overflow-wrap: anywhere;
+        }
+
+        .hint {
+            padding: 12px;
+            background: #eaf3ff;
+            border-left: 4px solid #1976d2;
+            border-radius: 6px;
+            text-align: left;
+        }
+
+        .content-box h2 {
+            color: #0d47a1;
+            line-height: 1.3;
+        }
+
+        .content-box h3 {
+            color: #174a83;
+        }
+
+        .content-box li {
+            margin-bottom: 8px;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #dbe3ee;
+            padding: 12px 0;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-item h3 {
+            margin-bottom: 5px;
+        }
+
+        .footer {
+            background: #12345a;
+            color: white;
+            text-align: center;
+            padding: 20px 12px;
+            margin-top: 30px;
+        }
+
+        .footer a {
+            color: white;
+            margin: 0 8px;
+        }
+
+        @media (max-width: 480px) {
+            .box,
+            .content-box {
+                padding: 16px;
+            }
+
+            .controls button,
+            .controls select {
+                width: 100%;
+                margin: 6px 0;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <div class="header">
-        <h1>📄 Photo → PDF</h1>
-        <p>Convert your photos into PDF</p>
-    </div>
+<header class="header">
+    <h1>📄 Photo to PDF Converter</h1>
+    <p>Combine your photos into one PDF document.</p>
+</header>
 
-    <div class="box">
-<button onclick="window.location.href='https://easylifetoolbox.com/'">🏠 Home</button>
+<main>
+    <section class="box" aria-label="Photo to PDF tool">
 
-        <input type="file" id="fileInput" accept="image/*" multiple hidden>
+        <h2>Create a PDF from Photos</h2>
+        <p>Select one or more images to create a PDF file.</p>
 
-        <button onclick="document.getElementById('fileInput').click()">
-            ➕ Add Photos
-        </button>
+        <button type="button" id="homeBtn">🏠 Home</button>
 
-        <div id="photos"></div>
+        <div class="controls">
+            <label for="pageSize"><strong>PDF page size:</strong></label>
+            <select id="pageSize">
+                <option value="a4">A4</option>
+                <option value="letter">Letter</option>
+            </select>
+        </div>
 
-        <button onclick="createPDF()">
-            📄 Create PDF
-        </button>
+        <input type="file" id="fileInput" accept="image/*" multiple>
 
-    </div>
+        <div class="controls">
+            <button type="button" id="addBtn">➕ Add Photos</button>
+            <button type="button" id="clearBtn">🗑️ Clear All</button>
+        </div>
 
-    <script>
+        <p id="photoCount">No photos selected.</p>
 
-        let selectedFiles = [];
+        <div id="photos" class="photo-list"></div>
 
-        document.getElementById("fileInput").addEventListener("change", function(event) {
+        <div class="controls">
+            <button type="button" id="createBtn">📄 Create PDF</button>
+        </div>
 
-            selectedFiles = Array.from(event.target.files);
+        <p id="status" role="status" aria-live="polite">
+            Select photos to get started.
+        </p>
 
-            let photos = document.getElementById("photos");
-            photos.innerHTML = "";
+        <p class="hint">
+            <strong>Tip:</strong> For clearer PDFs, choose sharp images with
+            good lighting. Check that the text is readable before sharing.
+        </p>
+    </section>
 
-            selectedFiles.forEach(file => {
+    <section class="content-box">
+        <h2>How to Convert Photos to PDF</h2>
+        <ol>
+            <li>Select <strong>Add Photos</strong>.</li>
+            <li>Choose one or more images from your phone or computer.</li>
+            <li>Check the image previews and remove any unwanted photo.</li>
+            <li>Select A4 or Letter for the PDF page size.</li>
+            <li>Press <strong>Create PDF</strong> and wait for the download.</li>
+            <li>Open the downloaded PDF to check each page.</li>
+        </ol>
+    </section>
 
-                let img = document.createElement("img");
+    <section class="content-box">
+        <h2>When Is Photo to PDF Useful?</h2>
+        <p>
+            Combining photos into a PDF can make it easier to share multiple
+            pages in a single file. For example, you might combine pictures
+            of handwritten notes, classwork, receipts or non-sensitive forms.
+        </p>
+        <p>
+            Each selected image is placed on a separate PDF page. The tool
+            does not automatically recognize text or make the PDF searchable.
+            Check the requirements of the website or office receiving your file
+            before submitting it.
+        </p>
+    </section>
 
-                img.src = URL.createObjectURL(file);
-                img.className = "photo";
+    <section class="content-box">
+        <h2>Tips for Better Results</h2>
+        <ul>
+            <li>Take photos in good light and keep the camera steady.</li>
+            <li>Make sure the important text is fully visible in each image.</li>
+            <li>Choose photos in the order you want them to appear in the PDF.</li>
+            <li>Use A4 when a form or office specifically requests A4 pages.</li>
+            <li>Large images may take longer to process and create a larger PDF.</li>
+            <li>Open the downloaded file and verify that all pages are present.</li>
+        </ul>
+    </section>
 
-                photos.appendChild(img);
+    <section class="content-box">
+        <h2>Frequently Asked Questions</h2>
 
+        <div class="faq-item">
+            <h3>1. Can I convert several photos into one PDF?</h3>
+            <p>
+                Yes. Select multiple images. The tool places each image on
+                a separate page in the same PDF.
+            </p>
+        </div>
+
+        <div class="faq-item">
+            <h3>2. Which page sizes are available?</h3>
+            <p>
+                This page offers A4 and Letter page sizes. Choose the one
+                required by the person or organization receiving your PDF.
+            </p>
+        </div>
+
+        <div class="faq-item">
+            <h3>3. Why is my PDF taking a long time to download?</h3>
+            <p>
+                Large photos or many images can take longer to process.
+                Try using smaller image files if your device runs out of
+                memory or the browser becomes unresponsive.
+            </p>
+        </div>
+
+        <div class="faq-item">
+            <h3>4. Does this tool convert images into searchable text?</h3>
+            <p>
+                No. It places the selected images into a PDF. It does not
+                include optical character recognition (OCR).
+            </p>
+        </div>
+
+        <div class="faq-item">
+            <h3>5. Can I use this on a mobile phone?</h3>
+            <p>
+                Yes, you can select photos from a supported mobile browser.
+                The exact file picker and download behavior depend on your device.
+            </p>
+        </div>
+
+        <div class="faq-item">
+            <h3>6. Are the selected photos sent to an EasyLife server?</h3>
+            <p>
+                The tool's JavaScript creates the PDF in your browser and
+                contains no request that uploads the selected images to an
+                EasyLife server. The page does load external resources, including
+                the PDF library and advertising script. For sensitive documents,
+                use a trusted device and review the site's Privacy Policy.
+            </p>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <p>EasyLife — Simple &amp; Free Tools for Everyday Life</p>
+    <p>
+        <a href="https://easylifetoolbox.com/">Home</a>
+        <a href="https://easylifetoolbox.com/privacy.html">Privacy Policy</a>
+        <a href="https://easylifetoolbox.com/contact.html">Contact Us</a>
+    </p>
+</footer>
+
+<script>
+    const fileInput = document.getElementById("fileInput");
+    const addBtn = document.getElementById("addBtn");
+    const clearBtn = document.getElementById("clearBtn");
+    const createBtn = document.getElementById("createBtn");
+    const photosContainer = document.getElementById("photos");
+    const photoCount = document.getElementById("photoCount");
+    const status = document.getElementById("status");
+    const pageSize = document.getElementById("pageSize");
+    const homeBtn = document.getElementById("homeBtn");
+
+    let selectedFiles = [];
+    let previewURLs = [];
+
+    addBtn.addEventListener("click", () => {
+        fileInput.click();
+    });
+
+    homeBtn.addEventListener("click", () => {
+        window.location.href = "https://easylifetoolbox.com/";
+    });
+
+    fileInput.addEventListener("change", (event) => {
+        const incomingFiles = Array.from(event.target.files || []);
+        const imageFiles = incomingFiles.filter(file =>
+            file.type.startsWith("image/")
+        );
+
+        if (imageFiles.length !== incomingFiles.length) {
+            status.textContent =
+                "Some files were skipped because they are not supported images.";
+        } else if (imageFiles.length > 0) {
+            status.textContent = "Photos added. Review them before creating the PDF.";
+        }
+
+        selectedFiles = selectedFiles.concat(imageFiles);
+        fileInput.value = "";
+
+        renderPhotos();
+    });
+
+    function renderPhotos() {
+        previewURLs.forEach(url => URL.revokeObjectURL(url));
+        previewURLs = [];
+        photosContainer.innerHTML = "";
+
+        selectedFiles.forEach((file, index) => {
+            const card = document.createElement("div");
+            card.className = "photo-card";
+
+            const img = document.createElement("img");
+            const url = URL.createObjectURL(file);
+            previewURLs.push(url);
+            img.src = url;
+            img.alt = "Preview of " + file.name;
+
+            const name = document.createElement("p");
+            name.className = "photo-name";
+            name.textContent = (index + 1) + ". " + file.name;
+
+            const removeBtn = document.createElement("button");
+            removeBtn.type = "button";
+            removeBtn.className = "remove-btn";
+            removeBtn.textContent = "Remove";
+            removeBtn.setAttribute("aria-label", "Remove " + file.name);
+
+            removeBtn.addEventListener("click", () => {
+                selectedFiles.splice(index, 1);
+                renderPhotos();
+                status.textContent = "Photo removed.";
             });
 
+            card.appendChild(img);
+            card.appendChild(name);
+            card.appendChild(removeBtn);
+            photosContainer.appendChild(card);
         });
 
-        async function createPDF() {
+        photoCount.textContent = selectedFiles.length === 1
+            ? "1 photo selected."
+            : selectedFiles.length + " photos selected.";
 
-            if (selectedFiles.length === 0) {
-                alert("Please add photos first.");
-                return;
-            }
+        if (selectedFiles.length === 0) {
+            photoCount.textContent = "No photos selected.";
+            status.textContent = "Select photos to get started.";
+        }
+    }
 
+    clearBtn.addEventListener("click", () => {
+        selectedFiles = [];
+        renderPhotos();
+        status.textContent = "All selected photos were cleared.";
+    });
+
+    function loadImage(file) {
+        return new Promise((resolve, reject) => {
+            const url = URL.createObjectURL(file);
+            const img = new Image();
+
+            img.onload = () => {
+                URL.revokeObjectURL(url);
+                resolve(img);
+            };
+
+            img.onerror = () => {
+                URL.revokeObjectURL(url);
+                reject(new Error("Could not read an image."));
+            };
+
+            img.src = url;
+        });
+    }
+
+    async function createPDF() {
+        if (selectedFiles.length === 0) {
+            status.textContent = "Please add photos first.";
+            return;
+        }
+
+        if (!window.jspdf || !window.jspdf.jsPDF) {
+            status.textContent =
+                "The PDF library did not load. Check your internet connection and try again.";
+            return;
+        }
+
+        createBtn.disabled = true;
+        addBtn.disabled = true;
+        clearBtn.disabled = true;
+
+        try {
             const { jsPDF } = window.jspdf;
+            const format = pageSize.value === "letter" ? "letter" : "a4";
 
-            let pdf = new jsPDF();
+            const pdf = new jsPDF({
+                orientation: "portrait",
+                unit: "mm",
+                format: format
+            });
 
             for (let i = 0; i < selectedFiles.length; i++) {
+                status.textContent =
+                    "Preparing photo " + (i + 1) + " of " + selectedFiles.length + "...";
+
+                const img = await loadImage(selectedFiles[i]);
 
                 if (i > 0) {
-                    pdf.addPage();
+                    pdf.addPage(format, "portrait");
                 }
 
-                let imageURL = URL.createObjectURL(selectedFiles[i]);
+                const pageWidth = pdf.internal.pageSize.getWidth();
+                const pageHeight = pdf.internal.pageSize.getHeight();
+                const margin = 10;
 
-                let img = new Image();
+                const maxWidth = pageWidth - margin * 2;
+                const maxHeight = pageHeight - margin * 2;
 
-                img.src = imageURL;
-
-                await new Promise(resolve => {
-                    img.onload = resolve;
-                });
-
-                let pageWidth = 190;
-                let pageHeight = (img.height / img.width) * pageWidth;
-
-                pdf.addImage(
-                    img,
-                    "JPEG",
-                    10,
-                    10,
-                    pageWidth,
-                    pageHeight
+                const ratio = Math.min(
+                    maxWidth / img.width,
+                    maxHeight / img.height
                 );
 
+                const imageWidth = img.width * ratio;
+                const imageHeight = img.height * ratio;
+
+                const x = (pageWidth - imageWidth) / 2;
+                const y = (pageHeight - imageHeight) / 2;
+
+                const canvas = document.createElement("canvas");
+                canvas.width = img.width;
+                canvas.height = img.height;
+
+                const context = canvas.getContext("2d");
+
+                if (!context) {
+                    throw new Error("Image processing is unavailable.");
+                }
+
+                context.drawImage(img, 0, 0);
+
+                const imageData = canvas.toDataURL("image/jpeg", 0.92);
+
+                pdf.addImage(
+                    imageData,
+                    "JPEG",
+                    x,
+                    y,
+                    imageWidth,
+                    imageHeight
+                );
             }
 
             pdf.save("EasyLife-Photos.pdf");
-
+            status.textContent =
+                "PDF created. Open the downloaded file to check every page.";
+        } catch (error) {
+            status.textContent =
+                "Could not create the PDF. Try fewer or smaller photos.";
+        } finally {
+            createBtn.disabled = false;
+            addBtn.disabled = false;
+            clearBtn.disabled = false;
         }
+    }
 
-    </script>
+    createBtn.addEventListener("click", createPDF);
+
+    window.addEventListener("beforeunload", () => {
+        previewURLs.forEach(url => URL.revokeObjectURL(url));
+    });
+</script>
 
 </body>
 </html>
+```
