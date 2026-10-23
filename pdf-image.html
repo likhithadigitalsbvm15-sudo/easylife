@@ -1,190 +1,590 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4584641102876506"
-         crossorigin="anonymous"></script>   
-    <title>EasyLife - PDF to Image</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>EasyLife - Free PDF to Image Converter</title>
+    <meta name="description" content="Convert PDF pages into PNG images with EasyLife. Preview each page and download images individually using this simple PDF to image tool.">
     <link rel="canonical" href="https://easylifetoolbox.com/pdf-image.html">
-         
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4584641102876506"
+        crossorigin="anonymous"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             font-family: Arial, sans-serif;
             background: #f2f7ff;
-            text-align: center;
+            color: #263238;
+            line-height: 1.6;
         }
 
         .header {
-            background: linear-gradient(135deg, #1976d2, #42a5f5);
+            background: linear-gradient(135deg, #0d47a1, #1976d2, #42a5f5);
             color: white;
-            padding: 25px 15px;
+            text-align: center;
+            padding: 30px 15px;
         }
 
         .header h1 {
             margin: 0;
+            font-size: clamp(26px, 5vw, 34px);
+        }
+
+        .header p {
+            margin-bottom: 0;
+        }
+
+        .box,
+        .content-box {
+            background: white;
+            width: calc(100% - 24px);
+            max-width: 760px;
+            margin: 24px auto;
+            padding: 22px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
         }
 
         .box {
-            background: white;
-            max-width: 500px;
-            margin: 25px auto;
-            padding: 25px;
-            border-radius: 18px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            max-width: 650px;
+            text-align: center;
         }
 
         button {
             background: #1976d2;
             color: white;
             border: none;
-            padding: 14px 22px;
-            border-radius: 10px;
-            font-size: 17px;
+            padding: 12px 18px;
+            border-radius: 9px;
+            font-size: 16px;
             cursor: pointer;
-            margin: 8px;
+            margin: 7px 4px;
+            min-height: 44px;
+        }
+
+        button:hover {
+            background: #0d47a1;
+        }
+
+        button:focus-visible {
+            outline: 3px solid #ffb300;
+            outline-offset: 3px;
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        #pdfInput {
+            display: none;
         }
 
         #fileName {
-            margin: 20px;
-            font-size: 16px;
+            margin: 16px 0;
+            overflow-wrap: anywhere;
         }
 
-        canvas {
+        #status {
+            min-height: 28px;
+            font-weight: bold;
+            margin: 16px 0;
+            overflow-wrap: anywhere;
+        }
+
+        .page-card {
+            background: #f8fbff;
+            border: 1px solid #d8e3f0;
+            border-radius: 12px;
+            padding: 14px;
+            margin: 22px 0;
+        }
+
+        .page-card h3 {
+            margin-top: 0;
+            color: #0d47a1;
+        }
+
+        .page-card canvas {
+            display: block;
             width: 100%;
+            height: auto;
             max-width: 450px;
-            margin-top: 20px;
-            border-radius: 8px;
+            margin: 12px auto;
+            border: 1px solid #d5dce5;
+            border-radius: 5px;
+            background: white;
         }
 
         .download {
             background: #2e7d32;
+        }
+
+        .download:hover {
+            background: #1b5e20;
+        }
+
+        .hint {
+            background: #eaf3ff;
+            border-left: 4px solid #1976d2;
+            border-radius: 6px;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .content-box h2 {
+            color: #0d47a1;
+            line-height: 1.3;
+        }
+
+        .content-box h3 {
+            color: #174a83;
+        }
+
+        .content-box li {
+            margin-bottom: 8px;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #dbe3ee;
+            padding: 12px 0;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-item h3 {
+            margin-bottom: 5px;
+        }
+
+        .footer {
+            background: #12345a;
+            color: white;
+            text-align: center;
+            padding: 20px 12px;
+            margin-top: 30px;
+        }
+
+        .footer a {
+            color: white;
+            margin: 0 8px;
+        }
+
+        @media (max-width: 480px) {
+            .box,
+            .content-box {
+                padding: 16px;
+            }
+
+            .box button {
+                width: 100%;
+                margin: 6px 0;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <div class="header">
-        <h1>🖼️ PDF → Image</h1>
-        <p>Convert PDF pages into images</p>
-    </div>
+<header class="header">
+    <h1>🖼️ PDF to Image Converter</h1>
+    <p>Convert PDF pages into PNG images and download them individually.</p>
+</header>
 
-    <div class="box">
+<main>
+    <section class="box" aria-label="PDF to image converter">
 
-        <input type="file" id="pdfInput" accept=".pdf" hidden>
+        <h2>Convert PDF Pages to Images</h2>
+        <p>Select a PDF file to preview its pages and download them as PNG images.</p>
 
-        <button onclick="document.getElementById('pdfInput').click()">
-            📄 Select PDF
+        <button type="button" id="homeBtn">🏠 Home</button>
+
+        <div>
+            <input type="file" id="pdfInput" accept=".pdf,application/pdf">
+
+            <button type="button" id="selectBtn">
+                📄 Select PDF
+            </button>
+        </div>
+
+        <div id="fileName">No PDF selected.</div>
+
+        <button type="button" id="convertBtn" hidden>
+            🔄 Convert to Images
         </button>
 
-        <div id="fileName">
-            No PDF selected
+        <button type="button" id="clearBtn" hidden>
+            🗑️ Clear
+        </button>
+
+        <div id="status" role="status" aria-live="polite">
+            Select a PDF to get started.
         </div>
-<button id="convertBtn" style="display:none;" onclick="startConversion()">
-    🔄 Convert to Images
-</button>
+
         <div id="result"></div>
 
-        <br>
+        <p class="hint">
+            <strong>Tip:</strong> Large PDFs and high-resolution pages can use
+            substantial memory. If conversion fails, try a smaller PDF.
+        </p>
+    </section>
 
-        <button onclick="window.location.href='https://easylifetoolbox.com/'">
-    🏠 Home
-</button>
+    <section class="content-box">
+        <h2>How to Convert a PDF to Images</h2>
+        <ol>
+            <li>Select <strong>Select PDF</strong>.</li>
+            <li>Choose a PDF file from your device.</li>
+            <li>Press <strong>Convert to Images</strong>.</li>
+            <li>Wait for the page previews to appear.</li>
+            <li>Choose <strong>Download Page</strong> under each page you need.</li>
+            <li>Open the downloaded PNG images to check the results.</li>
+        </ol>
+        <p>
+            Each PDF page is rendered as a separate PNG image. The tool does
+            not combine all pages into a single image file.
+        </p>
+    </section>
 
-    </div>
+    <section class="content-box">
+        <h2>When Is PDF to Image Useful?</h2>
+        <p>
+            Converting a PDF page into an image can be useful when you need
+            to preview a page as a picture, share a single page in an image
+            format, or use a page in a document or presentation.
+        </p>
+        <p>
+            PNG images may be larger than the original PDF. The output also
+            depends on the quality and resolution of the PDF page.
+        </p>
+    </section>
 
-    <script>
+    <section class="content-box">
+        <h2>Tips for Better Results</h2>
+        <ul>
+            <li>Check the PDF before converting it.</li>
+            <li>Download only the pages you need to save storage space.</li>
+            <li>Keep enough free memory available when converting large files.</li>
+            <li>Open each downloaded image to confirm that the text is readable.</li>
+            <li>Keep the original PDF if you need to preserve its original layout or searchable text.</li>
+        </ul>
+    </section>
 
+    <section class="content-box">
+        <h2>Frequently Asked Questions</h2>
+
+        <div class="faq-item">
+            <h3>1. Which image format does this tool create?</h3>
+            <p>
+                This tool downloads each converted page as a PNG image.
+            </p>
+        </div>
+
+        <div class="faq-item">
+            <h3>2. Can I download only one page?</h3>
+            <p>
+                Yes. Each page has its own download button, so you can download
+                only the pages you need.
+            </p>
+        </div>
+
+        <div class="faq-item">
+            <h3>3. Why is conversion slow?</h3>
+            <p>
+                Large PDFs, complex pages and high-resolution rendering can take
+                more time and browser memory.
+            </p>
+        </div>
+
+        <div class="faq-item">
+            <h3>4. Does converting a PDF to PNG preserve selectable text?</h3>
+            <p>
+                No. The output is an image of each page, not a searchable text
+                document. Keep the original PDF if you need selectable text.
+            </p>
+        </div>
+
+        <div class="faq-item">
+            <h3>5. Can I use this on a mobile phone?</h3>
+            <p>
+                Yes, in a supported mobile browser. The available memory and
+                download behavior depend on your device and browser.
+            </p>
+        </div>
+
+        <div class="faq-item">
+            <h3>6. Are my PDF pages uploaded to an EasyLife server?</h3>
+            <p>
+                This page uses PDF.js in the browser and does not contain code
+                that uploads the selected PDF to an EasyLife server. The page
+                also loads external resources, including the PDF library and
+                advertising script. For sensitive files, use a trusted device
+                and review the site's Privacy Policy.
+            </p>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <p>EasyLife — Simple &amp; Free Tools for Everyday Life</p>
+    <p>
+        <a href="https://easylifetoolbox.com/">Home</a>
+        <a href="https://easylifetoolbox.com/privacy.html">Privacy Policy</a>
+        <a href="https://easylifetoolbox.com/contact.html">Contact Us</a>
+    </p>
+</footer>
+
+<script>
+    const pdfInput = document.getElementById("pdfInput");
+    const selectBtn = document.getElementById("selectBtn");
+    const convertBtn = document.getElementById("convertBtn");
+    const clearBtn = document.getElementById("clearBtn");
+    const fileName = document.getElementById("fileName");
+    const status = document.getElementById("status");
+    const result = document.getElementById("result");
+    const homeBtn = document.getElementById("homeBtn");
+
+    let selectedPDF = null;
+    let loadingTask = null;
+    let conversionToken = 0;
+
+    if (window.pdfjsLib) {
         pdfjsLib.GlobalWorkerOptions.workerSrc =
-        "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
-
-        document.getElementById("pdfInput").addEventListener("change", function() {
-
-    const file = this.files[0];
-
-    if (!file) return;
-
-    document.getElementById("fileName").innerText =
-        "Selected: " + file.name;
-
-    document.getElementById("convertBtn").style.display = "inline-block";
-});
-
-function startConversion() {
-
-    const file = document.getElementById("pdfInput").files[0];
-
-    if (!file) {
-        alert("Please select a PDF first.");
-        return;
+            "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+    } else {
+        status.textContent =
+            "The PDF library could not load. Check your internet connection and refresh the page.";
+        selectBtn.disabled = true;
     }
 
-    convertPDF(file);
-}
-        async function convertPDF(file) {
+    selectBtn.addEventListener("click", () => {
+        pdfInput.click();
+    });
 
-            const result = document.getElementById("result");
+    homeBtn.addEventListener("click", () => {
+        window.location.href = "https://easylifetoolbox.com/";
+    });
 
-            result.innerHTML = "<p>⏳ Converting PDF...</p>";
+    pdfInput.addEventListener("change", () => {
+        const file = pdfInput.files && pdfInput.files[0];
 
-            const arrayBuffer = await file.arrayBuffer();
+        if (!file) return;
 
-            const pdf = await pdfjsLib.getDocument({
-                data: arrayBuffer
-            }).promise;
+        conversionToken++;
+        selectedPDF = null;
+        result.innerHTML = "";
 
-            result.innerHTML = "";
+        if (loadingTask) {
+            try {
+                loadingTask.destroy();
+            } catch (_) {}
+            loadingTask = null;
+        }
+
+        const isPDF = file.type === "application/pdf" ||
+            file.name.toLowerCase().endsWith(".pdf");
+
+        if (!isPDF) {
+            fileName.textContent = "The selected file is not a PDF.";
+            status.textContent = "Please choose a PDF file.";
+            convertBtn.hidden = true;
+            clearBtn.hidden = false;
+            return;
+        }
+
+        selectedPDF = file;
+        fileName.textContent =
+            "Selected: " + file.name + " (" + formatBytes(file.size) + ")";
+
+        convertBtn.hidden = false;
+        clearBtn.hidden = false;
+        status.textContent = "PDF selected. Press Convert to Images.";
+    });
+
+    clearBtn.addEventListener("click", () => {
+        conversionToken++;
+        selectedPDF = null;
+        result.innerHTML = "";
+        pdfInput.value = "";
+        fileName.textContent = "No PDF selected.";
+        convertBtn.hidden = true;
+        clearBtn.hidden = true;
+        status.textContent = "Select a PDF to get started.";
+
+        if (loadingTask) {
+            try {
+                loadingTask.destroy();
+            } catch (_) {}
+            loadingTask = null;
+        }
+    });
+
+    convertBtn.addEventListener("click", startConversion);
+
+    async function startConversion() {
+        if (!selectedPDF) {
+            status.textContent = "Please select a PDF first.";
+            return;
+        }
+
+        if (!window.pdfjsLib) {
+            status.textContent =
+                "The PDF library did not load. Refresh the page and try again.";
+            return;
+        }
+
+        const token = ++conversionToken;
+
+        convertBtn.disabled = true;
+        selectBtn.disabled = true;
+        clearBtn.disabled = true;
+        result.innerHTML = "";
+        status.textContent = "⏳ Opening PDF...";
+
+        try {
+            const arrayBuffer = await selectedPDF.arrayBuffer();
+
+            if (token !== conversionToken) return;
+
+            loadingTask = pdfjsLib.getDocument({
+                data: new Uint8Array(arrayBuffer)
+            });
+
+            const pdf = await loadingTask.promise;
+
+            if (token !== conversionToken) {
+                await pdf.destroy();
+                return;
+            }
+
+            status.textContent =
+                "PDF has " + pdf.numPages + " page(s). Preparing previews...";
 
             for (let pageNumber = 1; pageNumber <= pdf.numPages; pageNumber++) {
+                if (token !== conversionToken) {
+                    await pdf.destroy();
+                    return;
+                }
+
+                status.textContent =
+                    "⏳ Converting page " + pageNumber + " of " + pdf.numPages + "...";
 
                 const page = await pdf.getPage(pageNumber);
-
-                const viewport = page.getViewport({
-                    scale: 2
-                });
+                const viewport = page.getViewport({ scale: 1.5 });
 
                 const canvas = document.createElement("canvas");
-
                 const context = canvas.getContext("2d");
 
-                canvas.width = viewport.width;
-                canvas.height = viewport.height;
+                if (!context) {
+                    throw new Error("Canvas is unavailable.");
+                }
+
+                canvas.width = Math.ceil(viewport.width);
+                canvas.height = Math.ceil(viewport.height);
 
                 await page.render({
                     canvasContext: context,
                     viewport: viewport
                 }).promise;
 
-                result.appendChild(canvas);
+                if (token !== conversionToken) {
+                    canvas.width = 0;
+                    canvas.height = 0;
+                    await pdf.destroy();
+                    return;
+                }
 
-                const button = document.createElement("button");
+                const card = document.createElement("section");
+                card.className = "page-card";
 
-                button.className = "download";
+                const heading = document.createElement("h3");
+                heading.textContent = "Page " + pageNumber;
 
-                button.innerText =
-                    "⬇️ Download Page " + pageNumber;
+                const preview = document.createElement("canvas");
+                preview.width = canvas.width;
+                preview.height = canvas.height;
 
-                button.onclick = function() {
+                const previewContext = preview.getContext("2d");
 
-                    const link = document.createElement("a");
+                if (!previewContext) {
+                    throw new Error("Canvas is unavailable.");
+                }
 
-                    link.download =
-                        "EasyLife-Page-" + pageNumber + ".png";
+                previewContext.drawImage(canvas, 0, 0);
 
-                    link.href =
-                        canvas.toDataURL("image/png");
+                const downloadButton = document.createElement("button");
+                downloadButton.className = "download";
+                downloadButton.textContent = "⬇️ Download Page " + pageNumber;
 
-                    link.click();
-                };
+                downloadButton.addEventListener("click", () => {
+                    try {
+                        const link = document.createElement("a");
+                        link.download = "EasyLife-Page-" + pageNumber + ".png";
+                        link.href = preview.toDataURL("image/png");
+                        document.body.appendChild(link);
+                        link.click();
+                        link.remove();
+                    } catch (_) {
+                        status.textContent =
+                            "Could not download this page. Try a smaller PDF.";
+                    }
+                });
 
-                result.appendChild(button);
+                card.appendChild(heading);
+                card.appendChild(preview);
+                card.appendChild(downloadButton);
+                result.appendChild(card);
+
+                canvas.width = 0;
+                canvas.height = 0;
+
+                page.cleanup();
             }
 
-        }
+            await pdf.destroy();
+            loadingTask = null;
 
-    </script>
+            if (token === conversionToken) {
+                status.textContent =
+                    "✅ Conversion complete. Download the pages you need.";
+            }
+        } catch (error) {
+            if (token === conversionToken) {
+                result.innerHTML = "";
+                status.textContent =
+                    "Conversion failed. Check that the PDF opens correctly and try a smaller file.";
+            }
+
+            if (loadingTask) {
+                try {
+                    loadingTask.destroy();
+                } catch (_) {}
+                loadingTask = null;
+            }
+        } finally {
+            if (token === conversionToken) {
+                convertBtn.disabled = false;
+                selectBtn.disabled = false;
+                clearBtn.disabled = false;
+            }
+        }
+    }
+
+    function formatBytes(bytes) {
+        if (bytes < 1024) return bytes + " bytes";
+        if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + " KB";
+        return (bytes / (1024 * 1024)).toFixed(1) + " MB";
+    }
+</script>
 
 </body>
 </html>
+```
