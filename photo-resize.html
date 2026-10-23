@@ -1,24 +1,36 @@
+```html
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4584641102876506"
-         crossorigin="anonymous"></script>    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>EasyLife - Photo Resize</title>
+    <title>Free Photo Resizer Online | EasyLife</title>
+    <meta name="description" content="Resize photos online for free with EasyLife. Set custom image width and height, preview your resized photo, and download it as a JPEG image.">
+    <meta name="robots" content="index,follow">
     <link rel="canonical" href="https://easylifetoolbox.com/photo-resize.html">
-         
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4584641102876506"
+        crossorigin="anonymous"></script>
+
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             font-family: Arial, sans-serif;
             background: #f2f7ff;
-            text-align: center;
+            color: #263238;
+            line-height: 1.6;
         }
 
         .header {
             background: linear-gradient(135deg, #1976d2, #42a5f5);
             color: white;
-            padding: 30px 20px;
+            padding: 28px 16px;
+            text-align: center;
         }
 
         .header h1 {
@@ -26,131 +38,553 @@
             font-size: 30px;
         }
 
-        .box {
-            background: white;
-            max-width: 450px;
-            margin: 25px auto;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+        .header p {
+            margin-bottom: 0;
         }
 
-        input, select {
-            width: 90%;
+        .container {
+            width: 92%;
+            max-width: 850px;
+            margin: 24px auto;
+        }
+
+        .box, .info-section {
+            background: white;
+            padding: 22px;
+            margin-bottom: 22px;
+            border-radius: 14px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+        }
+
+        .box {
+            text-align: center;
+        }
+
+        input[type="file"],
+        input[type="number"] {
+            width: 100%;
             padding: 12px;
-            margin: 8px;
-            border: 1px solid #ccc;
+            margin: 8px 0;
+            border: 1px solid #cbd5e1;
             border-radius: 8px;
             font-size: 16px;
+            background: white;
         }
 
-        button {
+        .dimension-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            text-align: left;
+        }
+
+        .checkbox-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin: 12px 0;
+        }
+
+        .checkbox-row input {
+            width: auto;
+        }
+
+        button, .home-link {
+            display: inline-block;
             background: #1976d2;
             color: white;
             border: none;
-            padding: 13px 25px;
-            margin: 10px 5px;
+            padding: 12px 20px;
+            margin: 8px 4px;
             border-radius: 8px;
             font-size: 16px;
             cursor: pointer;
+            text-decoration: none;
         }
 
-        button:hover {
+        button:hover, .home-link:hover {
             background: #125ca8;
         }
 
+        button:focus-visible, a:focus-visible,
+        input:focus-visible {
+            outline: 3px solid #ffbf47;
+            outline-offset: 2px;
+        }
+
         #preview {
+            display: none;
             max-width: 100%;
-            margin-top: 15px;
+            height: auto;
+            margin: 18px auto;
+            border: 1px solid #d7e0eb;
+            border-radius: 8px;
+        }
+
+        #status {
+            overflow-wrap: anywhere;
+            font-weight: bold;
+        }
+
+        .small-note {
+            color: #455a64;
+            font-size: 14px;
+        }
+
+        .info-section h2 {
+            color: #1559a6;
+            font-size: 23px;
+            margin-top: 0;
+        }
+
+        .info-section h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #d9e2ef;
+            text-align: left;
+        }
+
+        th {
+            background: #eaf3ff;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px 10px;
+            background: #124b98;
+            color: white;
+        }
+
+        .footer a {
+            color: white;
+            margin: 0 7px;
+        }
+
+        @media (max-width: 520px) {
+            .header h1 {
+                font-size: 25px;
+            }
+
+            .dimension-row {
+                grid-template-columns: 1fr;
+            }
+
+            .box, .info-section {
+                padding: 16px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <div class="header">
-        <h1>📏 Photo Resize</h1>
-        <p>Resize your photo easily</p>
-    </div>
+    <header class="header">
+        <h1>📏 Free Photo Resizer</h1>
+        <p>Resize your photo online with custom dimensions.</p>
+    </header>
 
-    <div class="box">
+    <main class="container">
 
-        <input type="file" id="photo" accept="image/*">
+        <section class="box" aria-labelledby="tool-heading">
+            <h2 id="tool-heading">Resize Your Photo</h2>
+            <p>Select an image, enter the new dimensions, and download the resized photo.</p>
 
-        <br>
+            <label for="photo"><strong>Choose a photo</strong></label>
+            <input type="file" id="photo" accept="image/jpeg,image/png,image/webp,image/gif">
 
-        <input type="number" id="width" placeholder="Width (px)">
+            <p id="originalInfo" class="small-note" aria-live="polite">
+                No photo selected yet.
+            </p>
 
-        <input type="number" id="height" placeholder="Height (px)">
+            <div class="dimension-row">
+                <div>
+                    <label for="width"><strong>Width (pixels)</strong></label>
+                    <input type="number" id="width" min="1" max="10000"
+                           placeholder="Example: 1200">
+                </div>
 
-        <br>
+                <div>
+                    <label for="height"><strong>Height (pixels)</strong></label>
+                    <input type="number" id="height" min="1" max="10000"
+                           placeholder="Example: 800">
+                </div>
+            </div>
 
-        <button onclick="resizePhoto()">Resize Photo</button>
+            <div class="checkbox-row">
+                <input type="checkbox" id="keepRatio" checked>
+                <label for="keepRatio">Keep original photo proportions</label>
+            </div>
 
-        <br>
+            <p class="small-note">
+                Recommended: keep this option enabled to reduce stretching or distortion.
+            </p>
 
-        <canvas id="canvas" style="display:none;"></canvas>
+            <button type="button" id="resizeButton">Resize Photo</button>
 
-        <img id="preview">
+            <p id="status" role="status" aria-live="polite"></p>
 
-        <br>
+            <img id="preview" alt="Preview of the resized photo">
 
-        <button onclick="goHome()">🏠 Home</button>
+            <div>
+                <button type="button" id="downloadButton" hidden>
+                    Download Resized Photo
+                </button>
+                <a class="home-link" href="https://easylifetoolbox.com/">
+                    🏠 Home
+                </a>
+            </div>
+        </section>
 
-    </div>
+        <section class="info-section">
+            <h2>What Is Photo Resizing?</h2>
+            <p>
+                Photo resizing changes the pixel width and height of an image.
+                It can help prepare pictures for websites, online forms, social
+                media, email, or printing. The best dimensions depend on where
+                you plan to use the photo.
+            </p>
+            <p>
+                This tool lets you select a photo, enter custom dimensions,
+                preview the result, and download a JPEG copy. The original
+                file is not overwritten.
+            </p>
+        </section>
+
+        <section class="info-section">
+            <h2>How to Resize a Photo</h2>
+            <ol>
+                <li>Select a photo from your device.</li>
+                <li>Check the original dimensions shown above the input fields.</li>
+                <li>Enter your required width and height in pixels.</li>
+                <li>Keep “Keep original photo proportions” enabled unless you specifically need an exact stretched size.</li>
+                <li>Select “Resize Photo” to create a preview.</li>
+                <li>Select “Download Resized Photo” to save the JPEG copy.</li>
+            </ol>
+        </section>
+
+        <section class="info-section">
+            <h2>Photo Size Examples</h2>
+            <p>
+                These are example pixel dimensions, not universal requirements.
+                Check the specifications of the website, form, printer, or
+                platform where you intend to use the image.
+            </p>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Use</th>
+                            <th>Example dimensions</th>
+                            <th>Shape</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Square profile picture</td>
+                            <td>600 × 600 px</td>
+                            <td>Square</td>
+                        </tr>
+                        <tr>
+                            <td>Landscape photo</td>
+                            <td>1200 × 800 px</td>
+                            <td>3:2</td>
+                        </tr>
+                        <tr>
+                            <td>HD landscape image</td>
+                            <td>1920 × 1080 px</td>
+                            <td>16:9</td>
+                        </tr>
+                        <tr>
+                            <td>Portrait image</td>
+                            <td>800 × 1200 px</td>
+                            <td>2:3</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <h2>Why Keep the Original Proportions?</h2>
+            <p>
+                Every photo has a width-to-height ratio. If the width and height
+                are changed independently, people or objects can look stretched
+                or squashed. Keeping the original proportions calculates the
+                matching dimension automatically.
+            </p>
+            <p>
+                For example, if a photo is 1200 × 800 pixels and you change its
+                width to 600 pixels with proportions enabled, its height becomes
+                400 pixels.
+            </p>
+        </section>
+
+        <section class="info-section">
+            <h2>Does Resizing Improve Photo Quality?</h2>
+            <p>
+                Resizing does not restore details that are missing from a small
+                or blurry image. Enlarging a photo may make it look less sharp.
+                Reducing its dimensions can be useful for some online uploads,
+                but the final file size also depends on the image content and
+                JPEG compression.
+            </p>
+            <p>
+                This tool creates a JPEG output. JPEG is convenient for many
+                photos, but it does not preserve transparency. Keep your
+                original file if you need the original format or full quality.
+            </p>
+        </section>
+
+        <section class="info-section">
+            <h2>Frequently Asked Questions</h2>
+
+            <h3>What does px mean?</h3>
+            <p>
+                Px means pixels, the small units that make up a digital image.
+            </p>
+
+            <h3>Will the original photo be deleted?</h3>
+            <p>
+                No. This tool creates a new downloadable image and does not
+                overwrite your selected original file.
+            </p>
+
+            <h3>Why does my resized photo look stretched?</h3>
+            <p>
+                The new width and height may have a different ratio from the
+                original. Enable “Keep original photo proportions” to help
+                avoid stretching.
+            </p>
+
+            <h3>Is the resized photo always smaller in file size?</h3>
+            <p>
+                No. File size depends on the image dimensions, image content,
+                and compression. A resized JPEG may still be large.
+            </p>
+
+            <h3>What format will I download?</h3>
+            <p>
+                This tool downloads the resized image as a JPEG file.
+            </p>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <p><strong>EasyLife ❤️</strong></p>
+        <p>Simple &amp; Free Tools for Everyday Life</p>
+        <p>
+            <a href="https://easylifetoolbox.com/">Home</a>
+            <a href="https://easylifetoolbox.com/about.html">About Us</a>
+            <a href="https://easylifetoolbox.com/privacy.html">Privacy Policy</a>
+            <a href="https://easylifetoolbox.com/contact.html">Contact Us</a>
+        </p>
+    </footer>
 
     <script>
+        const photoInput = document.getElementById("photo");
+        const widthInput = document.getElementById("width");
+        const heightInput = document.getElementById("height");
+        const keepRatioInput = document.getElementById("keepRatio");
+        const originalInfo = document.getElementById("originalInfo");
+        const status = document.getElementById("status");
+        const preview = document.getElementById("preview");
+        const canvas = document.createElement("canvas");
+        const resizeButton = document.getElementById("resizeButton");
+        const downloadButton = document.getElementById("downloadButton");
 
-        function resizePhoto() {
+        let originalImage = null;
+        let originalURL = null;
+        let resizedURL = null;
+        let updatingDimensions = false;
 
-            const file = document.getElementById("photo").files[0];
+        photoInput.addEventListener("change", function () {
+            const file = photoInput.files[0];
 
-            const width = document.getElementById("width").value;
-            const height = document.getElementById("height").value;
+            originalImage = null;
+            preview.style.display = "none";
+            downloadButton.hidden = true;
+            status.textContent = "";
+
+            if (originalURL) {
+                URL.revokeObjectURL(originalURL);
+                originalURL = null;
+            }
+
+            if (resizedURL) {
+                URL.revokeObjectURL(resizedURL);
+                resizedURL = null;
+            }
 
             if (!file) {
-                alert("Please select a photo");
+                originalInfo.textContent = "No photo selected yet.";
                 return;
             }
 
-            if (!width || !height) {
-                alert("Please enter width and height");
+            if (!file.type.startsWith("image/")) {
+                status.textContent = "Please select a valid image file.";
+                photoInput.value = "";
                 return;
             }
 
+            originalURL = URL.createObjectURL(file);
             const img = new Image();
 
-            img.onload = function() {
+            img.onload = function () {
+                originalImage = img;
 
-                const canvas = document.getElementById("canvas");
+                originalInfo.textContent =
+                    "Original dimensions: " + img.naturalWidth + " × " +
+                    img.naturalHeight + " pixels.";
 
-                canvas.width = width;
-                canvas.height = height;
+                widthInput.value = img.naturalWidth;
+                heightInput.value = img.naturalHeight;
 
-                const ctx = canvas.getContext("2d");
-
-                ctx.drawImage(img, 0, 0, width, height);
-
-                const preview = document.getElementById("preview");
-
-                preview.src = canvas.toDataURL("image/jpeg", 0.95);
-
-                const link = document.createElement("a");
-
-                link.download = "EasyLife-Resized-Photo.jpg";
-                link.href = canvas.toDataURL("image/jpeg", 0.95);
-
-                link.click();
+                URL.revokeObjectURL(originalURL);
+                originalURL = null;
             };
 
-            img.src = URL.createObjectURL(file);
-        }
+            img.onerror = function () {
+                status.textContent = "This image could not be opened. Please try another photo.";
+                originalInfo.textContent = "Unable to read image dimensions.";
 
-        function goHome() {
-    window.location.href = "https://easylifetoolbox.com/";
-}
+                if (originalURL) {
+                    URL.revokeObjectURL(originalURL);
+                    originalURL = null;
+                }
+            };
 
+            img.src = originalURL;
+        });
+
+        widthInput.addEventListener("input", function () {
+            if (!originalImage || !keepRatioInput.checked || updatingDimensions) return;
+
+            const width = Number(widthInput.value);
+            if (width > 0) {
+                updatingDimensions = true;
+                heightInput.value = Math.max(
+                    1,
+                    Math.round(width * originalImage.naturalHeight / originalImage.naturalWidth)
+                );
+                updatingDimensions = false;
+            }
+        });
+
+        heightInput.addEventListener("input", function () {
+            if (!originalImage || !keepRatioInput.checked || updatingDimensions) return;
+
+            const height = Number(heightInput.value);
+            if (height > 0) {
+                updatingDimensions = true;
+                widthInput.value = Math.max(
+                    1,
+                    Math.round(height * originalImage.naturalWidth / originalImage.naturalHeight)
+                );
+                updatingDimensions = false;
+            }
+        });
+
+        keepRatioInput.addEventListener("change", function () {
+            if (!originalImage || !keepRatioInput.checked) return;
+
+            const width = Number(widthInput.value);
+            if (width > 0) {
+                heightInput.value = Math.max(
+                    1,
+                    Math.round(width * originalImage.naturalHeight / originalImage.naturalWidth)
+                );
+            }
+        });
+
+        resizeButton.addEventListener("click", function () {
+            if (!originalImage) {
+                status.textContent = "Please select a photo first.";
+                return;
+            }
+
+            const width = Number(widthInput.value);
+            const height = Number(heightInput.value);
+
+            if (!Number.isInteger(width) || !Number.isInteger(height) ||
+                width < 1 || height < 1 || width > 10000 || height > 10000) {
+                status.textContent = "Enter a whole-number width and height from 1 to 10000 pixels.";
+                return;
+            }
+
+            if (width * height > 40000000) {
+                status.textContent = "This image would be very large. Please use dimensions with no more than 40 million pixels.";
+                return;
+            }
+
+            canvas.width = width;
+            canvas.height = height;
+
+            const ctx = canvas.getContext("2d");
+            if (!ctx) {
+                status.textContent = "Your browser could not create the resized image.";
+                return;
+            }
+
+            ctx.clearRect(0, 0, width, height);
+            ctx.drawImage(originalImage, 0, 0, width, height);
+
+            canvas.toBlob(function (blob) {
+                if (!blob) {
+                    status.textContent = "The resized image could not be created. Please try again.";
+                    return;
+                }
+
+                if (resizedURL) {
+                    URL.revokeObjectURL(resizedURL);
+                }
+
+                resizedURL = URL.createObjectURL(blob);
+                preview.src = resizedURL;
+                preview.style.display = "block";
+                downloadButton.hidden = false;
+                status.textContent =
+                    "Resize complete: " + width + " × " + height +
+                    " pixels. Check the preview, then download your photo.";
+            }, "image/jpeg", 0.95);
+        });
+
+        downloadButton.addEventListener("click", function () {
+            if (!resizedURL) {
+                status.textContent = "Please resize a photo first.";
+                return;
+            }
+
+            const link = document.createElement("a");
+            link.href = resizedURL;
+            link.download = "EasyLife-Resized-Photo.jpg";
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+        });
+
+        window.addEventListener("beforeunload", function () {
+            if (originalURL) URL.revokeObjectURL(originalURL);
+            if (resizedURL) URL.revokeObjectURL(resizedURL);
+        });
     </script>
 
 </body>
 </html>
+```
