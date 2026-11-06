@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>EasyLife - Free PDF to Image Converter</title>
-    <meta name="description" content="Convert PDF pages into PNG images with EasyLife. Preview each page and download images individually using this simple PDF to image tool.">
+    <title>PDF to PNG Converter Online Free | EasyLife</title>
+    <meta name="description" content="Convert PDF pages into PNG images online for free with EasyLife. Preview PDF pages and download individual pages as PNG files on your phone or computer.">
+
     <link rel="canonical" href="https://easylifetoolbox.com/pdf-image.html">
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4584641102876506"
@@ -23,7 +24,7 @@
             font-family: Arial, sans-serif;
             background: #f2f7ff;
             color: #263238;
-            line-height: 1.6;
+            line-height: 1.7;
         }
 
         .header {
@@ -35,18 +36,18 @@
 
         .header h1 {
             margin: 0;
-            font-size: clamp(26px, 5vw, 34px);
+            font-size: clamp(26px, 5vw, 36px);
         }
 
         .header p {
-            margin-bottom: 0;
+            margin: 8px 0 0;
         }
 
         .box,
         .content-box {
             background: white;
             width: calc(100% - 24px);
-            max-width: 760px;
+            max-width: 800px;
             margin: 24px auto;
             padding: 22px;
             border-radius: 16px;
@@ -54,7 +55,7 @@
         }
 
         .box {
-            max-width: 650px;
+            max-width: 700px;
             text-align: center;
         }
 
@@ -66,7 +67,7 @@
             border-radius: 9px;
             font-size: 16px;
             cursor: pointer;
-            margin: 7px 4px;
+            margin: 6px 3px;
             min-height: 44px;
         }
 
@@ -80,7 +81,7 @@
         }
 
         button:disabled {
-            opacity: 0.6;
+            opacity: 0.55;
             cursor: not-allowed;
         }
 
@@ -91,6 +92,7 @@
         #fileName {
             margin: 16px 0;
             overflow-wrap: anywhere;
+            font-weight: bold;
         }
 
         #status {
@@ -98,6 +100,14 @@
             font-weight: bold;
             margin: 16px 0;
             overflow-wrap: anywhere;
+        }
+
+        .page-info {
+            background: #eaf3ff;
+            border-radius: 8px;
+            padding: 10px;
+            margin: 14px 0;
+            font-weight: bold;
         }
 
         .page-card {
@@ -117,7 +127,7 @@
             display: block;
             width: 100%;
             height: auto;
-            max-width: 450px;
+            max-width: 500px;
             margin: 12px auto;
             border: 1px solid #d5dce5;
             border-radius: 5px;
@@ -179,6 +189,10 @@
             margin: 0 8px;
         }
 
+        [hidden] {
+            display: none !important;
+        }
+
         @media (max-width: 480px) {
             .box,
             .content-box {
@@ -188,6 +202,10 @@
             .box button {
                 width: 100%;
                 margin: 6px 0;
+            }
+
+            .page-card {
+                padding: 10px;
             }
         }
     </style>
@@ -201,15 +219,24 @@
 </header>
 
 <main>
+
     <section class="box" aria-label="PDF to image converter">
 
         <h2>Convert PDF Pages to Images</h2>
-        <p>Select a PDF file to preview its pages and download them as PNG images.</p>
+
+        <p>
+            Select a PDF file from your phone or computer.
+            Preview its pages and download the pages you need as PNG images.
+        </p>
 
         <button type="button" id="homeBtn">🏠 Home</button>
 
         <div>
-            <input type="file" id="pdfInput" accept=".pdf,application/pdf">
+            <input
+                type="file"
+                id="pdfInput"
+                accept=".pdf,application/pdf"
+            >
 
             <button type="button" id="selectBtn">
                 📄 Select PDF
@@ -230,361 +257,678 @@
             Select a PDF to get started.
         </div>
 
+        <div id="pageInfo" class="page-info" hidden></div>
+
         <div id="result"></div>
 
         <p class="hint">
-            <strong>Tip:</strong> Large PDFs and high-resolution pages can use
-            substantial memory. If conversion fails, try a smaller PDF.
+            <strong>Tip:</strong> Large PDFs and high-resolution pages can
+            use considerable memory. If conversion fails, try a smaller PDF
+            or convert fewer pages at a time using a smaller PDF file.
         </p>
+
     </section>
 
+
     <section class="content-box">
-        <h2>How to Convert a PDF to Images</h2>
+
+        <h2>What Is a PDF to Image Converter?</h2>
+
+        <p>
+            A PDF to image converter changes the pages of a PDF document
+            into image files. This can help when you need to share a single
+            page as a picture or use a page in a presentation or another
+            document.
+        </p>
+
+        <p>
+            EasyLife uses the PDF.js library to display PDF pages in your
+            browser. Each page is rendered separately and can be downloaded
+            as a PNG image.
+        </p>
+
+        <p>
+            The original PDF is not modified. Your downloaded PNG files
+            are separate image files.
+        </p>
+
+    </section>
+
+
+    <section class="content-box">
+
+        <h2>How to Convert a PDF into PNG Images</h2>
+
         <ol>
-            <li>Select <strong>Select PDF</strong>.</li>
-            <li>Choose a PDF file from your device.</li>
-            <li>Press <strong>Convert to Images</strong>.</li>
-            <li>Wait for the page previews to appear.</li>
-            <li>Choose <strong>Download Page</strong> under each page you need.</li>
-            <li>Open the downloaded PNG images to check the results.</li>
+            <li>Open the PDF to Image Converter page.</li>
+            <li>Click <strong>Select PDF</strong>.</li>
+            <li>Choose a PDF file from your phone or computer.</li>
+            <li>Check the selected file name.</li>
+            <li>Click <strong>Convert to Images</strong>.</li>
+            <li>Wait while the PDF pages are prepared.</li>
+            <li>Review the page previews.</li>
+            <li>Click the download button under the page you need.</li>
+            <li>Open the downloaded PNG image to check its quality.</li>
         </ol>
+
         <p>
-            Each PDF page is rendered as a separate PNG image. The tool does
-            not combine all pages into a single image file.
+            Each PDF page becomes a separate PNG image.
+            For example, a PDF with five pages produces five individual
+            page previews and five separate download options.
         </p>
+
     </section>
 
+
     <section class="content-box">
+
         <h2>When Is PDF to Image Useful?</h2>
+
+        <h3>Sharing Individual Pages</h3>
         <p>
-            Converting a PDF page into an image can be useful when you need
-            to preview a page as a picture, share a single page in an image
-            format, or use a page in a document or presentation.
+            You can convert a particular PDF page into a PNG image
+            when someone needs that page in picture format.
         </p>
+
+        <h3>Presentations and Projects</h3>
         <p>
-            PNG images may be larger than the original PDF. The output also
-            depends on the quality and resolution of the PDF page.
+            A PDF page can be used as an image in a presentation,
+            project or other document.
         </p>
+
+        <h3>Previewing Documents</h3>
+        <p>
+            You can view the pages as images before sharing them.
+            This is useful when you need to check the appearance
+            of a document page.
+        </p>
+
+        <h3>Sharing on Mobile Devices</h3>
+        <p>
+            PNG images can be shared through apps that accept image files.
+            The sharing options depend on the device and application.
+        </p>
+
     </section>
 
+
     <section class="content-box">
-        <h2>Tips for Better Results</h2>
+
+        <h2>Tips for Better Conversion Results</h2>
+
         <ul>
-            <li>Check the PDF before converting it.</li>
-            <li>Download only the pages you need to save storage space.</li>
-            <li>Keep enough free memory available when converting large files.</li>
-            <li>Open each downloaded image to confirm that the text is readable.</li>
-            <li>Keep the original PDF if you need to preserve its original layout or searchable text.</li>
+            <li>Check that your PDF opens correctly before converting it.</li>
+            <li>Keep the original PDF as a backup.</li>
+            <li>Download only the pages you need.</li>
+            <li>Make sure your device has enough free memory.</li>
+            <li>Large PDFs may take longer to process.</li>
+            <li>Open each PNG image to check whether the text is readable.</li>
+            <li>Use the original PDF if you need selectable text or links.</li>
+            <li>Avoid closing or refreshing the browser during conversion.</li>
         </ul>
+
     </section>
 
+
     <section class="content-box">
+
+        <h2>Important Information and Limitations</h2>
+
+        <ul>
+            <li>
+                The output format is PNG. JPG and other output formats
+                are not provided by this tool.
+            </li>
+            <li>
+                PDF pages are converted into images. The resulting PNG
+                files do not retain selectable text or PDF links.
+            </li>
+            <li>
+                The image quality depends on the rendering resolution
+                and the contents of the original PDF.
+            </li>
+            <li>
+                Large documents and high-resolution pages can use
+                substantial browser memory.
+            </li>
+            <li>
+                Password-protected or damaged PDFs may not open
+                successfully.
+            </li>
+            <li>
+                The PDF.js library must load successfully before
+                conversion can begin.
+            </li>
+            <li>
+                Mobile browsers may have different memory and download
+                limitations.
+            </li>
+        </ul>
+
+    </section>
+
+
+    <section class="content-box">
+
         <h2>Frequently Asked Questions</h2>
 
         <div class="faq-item">
             <h3>1. Which image format does this tool create?</h3>
             <p>
-                This tool downloads each converted page as a PNG image.
+                This tool creates PNG images. Each PDF page can be
+                downloaded as an individual PNG file.
             </p>
         </div>
 
         <div class="faq-item">
-            <h3>2. Can I download only one page?</h3>
+            <h3>2. Can I download only one PDF page?</h3>
             <p>
-                Yes. Each page has its own download button, so you can download
-                only the pages you need.
+                Yes. Each page has its own download button.
+                You can download only the pages you need.
             </p>
         </div>
 
         <div class="faq-item">
-            <h3>3. Why is conversion slow?</h3>
+            <h3>3. Can I convert all pages into one image?</h3>
             <p>
-                Large PDFs, complex pages and high-resolution rendering can take
-                more time and browser memory.
+                No. This tool creates a separate PNG image for each
+                PDF page. It does not combine all pages into one image.
             </p>
         </div>
 
         <div class="faq-item">
-            <h3>4. Does converting a PDF to PNG preserve selectable text?</h3>
+            <h3>4. Why is conversion taking a long time?</h3>
             <p>
-                No. The output is an image of each page, not a searchable text
-                document. Keep the original PDF if you need selectable text.
+                Large PDF files, many pages and complex page contents
+                can take more time to render. Your device's memory
+                and processing speed also affect conversion time.
             </p>
         </div>
 
         <div class="faq-item">
-            <h3>5. Can I use this on a mobile phone?</h3>
+            <h3>5. Does the PNG image keep selectable text?</h3>
             <p>
-                Yes, in a supported mobile browser. The available memory and
-                download behavior depend on your device and browser.
+                No. A PNG is an image, not a text document.
+                Keep the original PDF if you need selectable or searchable text.
             </p>
         </div>
 
         <div class="faq-item">
-            <h3>6. Are my PDF pages uploaded to an EasyLife server?</h3>
+            <h3>6. Can I use this tool on a mobile phone?</h3>
             <p>
-                This page uses PDF.js in the browser and does not contain code
-                that uploads the selected PDF to an EasyLife server. The page
-                also loads external resources, including the PDF library and
-                advertising script. For sensitive files, use a trusted device
-                and review the site's Privacy Policy.
+                Yes. You can select a PDF using a supported mobile browser.
+                The available memory and download behaviour depend on
+                your phone and browser.
             </p>
         </div>
+
+        <div class="faq-item">
+            <h3>7. Why does my PDF fail to open?</h3>
+            <p>
+                The file may be damaged, password-protected or unsupported.
+                Try opening the PDF in a trusted PDF reader first.
+            </p>
+        </div>
+
+        <div class="faq-item">
+            <h3>8. Are my PDF pages uploaded to an EasyLife server?</h3>
+            <p>
+                This page's conversion code processes the selected PDF
+                in your browser and does not contain an upload request
+                to an EasyLife server. The page also loads external
+                resources, including the PDF.js library and advertising
+                script. For sensitive files, use a trusted device and
+                review the site's Privacy Policy.
+            </p>
+        </div>
+
+        <div class="faq-item">
+            <h3>9. Why is a PNG file larger than my PDF?</h3>
+            <p>
+                PNG images store page contents as image pixels.
+                Depending on the original PDF and its contents,
+                the resulting image files may be larger than the PDF.
+            </p>
+        </div>
+
     </section>
+
 </main>
 
+
 <footer class="footer">
+
     <p>EasyLife — Simple &amp; Free Tools for Everyday Life</p>
+
     <p>
         <a href="https://easylifetoolbox.com/">Home</a>
         <a href="https://easylifetoolbox.com/privacy.html">Privacy Policy</a>
+        <a href="https://easylifetoolbox.com/terms.html">Terms &amp; Conditions</a>
         <a href="https://easylifetoolbox.com/contact.html">Contact Us</a>
     </p>
+
 </footer>
 
+
 <script>
+
     const pdfInput = document.getElementById("pdfInput");
     const selectBtn = document.getElementById("selectBtn");
     const convertBtn = document.getElementById("convertBtn");
     const clearBtn = document.getElementById("clearBtn");
+
     const fileName = document.getElementById("fileName");
     const status = document.getElementById("status");
     const result = document.getElementById("result");
+    const pageInfo = document.getElementById("pageInfo");
     const homeBtn = document.getElementById("homeBtn");
 
     let selectedPDF = null;
     let loadingTask = null;
     let conversionToken = 0;
+    let isConverting = false;
 
+
+    // Configure PDF.js worker
     if (window.pdfjsLib) {
+
         pdfjsLib.GlobalWorkerOptions.workerSrc =
             "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+
     } else {
+
         status.textContent =
             "The PDF library could not load. Check your internet connection and refresh the page.";
+
         selectBtn.disabled = true;
+
     }
 
-    selectBtn.addEventListener("click", () => {
-        pdfInput.click();
-    });
 
+    // Go to EasyLife homepage
     homeBtn.addEventListener("click", () => {
+
         window.location.href = "https://easylifetoolbox.com/";
+
     });
 
+
+    // Open PDF selection window
+    selectBtn.addEventListener("click", () => {
+
+        if (!isConverting) {
+            pdfInput.click();
+        }
+
+    });
+
+
+    // Select a PDF file
     pdfInput.addEventListener("change", () => {
+
+        if (isConverting) return;
+
         const file = pdfInput.files && pdfInput.files[0];
 
         if (!file) return;
 
-        conversionToken++;
         selectedPDF = null;
+
         result.innerHTML = "";
 
-        if (loadingTask) {
-            try {
-                loadingTask.destroy();
-            } catch (_) {}
-            loadingTask = null;
-        }
+        pageInfo.hidden = true;
+        pageInfo.textContent = "";
 
-        const isPDF = file.type === "application/pdf" ||
+        const isPDF =
+            file.type === "application/pdf" ||
             file.name.toLowerCase().endsWith(".pdf");
 
         if (!isPDF) {
+
             fileName.textContent = "The selected file is not a PDF.";
-            status.textContent = "Please choose a PDF file.";
+
+            status.textContent = "Please select a valid PDF file.";
+
             convertBtn.hidden = true;
             clearBtn.hidden = false;
+
+            pdfInput.value = "";
+
             return;
+
         }
 
         selectedPDF = file;
+
         fileName.textContent =
             "Selected: " + file.name + " (" + formatBytes(file.size) + ")";
 
         convertBtn.hidden = false;
         clearBtn.hidden = false;
-        status.textContent = "PDF selected. Press Convert to Images.";
+
+        status.textContent =
+            "PDF selected successfully. Press Convert to Images.";
+
+        pdfInput.value = "";
+
     });
 
-    clearBtn.addEventListener("click", () => {
+
+    // Clear selected PDF and results
+    clearBtn.addEventListener("click", async () => {
+
+        if (isConverting) return;
+
         conversionToken++;
+
         selectedPDF = null;
+
         result.innerHTML = "";
+
+        pageInfo.hidden = true;
+        pageInfo.textContent = "";
+
         pdfInput.value = "";
+
         fileName.textContent = "No PDF selected.";
+
         convertBtn.hidden = true;
         clearBtn.hidden = true;
+
         status.textContent = "Select a PDF to get started.";
 
         if (loadingTask) {
+
             try {
-                loadingTask.destroy();
+                await loadingTask.destroy();
             } catch (_) {}
+
             loadingTask = null;
+
         }
+
     });
 
+
+    // Start conversion
     convertBtn.addEventListener("click", startConversion);
 
+
     async function startConversion() {
+
         if (!selectedPDF) {
+
             status.textContent = "Please select a PDF first.";
+
             return;
+
         }
 
         if (!window.pdfjsLib) {
+
             status.textContent =
                 "The PDF library did not load. Refresh the page and try again.";
+
             return;
+
         }
+
+        if (isConverting) return;
+
+        isConverting = true;
 
         const token = ++conversionToken;
 
         convertBtn.disabled = true;
         selectBtn.disabled = true;
         clearBtn.disabled = true;
+
         result.innerHTML = "";
+
+        pageInfo.hidden = true;
+
         status.textContent = "⏳ Opening PDF...";
 
+
+        let pdf = null;
+
         try {
+
+            // Read selected PDF
             const arrayBuffer = await selectedPDF.arrayBuffer();
 
             if (token !== conversionToken) return;
 
+
+            // Load PDF using PDF.js
             loadingTask = pdfjsLib.getDocument({
+
                 data: new Uint8Array(arrayBuffer)
+
             });
 
-            const pdf = await loadingTask.promise;
+            pdf = await loadingTask.promise;
 
-            if (token !== conversionToken) {
-                await pdf.destroy();
-                return;
-            }
+            if (token !== conversionToken) return;
+
+
+            const totalPages = pdf.numPages;
+
+            pageInfo.hidden = false;
+
+            pageInfo.textContent =
+                "Total PDF Pages: " + totalPages;
+
 
             status.textContent =
-                "PDF has " + pdf.numPages + " page(s). Preparing previews...";
+                "PDF opened. Preparing " + totalPages + " page(s)...";
 
-            for (let pageNumber = 1; pageNumber <= pdf.numPages; pageNumber++) {
-                if (token !== conversionToken) {
-                    await pdf.destroy();
-                    return;
-                }
+
+            // Convert each page
+            for (
+                let pageNumber = 1;
+                pageNumber <= totalPages;
+                pageNumber++
+            ) {
 
                 status.textContent =
-                    "⏳ Converting page " + pageNumber + " of " + pdf.numPages + "...";
+                    "⏳ Converting page " +
+                    pageNumber +
+                    " of " +
+                    totalPages +
+                    "...";
+
 
                 const page = await pdf.getPage(pageNumber);
-                const viewport = page.getViewport({ scale: 1.5 });
 
-                const canvas = document.createElement("canvas");
-                const context = canvas.getContext("2d");
+                // Render at a moderate resolution
+                const viewport = page.getViewport({
 
-                if (!context) {
-                    throw new Error("Canvas is unavailable.");
-                }
+                    scale: 1.5
 
-                canvas.width = Math.ceil(viewport.width);
-                canvas.height = Math.ceil(viewport.height);
-
-                await page.render({
-                    canvasContext: context,
-                    viewport: viewport
-                }).promise;
-
-                if (token !== conversionToken) {
-                    canvas.width = 0;
-                    canvas.height = 0;
-                    await pdf.destroy();
-                    return;
-                }
-
-                const card = document.createElement("section");
-                card.className = "page-card";
-
-                const heading = document.createElement("h3");
-                heading.textContent = "Page " + pageNumber;
-
-                const preview = document.createElement("canvas");
-                preview.width = canvas.width;
-                preview.height = canvas.height;
-
-                const previewContext = preview.getContext("2d");
-
-                if (!previewContext) {
-                    throw new Error("Canvas is unavailable.");
-                }
-
-                previewContext.drawImage(canvas, 0, 0);
-
-                const downloadButton = document.createElement("button");
-                downloadButton.className = "download";
-                downloadButton.textContent = "⬇️ Download Page " + pageNumber;
-
-                downloadButton.addEventListener("click", () => {
-                    try {
-                        const link = document.createElement("a");
-                        link.download = "EasyLife-Page-" + pageNumber + ".png";
-                        link.href = preview.toDataURL("image/png");
-                        document.body.appendChild(link);
-                        link.click();
-                        link.remove();
-                    } catch (_) {
-                        status.textContent =
-                            "Could not download this page. Try a smaller PDF.";
-                    }
                 });
 
+
+                // Create preview canvas
+                const canvas = document.createElement("canvas");
+
+                const context = canvas.getContext("2d");
+
+
+                if (!context) {
+
+                    throw new Error("Canvas is unavailable.");
+
+                }
+
+
+                canvas.width = Math.ceil(viewport.width);
+
+                canvas.height = Math.ceil(viewport.height);
+
+
+                // Render PDF page
+                await page.render({
+
+                    canvasContext: context,
+
+                    viewport: viewport
+
+                }).promise;
+
+
+                // Create page card
+                const card = document.createElement("section");
+
+                card.className = "page-card";
+
+
+                const heading = document.createElement("h3");
+
+                heading.textContent =
+                    "Page " + pageNumber;
+
+
+                const downloadButton = document.createElement("button");
+
+                downloadButton.type = "button";
+
+                downloadButton.className = "download";
+
+                downloadButton.textContent =
+                    "⬇️ Download Page " + pageNumber;
+
+
+                // Download this page as PNG
+                downloadButton.addEventListener("click", () => {
+
+                    downloadPNG(canvas, pageNumber);
+
+                });
+
+
                 card.appendChild(heading);
-                card.appendChild(preview);
+
+                card.appendChild(canvas);
+
                 card.appendChild(downloadButton);
+
                 result.appendChild(card);
 
-                canvas.width = 0;
-                canvas.height = 0;
 
+                // Release temporary page resources
                 page.cleanup();
+
             }
 
-            await pdf.destroy();
+
+            status.textContent =
+                "✅ Conversion complete! Download the pages you need.";
+
+
+        } catch (error) {
+
+            console.error("PDF conversion error:", error);
+
+            status.textContent =
+                "Conversion failed. Check that the PDF opens correctly and try a smaller file.";
+
+        } finally {
+
+            if (pdf) {
+
+                try {
+                    await pdf.destroy();
+                } catch (_) {}
+
+            }
+
             loadingTask = null;
 
-            if (token === conversionToken) {
-                status.textContent =
-                    "✅ Conversion complete. Download the pages you need.";
-            }
-        } catch (error) {
-            if (token === conversionToken) {
-                result.innerHTML = "";
-                status.textContent =
-                    "Conversion failed. Check that the PDF opens correctly and try a smaller file.";
-            }
+            isConverting = false;
 
-            if (loadingTask) {
-                try {
-                    loadingTask.destroy();
-                } catch (_) {}
-                loadingTask = null;
-            }
-        } finally {
-            if (token === conversionToken) {
-                convertBtn.disabled = false;
-                selectBtn.disabled = false;
-                clearBtn.disabled = false;
-            }
+            convertBtn.disabled = false;
+
+            selectBtn.disabled = false;
+
+            clearBtn.disabled = false;
+
         }
+
     }
 
-    function formatBytes(bytes) {
-        if (bytes < 1024) return bytes + " bytes";
-        if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + " KB";
-        return (bytes / (1024 * 1024)).toFixed(1) + " MB";
+
+    // Download a canvas as PNG
+    function downloadPNG(canvas, pageNumber) {
+
+        status.textContent =
+            "Preparing PNG download for page " + pageNumber + "...";
+
+
+        canvas.toBlob((blob) => {
+
+            if (!blob) {
+
+                status.textContent =
+                    "Could not create the PNG image. Please try again.";
+
+                return;
+
+            }
+
+
+            const url = URL.createObjectURL(blob);
+
+            const link = document.createElement("a");
+
+            link.href = url;
+
+            link.download =
+                "EasyLife-Page-" + pageNumber + ".png";
+
+
+            document.body.appendChild(link);
+
+            link.click();
+
+            link.remove();
+
+
+            setTimeout(() => {
+
+                URL.revokeObjectURL(url);
+
+            }, 1000);
+
+
+            status.textContent =
+                "Page " + pageNumber + " PNG download started.";
+
+        }, "image/png");
+
     }
+
+
+    // Format file size
+    function formatBytes(bytes) {
+
+        if (bytes < 1024) {
+
+            return bytes + " bytes";
+
+        }
+
+        if (bytes < 1024 * 1024) {
+
+            return (bytes / 1024).toFixed(1) + " KB";
+
+        }
+
+        return (bytes / (1024 * 1024)).toFixed(2) + " MB";
+
+    }
+
 </script>
 
 </body>
 </html>
-```
