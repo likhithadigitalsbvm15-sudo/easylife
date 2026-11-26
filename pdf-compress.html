@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>EasyLife - Free PDF Optimizer</title>
+    <title>PDF Optimizer &amp; Compressor Online Free | EasyLife</title>
     <meta name="description" content="Optimize PDF files online while keeping their original text and page content. Compare file sizes and download your optimized PDF with EasyLife.">
     <link rel="canonical" href="https://easylifetoolbox.com/pdf-compress.html">
 
@@ -39,7 +39,7 @@
         }
 
         .header p {
-            margin-bottom: 0;
+            margin: 8px 0 0;
         }
 
         .box,
@@ -70,6 +70,7 @@
             padding: 13px 18px;
             border-radius: 9px;
             font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
             margin: 7px 4px;
             min-height: 46px;
@@ -81,7 +82,7 @@
 
         button:focus-visible {
             outline: 3px solid #ffb300;
-            outline-offset: 3px;
+            outline-offset: 2px;
         }
 
         button:disabled {
@@ -97,8 +98,17 @@
             background: #0d47a1;
         }
 
+        .secondary-btn {
+            background: #526477;
+        }
+
+        .secondary-btn:hover {
+            background: #35485b;
+        }
+
         .download-btn {
             background: #16803c;
+            font-size: 17px;
         }
 
         .download-btn:hover {
@@ -113,6 +123,7 @@
 
         #fileName {
             font-weight: bold;
+            color: #0d47a1;
         }
 
         #status {
@@ -121,7 +132,8 @@
         }
 
         .size-panel {
-            background: #eaf3ff;
+            background: #f4f8ff;
+            border: 1px solid #d0e3ff;
             border-radius: 10px;
             padding: 15px;
             margin: 18px 0;
@@ -130,6 +142,20 @@
 
         .size-panel p {
             margin: 8px 0;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px dashed #d8e3f0;
+            padding-bottom: 6px;
+        }
+
+        .size-panel p:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .saved-highlight {
+            color: #16803c;
+            font-weight: bold;
         }
 
         .hint {
@@ -139,6 +165,7 @@
             padding: 13px;
             text-align: left;
             margin-top: 18px;
+            font-size: 15px;
         }
 
         .warning {
@@ -148,6 +175,7 @@
             padding: 13px;
             text-align: left;
             margin-top: 14px;
+            font-size: 15px;
         }
 
         .content-box h2 {
@@ -188,6 +216,10 @@
             margin: 0 8px;
         }
 
+        [hidden] {
+            display: none !important;
+        }
+
         @media (max-width: 480px) {
             .box,
             .content-box {
@@ -198,6 +230,11 @@
                 width: 100%;
                 margin: 6px 0;
             }
+
+            .size-panel p {
+                flex-direction: column;
+                gap: 2px;
+            }
         }
     </style>
 </head>
@@ -206,7 +243,7 @@
 
 <header class="header">
     <h1>📦 PDF Optimizer</h1>
-    <p>Optimize your PDF while keeping its original page content.</p>
+    <p>Optimize your PDF while keeping its original text and page content.</p>
 </header>
 
 <main>
@@ -215,9 +252,9 @@
 
         <h2>Optimize Your PDF</h2>
 
-        <p>Select a PDF file to optimize it.</p>
+        <p>Select a PDF file to clean and optimize its structure.</p>
 
-        <button type="button" id="homeBtn">🏠 Home</button>
+        <button type="button" id="homeBtn" class="secondary-btn">🏠 Home</button>
 
         <div>
             <input type="file" id="pdfInput" accept=".pdf,application/pdf">
@@ -247,19 +284,27 @@
             </p>
 
             <p>
-                <strong>PDF Pages:</strong>
+                <strong>Total PDF Pages:</strong>
                 <span id="pageCount">—</span>
             </p>
 
         </div>
 
-        <button type="button" id="optimizeBtn" disabled>
-            📦 Optimize PDF
-        </button>
+        <div>
+            <button type="button" id="optimizeBtn" disabled>
+                📦 Optimize PDF
+            </button>
 
-        <button type="button" class="download-btn" id="downloadBtn" hidden>
-            ⬇️ Download Optimized PDF
-        </button>
+            <button type="button" id="clearBtn" class="secondary-btn" hidden>
+                🗑️ Clear
+            </button>
+        </div>
+
+        <div>
+            <button type="button" class="download-btn" id="downloadBtn" hidden>
+                ⬇️ Download Optimized PDF
+            </button>
+        </div>
 
         <p id="status" role="status" aria-live="polite">
             Select a PDF to get started.
@@ -268,176 +313,128 @@
         <div class="hint">
             <strong>How it works:</strong>
             This tool re-saves the PDF using PDF-lib.
-            It attempts to optimize the PDF structure without
-            converting entire pages into images.
+            It optimizes the internal PDF structure without
+            converting pages into blurry images, keeping your text selectable.
         </div>
 
         <div class="warning">
             <strong>Important:</strong>
-            File size reduction is not guaranteed.
-            Some advanced PDF features, encryption or special
-            document structures may not be supported.
+            File size reduction depends on how the original PDF was created.
+            Already compressed or encrypted PDFs may not shrink further.
             Always check the downloaded file.
         </div>
 
     </section>
 
     <section class="content-box">
-
         <h2>How to Optimize a PDF</h2>
-
         <ol>
-            <li>Click Select PDF.</li>
+            <li>Click <strong>Select PDF</strong>.</li>
             <li>Choose a PDF from your computer or mobile phone.</li>
             <li>Check the selected file name and original size.</li>
-            <li>Click Optimize PDF.</li>
-            <li>Wait for processing to finish.</li>
+            <li>Click <strong>Optimize PDF</strong>.</li>
+            <li>Wait a moment for processing to finish.</li>
             <li>Compare the original and optimized file sizes.</li>
-            <li>Download the optimized PDF.</li>
-            <li>Open it and check the text, photos and pages.</li>
+            <li>Click <strong>Download Optimized PDF</strong> and check your document.</li>
         </ol>
-
     </section>
 
     <section class="content-box">
-
         <h2>What Is PDF Optimization?</h2>
-
         <p>
             A PDF can contain text, images, fonts, page information
-            and other embedded resources. PDF optimization attempts
-            to organize or reduce some of the internal data.
+            and redundant metadata. PDF optimization organizes and
+            compresses the internal object streams to make the file cleaner.
         </p>
-
         <p>
-            This tool uses PDF-lib to load and re-save the document.
-            It does not intentionally convert every page into a
-            JPEG image. This helps retain the original page content
-            and selectable text in supported PDFs.
+            This tool uses PDF-lib to load and re-save the document directly
+            in your browser. It does not turn your pages into JPEG screenshots,
+            which helps preserve selectable and searchable text.
         </p>
-
         <p>
-            The amount of optimization depends on how the original
-            PDF was created. Some files may become smaller, while
-            others may remain similar in size or become larger.
+            The amount of size reduction depends on how the original PDF was
+            generated. Unoptimized documents with heavy metadata often shrink noticeably,
+            while pre-compressed PDFs may remain similar in size.
         </p>
-
     </section>
 
     <section class="content-box">
-
         <h2>Benefits of Keeping Original PDF Content</h2>
-
         <ul>
-            <li>Text can remain selectable in supported documents.</li>
-            <li>Text may remain searchable.</li>
-            <li>Images are not intentionally replaced with page screenshots.</li>
-            <li>Page dimensions and document content are retained where supported.</li>
-            <li>A separate output file is created instead of overwriting the original.</li>
+            <li>Text remains selectable and copyable in supported documents.</li>
+            <li>Text remains searchable for quick keyword lookups.</li>
+            <li>Images and vector graphics are not degraded into low-res screenshots.</li>
+            <li>Original page dimensions and layout are preserved.</li>
+            <li>A new file is downloaded without modifying your original PDF.</li>
         </ul>
-
     </section>
 
     <section class="content-box">
-
         <h2>Tips for Smaller PDF Files</h2>
-
         <ul>
-            <li>Use appropriately sized photographs when creating a PDF.</li>
-            <li>Avoid unnecessarily high-resolution images.</li>
-            <li>Keep a backup of the original document.</li>
-            <li>Check the final PDF before submitting or sharing it.</li>
-            <li>If a website has a maximum upload size, check the final file size.</li>
+            <li>Use medium-resolution images when creating a PDF from photos.</li>
+            <li>Avoid scanning documents at excessively high DPI unless required.</li>
+            <li>Keep a backup copy of your original file.</li>
+            <li>Verify the final file size before uploading to portals with strict MB limits.</li>
         </ul>
-
     </section>
 
     <section class="content-box">
-
         <h2>Frequently Asked Questions</h2>
 
         <div class="faq-item">
             <h3>1. Is this PDF optimizer free?</h3>
-            <p>
-                Yes. You can use this EasyLife tool without
-                paying a processing fee.
-            </p>
+            <p>Yes. You can use this EasyLife tool completely free with no hidden charges.</p>
         </div>
 
         <div class="faq-item">
             <h3>2. Will every PDF become smaller?</h3>
-            <p>
-                No. The output may be smaller, similar in size
-                or larger than the original.
-            </p>
+            <p>Not always. If a PDF is already heavily compressed, the output size may remain similar.</p>
         </div>
 
         <div class="faq-item">
             <h3>3. Will my text become an image?</h3>
-            <p>
-                This version does not intentionally convert
-                entire PDF pages into images. It re-saves the
-                PDF using PDF-lib.
-            </p>
+            <p>No. This tool optimizes the PDF structure without converting text pages into images.</p>
         </div>
 
         <div class="faq-item">
-            <h3>4. Will all PDF features be preserved?</h3>
-            <p>
-                Not necessarily. Some advanced features,
-                encryption, forms, signatures or special
-                structures may not be supported.
-            </p>
+            <h3>4. Can I optimize password-protected PDFs?</h3>
+            <p>No. Encrypted or password-protected PDFs must be unlocked before they can be processed.</p>
         </div>
 
         <div class="faq-item">
-            <h3>5. Can I use this tool on Android?</h3>
-            <p>
-                Yes, in a supported mobile browser.
-                Large files may require more memory.
-            </p>
+            <h3>5. Can I use this tool on Android or iPhone?</h3>
+            <p>Yes, it works directly in modern mobile browsers without installing any app.</p>
         </div>
 
         <div class="faq-item">
-            <h3>6. Is my PDF uploaded to an EasyLife server?</h3>
-            <p>
-                This page processes the selected PDF in the browser
-                and does not contain code that uploads the file to
-                an EasyLife server. It does load the external PDF
-                library and advertising script.
-            </p>
+            <h3>6. Are my PDF files uploaded to a server?</h3>
+            <p>No. All processing happens locally inside your web browser for maximum privacy.</p>
         </div>
 
         <div class="faq-item">
             <h3>7. Does the original PDF change?</h3>
-            <p>
-                No. The original file is not overwritten.
-                A separate optimized PDF is created.
-            </p>
+            <p>No. Your original file remains untouched, and a separate optimized PDF is downloaded.</p>
         </div>
-
     </section>
 
 </main>
 
 <footer class="footer">
-
     <p>EasyLife — Simple &amp; Free Tools for Everyday Life</p>
-
     <p>
         <a href="https://easylifetoolbox.com/">Home</a>
         <a href="https://easylifetoolbox.com/privacy.html">Privacy Policy</a>
-        <a href="https://easylifetoolbox.com/terms.html">Terms</a>
+        <a href="https://easylifetoolbox.com/terms.html">Terms &amp; Conditions</a>
         <a href="https://easylifetoolbox.com/contact.html">Contact Us</a>
     </p>
-
 </footer>
 
 <script>
-
     const pdfInput = document.getElementById("pdfInput");
     const selectBtn = document.getElementById("selectBtn");
     const optimizeBtn = document.getElementById("optimizeBtn");
+    const clearBtn = document.getElementById("clearBtn");
     const downloadBtn = document.getElementById("downloadBtn");
     const homeBtn = document.getElementById("homeBtn");
 
@@ -451,6 +448,7 @@
     const pageCount = document.getElementById("pageCount");
 
     let selectedPDF = null;
+    let basePdfName = "EasyLife";
     let optimizedBlob = null;
     let optimizedURL = "";
     let originalFileSize = 0;
@@ -467,9 +465,7 @@
     });
 
     pdfInput.addEventListener("change", function () {
-
         const file = pdfInput.files && pdfInput.files[0];
-
         if (!file) return;
 
         const isPDF =
@@ -487,45 +483,55 @@
 
         selectedPDF = file;
         originalFileSize = file.size;
+        basePdfName = file.name.replace(/\.pdf$/i, "").replace(/[^a-zA-Z0-9-_]/g, "_") || "EasyLife";
 
         clearPreviousResult();
 
         fileName.textContent =
-            "Selected: " + file.name +
-            " (" + formatBytes(file.size) + ")";
+            "Selected: " + file.name + " (" + formatBytes(file.size) + ")";
 
         originalSize.textContent = formatBytes(file.size);
         optimizedSize.textContent = "—";
         sizeDifference.textContent = "—";
+        sizeDifference.className = "";
         pageCount.textContent = "—";
 
         sizePanel.hidden = false;
         optimizeBtn.disabled = false;
+        clearBtn.hidden = false;
 
-        status.textContent =
-            "PDF selected. Press Optimize PDF to continue.";
-
+        status.textContent = "PDF selected. Press Optimize PDF to continue.";
         pdfInput.value = "";
+    });
 
+    clearBtn.addEventListener("click", function () {
+        if (isProcessing) return;
+
+        selectedPDF = null;
+        basePdfName = "EasyLife";
+        originalFileSize = 0;
+        clearPreviousResult();
+
+        fileName.textContent = "No PDF selected.";
+        sizePanel.hidden = true;
+        optimizeBtn.disabled = true;
+        clearBtn.hidden = true;
+        pdfInput.value = "";
+        status.textContent = "Select a PDF to get started.";
     });
 
     function clearPreviousResult() {
-
         optimizedBlob = null;
-
         if (optimizedURL) {
             URL.revokeObjectURL(optimizedURL);
             optimizedURL = "";
         }
-
         downloadBtn.hidden = true;
-
     }
 
     optimizeBtn.addEventListener("click", optimizePDF);
 
     async function optimizePDF() {
-
         if (!selectedPDF || isProcessing) {
             status.textContent = "Please select a PDF first.";
             return;
@@ -538,15 +544,14 @@
         }
 
         isProcessing = true;
-
         optimizeBtn.disabled = true;
         selectBtn.disabled = true;
+        clearBtn.disabled = true;
         downloadBtn.hidden = true;
 
         status.textContent = "⏳ Reading your PDF...";
 
         try {
-
             const originalBytes = await selectedPDF.arrayBuffer();
 
             const pdfDoc = await PDFLib.PDFDocument.load(
@@ -558,13 +563,11 @@
             );
 
             const totalPages = pdfDoc.getPageCount();
-
             if (totalPages < 1) {
                 throw new Error("No pages found in the PDF.");
             }
 
             pageCount.textContent = totalPages;
-
             status.textContent = "Optimizing PDF structure...";
 
             const savedBytes = await pdfDoc.save({
@@ -574,58 +577,38 @@
                 updateFieldAppearances: false
             });
 
-            optimizedBlob = new Blob(
-                [savedBytes],
-                { type: "application/pdf" }
-            );
+            optimizedBlob = new Blob([savedBytes], { type: "application/pdf" });
 
             if (!optimizedBlob.size) {
                 throw new Error("Output PDF is empty.");
             }
 
-            optimizedSize.textContent =
-                formatBytes(optimizedBlob.size);
+            optimizedSize.textContent = formatBytes(optimizedBlob.size);
 
-            const difference =
-                originalFileSize - optimizedBlob.size;
+            const difference = originalFileSize - optimizedBlob.size;
 
             if (difference > 0) {
-
-                const percentage =
-                    (difference / originalFileSize) * 100;
-
+                const percentage = (difference / originalFileSize) * 100;
                 sizeDifference.textContent =
-                    formatBytes(difference) +
-                    " smaller (" +
-                    percentage.toFixed(1) +
-                    "% reduction)";
-
-                status.textContent =
-                    "✅ Optimization complete! The PDF is smaller.";
-
+                    formatBytes(difference) + " smaller (" + percentage.toFixed(1) + "% saved)";
+                sizeDifference.className = "saved-highlight";
+                status.textContent = "✅ Optimization complete! The PDF is smaller.";
             } else if (difference < 0) {
-
                 sizeDifference.textContent =
-                    formatBytes(Math.abs(difference)) + " larger";
-
+                    formatBytes(Math.abs(difference)) + " larger (Already optimized)";
+                sizeDifference.className = "";
                 status.textContent =
-                    "Optimization complete, but the output is larger. The original PDF may already be optimized.";
-
+                    "Optimization complete. The original PDF was already tightly compressed.";
             } else {
-
                 sizeDifference.textContent = "No size change";
-
-                status.textContent =
-                    "Optimization complete. The file size did not change.";
-
+                sizeDifference.className = "";
+                status.textContent = "Optimization complete. The file size did not change.";
             }
 
             downloadBtn.hidden = false;
 
         } catch (error) {
-
             console.error("PDF optimization error:", error);
-
             optimizedBlob = null;
             downloadBtn.hidden = true;
 
@@ -640,20 +623,15 @@
                 status.textContent =
                     "Could not optimize this PDF. It may be damaged, encrypted or unsupported.";
             }
-
         } finally {
-
             isProcessing = false;
-
             optimizeBtn.disabled = !selectedPDF;
             selectBtn.disabled = false;
-
+            clearBtn.disabled = false;
         }
-
     }
 
     downloadBtn.addEventListener("click", function () {
-
         if (!optimizedBlob) {
             status.textContent = "Please optimize a PDF first.";
             return;
@@ -666,9 +644,8 @@
         optimizedURL = URL.createObjectURL(optimizedBlob);
 
         const link = document.createElement("a");
-
         link.href = optimizedURL;
-        link.download = "EasyLife-Optimized.pdf";
+        link.download = basePdfName + "-Optimized.pdf";
 
         document.body.appendChild(link);
         link.click();
@@ -676,31 +653,19 @@
 
         status.textContent =
             "Download started. Open the PDF and check its text and images.";
-
     });
 
     function formatBytes(bytes) {
-
-        if (bytes < 1024) {
-            return bytes + " bytes";
-        }
-
-        if (bytes < 1024 * 1024) {
-            return (bytes / 1024).toFixed(1) + " KB";
-        }
-
+        if (bytes < 1024) return bytes + " bytes";
+        if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + " KB";
         return (bytes / (1024 * 1024)).toFixed(2) + " MB";
-
     }
 
     window.addEventListener("beforeunload", function () {
-
         if (optimizedURL) {
             URL.revokeObjectURL(optimizedURL);
         }
-
     });
-
 </script>
 
 </body>
