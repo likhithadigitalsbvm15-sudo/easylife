@@ -1,140 +1,426 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4584641102876506"
-         crossorigin="anonymous"></script>
-    <title>Percentage Calculator - EasyLife</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Free Percentage Calculator Online (Marks, Discount &amp; % Change) | EasyLife</title>
+    <meta name="description" content="Calculate percentages easily online for free with EasyLife. Find X% of Y, exam marks percentage, and percentage increase or decrease instantly.">
     <link rel="canonical" href="https://easylifetoolbox.com/percentage.html">
-         
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4584641102876506"
+        crossorigin="anonymous"></script>
+
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: #eef5ff;
+            background: #f2f7ff;
+            color: #263238;
+            line-height: 1.6;
         }
 
         .header {
-            background: linear-gradient(135deg, #0d47a1, #2196f3);
+            background: linear-gradient(135deg, #0d47a1, #1976d2, #42a5f5);
             color: white;
-            padding: 30px 20px;
+            padding: 30px 16px;
             text-align: center;
         }
 
         .header h1 {
             margin: 0;
-            font-size: 32px;
+            font-size: clamp(25px, 5vw, 34px);
         }
 
-        .container {
-            max-width: 500px;
-            margin: 25px auto;
-            padding: 20px;
+        .header p {
+            margin: 8px 0 0;
         }
 
-        .card {
+        .box,
+        .content-box {
             background: white;
+            width: calc(100% - 24px);
+            max-width: 760px;
+            margin: 22px auto;
             padding: 22px;
-            border-radius: 15px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.10);
+            border-radius: 14px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
         }
 
-        label {
+        .box {
+            max-width: 560px;
+            text-align: center;
+        }
+
+        .box h2,
+        .content-box h2 {
+            color: #0d47a1;
+            margin-top: 0;
+        }
+
+        .calc-card {
+            background: #f8fbff;
+            border: 1px solid #d0e3ff;
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 18px;
+            text-align: left;
+        }
+
+        .calc-card h3 {
+            margin: 0 0 12px;
+            font-size: 17px;
+            color: #0d47a1;
+        }
+
+        .inline-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .field-group label {
             display: block;
-            margin-top: 15px;
+            font-size: 13px;
             font-weight: bold;
+            color: #455a64;
+            margin-bottom: 4px;
         }
 
         input {
             width: 100%;
-            padding: 13px;
-            margin-top: 7px;
-            box-sizing: border-box;
-            border: 2px solid #bbdefb;
-            border-radius: 10px;
-            font-size: 17px;
+            padding: 11px;
+            border: 1px solid #b0c4de;
+            border-radius: 8px;
+            font-size: 16px;
+            background: white;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #1976d2;
+            box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.15);
+        }
+
+        .btn-row {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
         }
 
         button {
-            width: 100%;
-            margin-top: 20px;
-            padding: 14px;
-            border: none;
-            border-radius: 10px;
-            background: #2196f3;
+            flex: 1;
+            background: #1976d2;
             color: white;
-            font-size: 17px;
+            border: none;
+            padding: 11px 16px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: bold;
             cursor: pointer;
+            min-height: 44px;
         }
 
         button:hover {
             background: #0d47a1;
         }
 
-        .result {
-            margin-top: 20px;
-            padding: 15px;
-            background: #e3f2fd;
-            border-radius: 10px;
-            text-align: center;
-            font-size: 20px;
+        button:focus-visible {
+            outline: 3px solid #ffb300;
+            outline-offset: 2px;
         }
 
-        .back {
-            display: block;
-            margin-top: 20px;
-            text-align: center;
-            text-decoration: none;
-            color: #0d47a1;
+        .clear-btn {
+            flex: 0 0 auto;
+            background: #526477;
+            padding: 11px 14px;
+        }
+
+        .clear-btn:hover {
+            background: #35485b;
+        }
+
+        .result-banner {
+            margin-top: 12px;
+            padding: 11px 14px;
+            background: #eaf3ff;
+            border-left: 4px solid #1976d2;
+            border-radius: 6px;
+            font-size: 16px;
             font-weight: bold;
+            color: #0d47a1;
+        }
+
+        .home-btn {
+            width: 100%;
+            margin-top: 8px;
+            background: #16803c;
+            font-size: 16px;
+        }
+
+        .home-btn:hover {
+            background: #0d642d;
+        }
+
+        .formula-box {
+            background: #eaf3ff;
+            border-left: 4px solid #1976d2;
+            padding: 12px;
+            border-radius: 6px;
+            font-weight: bold;
+            color: #0d47a1;
+            margin: 10px 0;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #dbe3ee;
+            padding: 12px 0;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-item h3 {
+            color: #174a83;
+            margin-bottom: 5px;
+        }
+
+        .footer {
+            background: #12345a;
+            color: white;
+            text-align: center;
+            padding: 20px 12px;
+            margin-top: 30px;
+        }
+
+        .footer a {
+            color: white;
+            margin: 0 8px;
+        }
+
+        @media (max-width: 480px) {
+            .box,
+            .content-box {
+                padding: 16px;
+            }
+
+            .inline-inputs {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
-
 </head>
 
 <body>
 
-    <div class="header">
+    <header class="header">
         <h1>🧮 Percentage Calculator</h1>
-        <p>Calculate percentages easily</p>
-    </div>
+        <p>Calculate percentages, exam marks, discounts, and percentage change easily.</p>
+    </header>
 
-    <div class="container">
+    <main>
+        <section class="box" aria-label="Percentage Calculator">
 
-        <div class="card">
+            <h2>All-in-One Percentage Calculator</h2>
 
-            <label>Percentage (%)</label>
-            <input type="number" id="percent" placeholder="Example: 20">
-
-            <label>Value</label>
-            <input type="number" id="value" placeholder="Example: 500">
-
-            <button onclick="calculate()">Calculate</button>
-
-            <div class="result" id="result">
-                Result: 0
+            <!-- Calculator 1: What is X% of Y -->
+            <div class="calc-card">
+                <h3>1. What is X% of Y?</h3>
+                <div class="inline-inputs">
+                    <div class="field-group">
+                        <label for="p1">Percentage (%)</label>
+                        <input type="number" id="p1" step="any" placeholder="Example: 20">
+                    </div>
+                    <div class="field-group">
+                        <label for="v1">Total Value (Y)</label>
+                        <input type="number" id="v1" step="any" placeholder="Example: 500">
+                    </div>
+                </div>
+                <div class="btn-row">
+                    <button type="button" onclick="calcMode1()">Calculate</button>
+                    <button type="button" class="clear-btn" onclick="clearMode1()">Clear</button>
+                </div>
+                <div class="result-banner" id="res1">Result: —</div>
             </div>
 
-        </div>
+            <!-- Calculator 2: X is what % of Y (Marks Calculator) -->
+            <div class="calc-card">
+                <h3>2. X is what % of Y? (Marks / Share)</h3>
+                <div class="inline-inputs">
+                    <div class="field-group">
+                        <label for="x2">Obtained Value (X)</label>
+                        <input type="number" id="x2" step="any" placeholder="Example: 480">
+                    </div>
+                    <div class="field-group">
+                        <label for="y2">Total Value (Y)</label>
+                        <input type="number" id="y2" step="any" placeholder="Example: 600">
+                    </div>
+                </div>
+                <div class="btn-row">
+                    <button type="button" onclick="calcMode2()">Calculate %</button>
+                    <button type="button" class="clear-btn" onclick="clearMode2()">Clear</button>
+                </div>
+                <div class="result-banner" id="res2">Percentage: —</div>
+            </div>
 
-        <a class="back" href="https://easylifetoolbox.com/";
-            ← Back to EasyLife
-        </a>
+            <!-- Calculator 3: Percentage Increase / Decrease -->
+            <div class="calc-card">
+                <h3>3. Percentage Increase / Decrease</h3>
+                <div class="inline-inputs">
+                    <div class="field-group">
+                        <label for="from3">Initial Value (From)</label>
+                        <input type="number" id="from3" step="any" placeholder="Example: 500">
+                    </div>
+                    <div class="field-group">
+                        <label for="to3">Final Value (To)</label>
+                        <input type="number" id="to3" step="any" placeholder="Example: 600">
+                    </div>
+                </div>
+                <div class="btn-row">
+                    <button type="button" onclick="calcMode3()">Calculate Change</button>
+                    <button type="button" class="clear-btn" onclick="clearMode3()">Clear</button>
+                </div>
+                <div class="result-banner" id="res3">Change: —</div>
+            </div>
 
-    </div>
+            <button type="button" class="home-btn" onclick="goHome()">🏠 Back to Home</button>
+
+        </section>
+
+        <section class="content-box">
+            <h2>What Is a Percentage Calculator?</h2>
+            <p>
+                A percentage represents a number or ratio expressed as a fraction of 100.
+                EasyLife's Percentage Calculator provides three essential percentage tools
+                on a single page—helping students calculate exam percentages, shoppers check
+                discount amounts, and businesses measure growth or price changes.
+            </p>
+        </section>
+
+        <section class="content-box">
+            <h2>Percentage Formulas</h2>
+            <p><strong>1. Finding X% of a number Y:</strong></p>
+            <div class="formula-box">
+                Result = (X / 100) × Y
+            </div>
+            <p><strong>2. Finding what percentage X is of Y (Marks Percentage):</strong></p>
+            <div class="formula-box">
+                Percentage (%) = (X / Y) × 100
+            </div>
+            <p><strong>3. Finding Percentage Increase or Decrease:</strong></p>
+            <div class="formula-box">
+                Percentage Change (%) = [(Final Value − Initial Value) / Initial Value] × 100
+            </div>
+        </section>
+
+        <section class="content-box">
+            <h2>Frequently Asked Questions</h2>
+
+            <div class="faq-item">
+                <h3>1. How do I calculate my exam marks percentage?</h3>
+                <p>Use Calculator 2 (<strong>X is what % of Y?</strong>). Enter your obtained marks in X and total maximum marks in Y, then click Calculate %.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>2. How do I calculate a shopping discount?</h3>
+                <p>Use Calculator 1 (<strong>What is X% of Y?</strong>). Enter the discount percentage in X and the item's MRP in Y to find how much money you save.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>3. Is this tool free to use?</h3>
+                <p>Yes, it is 100% free and works instantly in your browser on both mobile and desktop.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>EasyLife — Simple &amp; Free Tools for Everyday Life</p>
+        <p>
+            <a href="https://easylifetoolbox.com/">Home</a>
+            <a href="https://easylifetoolbox.com/privacy.html">Privacy Policy</a>
+            <a href="https://easylifetoolbox.com/terms.html">Terms &amp; Conditions</a>
+            <a href="https://easylifetoolbox.com/contact.html">Contact Us</a>
+        </p>
+    </footer>
 
     <script>
-
-        function calculate() {
-
-            const percent = Number(document.getElementById("percent").value);
-            const value = Number(document.getElementById("value").value);
-
-            const result = (percent / 100) * value;
-
-            document.getElementById("result").innerText =
-                "Result: " + result;
+        function formatNumber(num) {
+            return Number(num.toFixed(4)).toLocaleString("en-IN", {
+                maximumFractionDigits: 4
+            });
         }
 
+        function calcMode1() {
+            const p = parseFloat(document.getElementById("p1").value);
+            const v = parseFloat(document.getElementById("v1").value);
+            if (isNaN(p) || isNaN(v)) {
+                alert("Please enter both Percentage and Total Value.");
+                return;
+            }
+            const result = (p / 100) * v;
+            document.getElementById("res1").textContent =
+                p + "% of " + formatNumber(v) + " = " + formatNumber(result);
+        }
+
+        function clearMode1() {
+            document.getElementById("p1").value = "";
+            document.getElementById("v1").value = "";
+            document.getElementById("res1").textContent = "Result: —";
+        }
+
+        function calcMode2() {
+            const x = parseFloat(document.getElementById("x2").value);
+            const y = parseFloat(document.getElementById("y2").value);
+            if (isNaN(x) || isNaN(y) || y === 0) {
+                alert("Please enter valid numbers (Total Value cannot be zero).");
+                return;
+            }
+            const pct = (x / y) * 100;
+            document.getElementById("res2").textContent =
+                formatNumber(x) + " out of " + formatNumber(y) + " = " + pct.toFixed(2) + "%";
+        }
+
+        function clearMode2() {
+            document.getElementById("x2").value = "";
+            document.getElementById("y2").value = "";
+            document.getElementById("res2").textContent = "Percentage: —";
+        }
+
+        function calcMode3() {
+            const fromVal = parseFloat(document.getElementById("from3").value);
+            const toVal = parseFloat(document.getElementById("to3").value);
+            if (isNaN(fromVal) || isNaN(toVal) || fromVal === 0) {
+                alert("Please enter valid numbers (Initial Value cannot be zero).");
+                return;
+            }
+            const diff = toVal - fromVal;
+            const pctChange = (diff / Math.abs(fromVal)) * 100;
+
+            if (pctChange > 0) {
+                document.getElementById("res3").textContent =
+                    "📈 Increase of " + pctChange.toFixed(2) + "% (+" + formatNumber(diff) + ")";
+            } else if (pctChange < 0) {
+                document.getElementById("res3").textContent =
+                    "📉 Decrease of " + Math.abs(pctChange).toFixed(2) + "% (" + formatNumber(diff) + ")";
+            } else {
+                document.getElementById("res3").textContent = "No change (0%)";
+            }
+        }
+
+        function clearMode3() {
+            document.getElementById("from3").value = "";
+            document.getElementById("to3").value = "";
+            document.getElementById("res3").textContent = "Change: —";
+        }
+
+        function goHome() {
+            window.location.href = "https://easylifetoolbox.com/";
+        }
     </script>
 
 </body>
