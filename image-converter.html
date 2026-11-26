@@ -1,165 +1,535 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4584641102876506"
-         crossorigin="anonymous"></script>
-    <title>Image → JPG/PNG - EasyLife</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Free Image Converter (JPG, PNG, WebP Online) | EasyLife</title>
+    <meta name="description" content="Convert images between JPG, PNG, and WebP formats online for free with EasyLife. Fast browser-based conversion with instant preview and file size comparison.">
     <link rel="canonical" href="https://easylifetoolbox.com/image-converter.html">
-         
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4584641102876506"
+        crossorigin="anonymous"></script>
+
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             font-family: Arial, sans-serif;
             background: #f2f7ff;
-            text-align: center;
+            color: #263238;
+            line-height: 1.6;
         }
 
         .header {
-            background: linear-gradient(135deg, #1976d2, #42a5f5);
+            background: linear-gradient(135deg, #0d47a1, #1976d2, #42a5f5);
             color: white;
-            padding: 30px 20px;
+            padding: 30px 16px;
+            text-align: center;
         }
 
         .header h1 {
             margin: 0;
-            font-size: 30px;
+            font-size: clamp(25px, 5vw, 34px);
+        }
+
+        .header p {
+            margin: 8px 0 0;
+        }
+
+        .box,
+        .content-box {
+            background: white;
+            width: calc(100% - 24px);
+            max-width: 760px;
+            margin: 22px auto;
+            padding: 22px;
+            border-radius: 14px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
         }
 
         .box {
-            background: white;
-            max-width: 450px;
-            margin: 30px auto;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+            max-width: 600px;
+            text-align: center;
         }
 
-        input, select, button {
-            margin: 10px;
+        .box h2,
+        .content-box h2 {
+            color: #0d47a1;
+            margin-top: 0;
+        }
+
+        #imageInput {
+            display: none;
+        }
+
+        .settings-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 16px 0;
+            text-align: left;
+        }
+
+        .setting-item {
+            background: #f4f8ff;
             padding: 12px;
-            font-size: 16px;
+            border-radius: 9px;
+            border: 1px solid #d0e3ff;
+        }
+
+        .setting-item label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 6px;
+            font-size: 14px;
+            color: #0d47a1;
+        }
+
+        select {
+            width: 100%;
+            padding: 11px;
+            font-size: 15px;
+            border: 1px solid #b0c4de;
+            border-radius: 8px;
+            background: white;
         }
 
         button {
             background: #1976d2;
             color: white;
             border: none;
+            padding: 12px 20px;
+            margin: 7px 4px;
             border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
+            min-height: 44px;
         }
 
         button:hover {
-            background: #125ca8;
+            background: #0d47a1;
+        }
+
+        button:focus-visible,
+        select:focus-visible {
+            outline: 3px solid #ffb300;
+            outline-offset: 2px;
+        }
+
+        button:disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
+        }
+
+        .secondary-btn {
+            background: #526477;
+        }
+
+        .secondary-btn:hover {
+            background: #35485b;
+        }
+
+        .download-btn {
+            background: #16803c;
+            font-size: 17px;
+            padding: 13px 24px;
+        }
+
+        .download-btn:hover {
+            background: #0d642d;
+        }
+
+        #fileInfo {
+            margin: 14px 0;
+            font-weight: bold;
+            color: #0d47a1;
+            overflow-wrap: anywhere;
+        }
+
+        #status {
+            margin: 12px 0;
+            font-weight: bold;
+            color: #16803c;
+            overflow-wrap: anywhere;
         }
 
         #preview {
+            display: none;
             max-width: 100%;
-            margin-top: 20px;
+            max-height: 420px;
+            height: auto;
+            margin: 18px auto;
+            border: 1px solid #cfd8dc;
+            border-radius: 8px;
+            background: #f8fafc;
+        }
+
+        .hint {
+            background: #eaf3ff;
+            border-left: 4px solid #1976d2;
+            padding: 12px;
+            border-radius: 6px;
+            text-align: left;
+            font-size: 15px;
+            margin-top: 16px;
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #d9e2ef;
+            text-align: left;
+        }
+
+        th {
+            background: #eaf3ff;
+            color: #0d47a1;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #dbe3ee;
+            padding: 12px 0;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-item h3 {
+            color: #174a83;
+            margin-bottom: 5px;
+        }
+
+        .footer {
+            background: #12345a;
+            color: white;
+            text-align: center;
+            padding: 20px 12px;
+            margin-top: 30px;
+        }
+
+        .footer a {
+            color: white;
+            margin: 0 8px;
+        }
+
+        [hidden] {
+            display: none !important;
+        }
+
+        @media (max-width: 480px) {
+            .box,
+            .content-box {
+                padding: 16px;
+            }
+
+            .settings-grid {
+                grid-template-columns: 1fr;
+            }
+
+            button {
+                width: 100%;
+                margin: 6px 0;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <div class="header">
-        <h1>🖼️ Image → JPG/PNG</h1>
-        <p>Convert your image easily</p>
-    </div>
+    <header class="header">
+        <h1>🖼️ Image Converter (JPG / PNG / WebP)</h1>
+        <p>Convert your photos between JPG, PNG, and WebP formats instantly in your browser.</p>
+    </header>
 
-    <div class="box">
+    <main>
+        <section class="box" aria-label="Image format converter">
 
-        <input type="file" id="imageInput" accept="image/*">
+            <h2>Convert Your Image</h2>
+            <p>Select any image from your phone or computer and choose your target format.</p>
 
-        <br>
+            <input type="file" id="imageInput" accept="image/*">
 
-        <select id="format">
-            <option value="image/jpeg">JPG</option>
-            <option value="image/png">PNG</option>
-        </select>
+            <div>
+                <button type="button" id="selectBtn">📁 Select Image</button>
+                <button type="button" id="homeBtn" class="secondary-btn">🏠 Home</button>
+            </div>
 
-        <br>
+            <div id="fileInfo">No image selected.</div>
 
-        <button onclick="convertImage()">Convert & Download</button>
+            <div class="settings-grid">
+                <div class="setting-item">
+                    <label for="format">Convert To Format</label>
+                    <select id="format">
+                        <option value="image/jpeg" selected>JPG (Best for Photos &amp; Forms)</option>
+                        <option value="image/png">PNG (Lossless &amp; Transparency)</option>
+                        <option value="image/webp">WebP (Modern &amp; Smallest Size)</option>
+                    </select>
+                </div>
 
-        <br>
+                <div class="setting-item">
+                    <label for="quality">Image Quality</label>
+                    <select id="quality">
+                        <option value="0.95" selected>High Quality (95%)</option>
+                        <option value="0.82">Medium Quality (82% - Balanced)</option>
+                        <option value="0.65">Low Quality (65% - Smallest KB)</option>
+                    </select>
+                </div>
+            </div>
 
-        <img id="preview">
+            <div>
+                <button type="button" id="convertBtn" class="download-btn" disabled>
+                    🔄 Convert &amp; Download Image
+                </button>
+                <button type="button" id="clearBtn" class="secondary-btn" hidden>
+                    🗑️ Clear
+                </button>
+            </div>
 
-        <br>
+            <div id="status" role="status" aria-live="polite"></div>
 
-        <button onclick="goHome()">🏠 Home</button>
+            <img id="preview" alt="Selected image preview">
 
-    </div>
+            <p class="hint">
+                <strong>Tip:</strong> Converting a transparent PNG to <strong>JPG</strong> automatically adds a clean white background instead of turning black.
+            </p>
+        </section>
+
+        <section class="content-box">
+            <h2>How to Convert Images Online</h2>
+            <ol>
+                <li>Click <strong>Select Image</strong> and pick a photo (JPG, PNG, WebP, GIF, or BMP) from your device.</li>
+                <li>Review the preview and original file size displayed on screen.</li>
+                <li>Choose your desired output format: <strong>JPG</strong>, <strong>PNG</strong>, or <strong>WebP</strong>.</li>
+                <li>Select the image quality level (applicable for JPG and WebP).</li>
+                <li>Click <strong>Convert &amp; Download Image</strong> to save the new file immediately.</li>
+            </ol>
+        </section>
+
+        <section class="content-box">
+            <h2>Which Image Format Should You Choose?</h2>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Format</th>
+                            <th>Best Used For</th>
+                            <th>Key Feature</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>JPG / JPEG</strong></td>
+                            <td>Photographs, online application forms, social media</td>
+                            <td>Small file size, universally supported everywhere</td>
+                        </tr>
+                        <tr>
+                            <td><strong>PNG</strong></td>
+                            <td>Logos, screenshots, graphics, text documents</td>
+                            <td>Sharp lossless quality and supports transparent backgrounds</td>
+                        </tr>
+                        <tr>
+                            <td><strong>WebP</strong></td>
+                            <td>Websites, blogs, faster page loading</td>
+                            <td>Up to 30% smaller than JPG/PNG with great visual clarity</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="content-box">
+            <h2>Frequently Asked Questions</h2>
+
+            <div class="faq-item">
+                <h3>1. Is this Image Converter completely free?</h3>
+                <p>Yes. You can convert unlimited images between JPG, PNG, and WebP without any watermarks or fees.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>2. Are my photos uploaded to any server?</h3>
+                <p>No. All image conversion takes place directly inside your browser using HTML5 Canvas, keeping your personal photos 100% private.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>3. Does converting to PNG reduce image quality?</h3>
+                <p>No. PNG is a lossless format, meaning your image retains its exact pixel sharpness without compression artifacts.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>4. Can I use this tool on Android and iPhone?</h3>
+                <p>Yes. It works smoothly on mobile phones, tablets, and desktop computers.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>EasyLife — Simple &amp; Free Tools for Everyday Life</p>
+        <p>
+            <a href="https://easylifetoolbox.com/">Home</a>
+            <a href="https://easylifetoolbox.com/privacy.html">Privacy Policy</a>
+            <a href="https://easylifetoolbox.com/terms.html">Terms &amp; Conditions</a>
+            <a href="https://easylifetoolbox.com/contact.html">Contact Us</a>
+        </p>
+    </footer>
 
     <script>
+        const imageInput = document.getElementById("imageInput");
+        const selectBtn = document.getElementById("selectBtn");
+        const homeBtn = document.getElementById("homeBtn");
+        const convertBtn = document.getElementById("convertBtn");
+        const clearBtn = document.getElementById("clearBtn");
+        const formatSelect = document.getElementById("format");
+        const qualitySelect = document.getElementById("quality");
+        const fileInfo = document.getElementById("fileInfo");
+        const status = document.getElementById("status");
+        const preview = document.getElementById("preview");
 
         let selectedImage = null;
+        let previewObjectURL = null;
+        let baseFileName = "easylife-image";
 
-        document.getElementById("imageInput").addEventListener("change", function(event) {
+        function formatBytes(bytes) {
+            if (bytes < 1024) return bytes + " B";
+            if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + " KB";
+            return (bytes / (1024 * 1024)).toFixed(2) + " MB";
+        }
 
-            const file = event.target.files[0];
+        selectBtn.addEventListener("click", () => imageInput.click());
 
-            if (!file) return;
-
-            const reader = new FileReader();
-
-            reader.onload = function(e) {
-
-                selectedImage = new Image();
-
-                selectedImage.onload = function() {
-                    document.getElementById("preview").src = e.target.result;
-                };
-
-                selectedImage.src = e.target.result;
-            };
-
-            reader.readAsDataURL(file);
-
+        homeBtn.addEventListener("click", () => {
+            window.location.href = "https://easylifetoolbox.com/";
         });
 
-        function convertImage() {
+        formatSelect.addEventListener("change", () => {
+            qualitySelect.disabled = formatSelect.value === "image/png";
+        });
 
+        imageInput.addEventListener("change", function (event) {
+            const file = event.target.files && event.target.files[0];
+            if (!file) return;
+
+            if (!file.type.startsWith("image/")) {
+                status.textContent = "Please select a valid image file.";
+                imageInput.value = "";
+                return;
+            }
+
+            if (previewObjectURL) {
+                URL.revokeObjectURL(previewObjectURL);
+                previewObjectURL = null;
+            }
+
+            baseFileName = file.name.replace(/\.[^/.]+$/, "").replace(/[^a-zA-Z0-9-_]/g, "_") || "easylife-image";
+            previewObjectURL = URL.createObjectURL(file);
+
+            const img = new Image();
+            img.onload = function () {
+                selectedImage = img;
+                preview.src = previewObjectURL;
+                preview.style.display = "block";
+                convertBtn.disabled = false;
+                clearBtn.hidden = false;
+                fileInfo.textContent =
+                    "Selected: " + file.name + " (" + img.naturalWidth + "×" + img.naturalHeight + " px, " + formatBytes(file.size) + ")";
+                status.textContent = "Ready to convert!";
+            };
+
+            img.onerror = function () {
+                selectedImage = null;
+                convertBtn.disabled = true;
+                fileInfo.textContent = "Could not load this image format.";
+                status.textContent = "";
+            };
+
+            img.src = previewObjectURL;
+            imageInput.value = "";
+        });
+
+        convertBtn.addEventListener("click", function () {
             if (!selectedImage) {
                 alert("Please select an image first.");
                 return;
             }
 
-            const format = document.getElementById("format").value;
+            const format = formatSelect.value;
+            const quality = parseFloat(qualitySelect.value) || 0.95;
 
             const canvas = document.createElement("canvas");
-
-            canvas.width = selectedImage.width;
-            canvas.height = selectedImage.height;
+            canvas.width = selectedImage.naturalWidth;
+            canvas.height = selectedImage.naturalHeight;
 
             const ctx = canvas.getContext("2d");
+            if (!ctx) {
+                status.textContent = "Browser canvas error. Please try again.";
+                return;
+            }
+
+            // Fill white background for JPEG so transparent areas do not turn black
+            if (format === "image/jpeg") {
+                ctx.fillStyle = "#ffffff";
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            }
 
             ctx.drawImage(selectedImage, 0, 0);
 
-            canvas.toBlob(function(blob) {
+            let extension = "jpg";
+            if (format === "image/png") extension = "png";
+            else if (format === "image/webp") extension = "webp";
 
-                const link = document.createElement("a");
-
-                link.href = URL.createObjectURL(blob);
-
-                if (format === "image/png") {
-                    link.download = "easylife-image.png";
-                } else {
-                    link.download = "easylife-image.jpg";
+            canvas.toBlob(function (blob) {
+                if (!blob) {
+                    status.textContent = "Conversion failed. Please try another format.";
+                    return;
                 }
 
+                const downloadURL = URL.createObjectURL(blob);
+                const link = document.createElement("a");
+                link.href = downloadURL;
+                link.download = baseFileName + "-EasyLife." + extension;
+                document.body.appendChild(link);
                 link.click();
+                link.remove();
 
-                URL.revokeObjectURL(link.href);
+                setTimeout(() => URL.revokeObjectURL(downloadURL), 1000);
 
-            }, format);
+                status.textContent =
+                    "✅ Converted to " + extension.toUpperCase() + " (" + formatBytes(blob.size) + ") & downloaded!";
+            }, format, format === "image/png" ? undefined : quality);
+        });
 
-        }
+        clearBtn.addEventListener("click", function () {
+            selectedImage = null;
+            if (previewObjectURL) {
+                URL.revokeObjectURL(previewObjectURL);
+                previewObjectURL = null;
+            }
+            preview.style.display = "none";
+            preview.src = "";
+            convertBtn.disabled = true;
+            clearBtn.hidden = true;
+            fileInfo.textContent = "No image selected.";
+            status.textContent = "";
+            imageInput.value = "";
+        });
 
-        function goHome() {
-            window.location.href = "https://easylifetoolbox.com/";
-        }
-
+        window.addEventListener("beforeunload", function () {
+            if (previewObjectURL) URL.revokeObjectURL(previewObjectURL);
+        });
     </script>
 
 </body>
