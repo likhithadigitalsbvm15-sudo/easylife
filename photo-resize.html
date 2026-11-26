@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Free Photo Resizer Online | EasyLife</title>
-    <meta name="description" content="Resize photos online for free with EasyLife. Set custom image width and height, preview your resized photo, and download it as a JPEG image.">
+    <title>Free Photo Resizer Online (Pixels, Presets, JPG &amp; PNG) | EasyLife</title>
+    <meta name="description" content="Resize photos online for free with EasyLife. Set custom image width and height, choose quick presets, preview your resized photo and file size, and download as JPEG or PNG.">
     <meta name="robots" content="index,follow">
     <link rel="canonical" href="https://easylifetoolbox.com/photo-resize.html">
 
@@ -26,7 +26,7 @@
         }
 
         .header {
-            background: linear-gradient(135deg, #1976d2, #42a5f5);
+            background: linear-gradient(135deg, #0d47a1, #1976d2, #42a5f5);
             color: white;
             padding: 28px 16px;
             text-align: center;
@@ -34,11 +34,11 @@
 
         .header h1 {
             margin: 0;
-            font-size: 30px;
+            font-size: clamp(25px, 5vw, 32px);
         }
 
         .header p {
-            margin-bottom: 0;
+            margin: 8px 0 0;
         }
 
         .container {
@@ -60,10 +60,11 @@
         }
 
         input[type="file"],
-        input[type="number"] {
+        input[type="number"],
+        select {
             width: 100%;
             padding: 12px;
-            margin: 8px 0;
+            margin: 6px 0;
             border: 1px solid #cbd5e1;
             border-radius: 8px;
             font-size: 16px;
@@ -75,6 +76,38 @@
             grid-template-columns: 1fr 1fr;
             gap: 12px;
             text-align: left;
+            margin-top: 10px;
+        }
+
+        .presets-box {
+            background: #f4f8ff;
+            border: 1px solid #d0e3ff;
+            border-radius: 10px;
+            padding: 12px;
+            margin: 14px 0;
+        }
+
+        .presets-box p {
+            margin: 0 0 8px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #0d47a1;
+        }
+
+        .preset-btn {
+            background: #e3f2fd;
+            color: #0d47a1;
+            border: 1px solid #90caf9;
+            padding: 8px 12px;
+            margin: 4px;
+            font-size: 13px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .preset-btn:hover {
+            background: #bbdefb;
         }
 
         .checkbox-row {
@@ -89,7 +122,7 @@
             width: auto;
         }
 
-        button, .home-link {
+        button.main-btn, .home-link, .download-btn {
             display: inline-block;
             background: #1976d2;
             color: white;
@@ -98,16 +131,34 @@
             margin: 8px 4px;
             border-radius: 8px;
             font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
             text-decoration: none;
+            min-height: 44px;
         }
 
-        button:hover, .home-link:hover {
+        button.main-btn:hover {
             background: #125ca8;
         }
 
+        .download-btn {
+            background: #16803c;
+        }
+
+        .download-btn:hover {
+            background: #0d642d;
+        }
+
+        .home-link {
+            background: #526477;
+        }
+
+        .home-link:hover {
+            background: #35485b;
+        }
+
         button:focus-visible, a:focus-visible,
-        input:focus-visible {
+        input:focus-visible, select:focus-visible {
             outline: 3px solid #ffbf47;
             outline-offset: 2px;
         }
@@ -115,6 +166,7 @@
         #preview {
             display: none;
             max-width: 100%;
+            max-height: 500px;
             height: auto;
             margin: 18px auto;
             border: 1px solid #d7e0eb;
@@ -124,6 +176,7 @@
         #status {
             overflow-wrap: anywhere;
             font-weight: bold;
+            color: #0d47a1;
         }
 
         .small-note {
@@ -165,7 +218,7 @@
         .footer {
             text-align: center;
             padding: 20px 10px;
-            background: #124b98;
+            background: #12345a;
             color: white;
         }
 
@@ -174,17 +227,22 @@
             margin: 0 7px;
         }
 
-        @media (max-width: 520px) {
-            .header h1 {
-                font-size: 25px;
-            }
+        [hidden] {
+            display: none !important;
+        }
 
+        @media (max-width: 520px) {
             .dimension-row {
                 grid-template-columns: 1fr;
             }
 
             .box, .info-section {
                 padding: 16px;
+            }
+
+            button.main-btn, .home-link, .download-btn {
+                width: 100%;
+                margin: 6px 0;
             }
         }
     </style>
@@ -194,7 +252,7 @@
 
     <header class="header">
         <h1>📏 Free Photo Resizer</h1>
-        <p>Resize your photo online with custom dimensions.</p>
+        <p>Resize your photo online with custom pixel dimensions or quick presets.</p>
     </header>
 
     <main class="container">
@@ -210,17 +268,43 @@
                 No photo selected yet.
             </p>
 
+            <div class="presets-box" id="presetsBox" hidden>
+                <p>Quick Size Presets:</p>
+                <button type="button" class="preset-btn" data-scale="0.5">50% Smaller</button>
+                <button type="button" class="preset-btn" data-scale="0.25">25% Smaller</button>
+                <button type="button" class="preset-btn" data-w="350" data-h="450">Passport (350×450)</button>
+                <button type="button" class="preset-btn" data-w="1080" data-h="1080">Square (1080×1080)</button>
+                <button type="button" class="preset-btn" data-w="1920" data-h="1080">Full HD (1920×1080)</button>
+            </div>
+
             <div class="dimension-row">
                 <div>
                     <label for="width"><strong>Width (pixels)</strong></label>
-                    <input type="number" id="width" min="1" max="10000"
-                           placeholder="Example: 1200">
+                    <input type="number" id="width" min="1" max="10000" placeholder="Example: 1200">
                 </div>
 
                 <div>
                     <label for="height"><strong>Height (pixels)</strong></label>
-                    <input type="number" id="height" min="1" max="10000"
-                           placeholder="Example: 800">
+                    <input type="number" id="height" min="1" max="10000" placeholder="Example: 800">
+                </div>
+            </div>
+
+            <div class="dimension-row">
+                <div>
+                    <label for="outputFormat"><strong>Output Format</strong></label>
+                    <select id="outputFormat">
+                        <option value="image/jpeg" selected>JPG (Smaller Size, White BG)</option>
+                        <option value="image/png">PNG (Keep Transparency)</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="quality"><strong>JPG Quality</strong></label>
+                    <select id="quality">
+                        <option value="0.95" selected>High (95%)</option>
+                        <option value="0.80">Medium (80% - Balanced)</option>
+                        <option value="0.60">Low (60% - Small KB)</option>
+                    </select>
                 </div>
             </div>
 
@@ -230,18 +314,18 @@
             </div>
 
             <p class="small-note">
-                Recommended: keep this option enabled to reduce stretching or distortion.
+                Recommended: keep proportions enabled to prevent stretching or distortion.
             </p>
 
-            <button type="button" id="resizeButton">Resize Photo</button>
+            <button type="button" class="main-btn" id="resizeButton">📏 Resize Photo</button>
 
             <p id="status" role="status" aria-live="polite"></p>
 
             <img id="preview" alt="Preview of the resized photo">
 
             <div>
-                <button type="button" id="downloadButton" hidden>
-                    Download Resized Photo
+                <button type="button" class="download-btn" id="downloadButton" hidden>
+                    ⬇️ Download Resized Photo
                 </button>
                 <a class="home-link" href="https://easylifetoolbox.com/">
                     🏠 Home
@@ -253,14 +337,14 @@
             <h2>What Is Photo Resizing?</h2>
             <p>
                 Photo resizing changes the pixel width and height of an image.
-                It can help prepare pictures for websites, online forms, social
-                media, email, or printing. The best dimensions depend on where
+                It helps prepare pictures for websites, government application forms,
+                social media, email, or printing. The best dimensions depend on where
                 you plan to use the photo.
             </p>
             <p>
-                This tool lets you select a photo, enter custom dimensions,
-                preview the result, and download a JPEG copy. The original
-                file is not overwritten.
+                This tool lets you select a photo, enter custom dimensions or pick a preset,
+                preview the result with its new file size, and download a JPG or PNG copy.
+                Your original file is never overwritten.
             </p>
         </section>
 
@@ -268,20 +352,19 @@
             <h2>How to Resize a Photo</h2>
             <ol>
                 <li>Select a photo from your device.</li>
-                <li>Check the original dimensions shown above the input fields.</li>
-                <li>Enter your required width and height in pixels.</li>
-                <li>Keep “Keep original photo proportions” enabled unless you specifically need an exact stretched size.</li>
-                <li>Select “Resize Photo” to create a preview.</li>
-                <li>Select “Download Resized Photo” to save the JPEG copy.</li>
+                <li>Check the original dimensions and file size shown above the input fields.</li>
+                <li>Enter your required width and height in pixels, or click a Quick Preset.</li>
+                <li>Choose <strong>JPG</strong> for smaller file sizes or <strong>PNG</strong> to preserve transparent backgrounds.</li>
+                <li>Click <strong>Resize Photo</strong> to generate a preview.</li>
+                <li>Click <strong>Download Resized Photo</strong> to save your new image.</li>
             </ol>
         </section>
 
         <section class="info-section">
             <h2>Photo Size Examples</h2>
             <p>
-                These are example pixel dimensions, not universal requirements.
-                Check the specifications of the website, form, printer, or
-                platform where you intend to use the image.
+                These are common pixel dimensions used across web and document portals.
+                Always check the exact specifications required by the platform you are uploading to.
             </p>
 
             <div class="table-wrap">
@@ -295,24 +378,24 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Square profile picture</td>
-                            <td>600 × 600 px</td>
-                            <td>Square</td>
+                            <td>Online Form / Passport Photo</td>
+                            <td>350 × 450 px</td>
+                            <td>Portrait</td>
                         </tr>
                         <tr>
-                            <td>Landscape photo</td>
+                            <td>Square Profile Picture</td>
+                            <td>1080 × 1080 px</td>
+                            <td>1:1 Square</td>
+                        </tr>
+                        <tr>
+                            <td>Landscape Photo</td>
                             <td>1200 × 800 px</td>
                             <td>3:2</td>
                         </tr>
                         <tr>
-                            <td>HD landscape image</td>
+                            <td>HD Widescreen Image</td>
                             <td>1920 × 1080 px</td>
                             <td>16:9</td>
-                        </tr>
-                        <tr>
-                            <td>Portrait image</td>
-                            <td>800 × 1200 px</td>
-                            <td>2:3</td>
                         </tr>
                     </tbody>
                 </table>
@@ -322,31 +405,15 @@
         <section class="info-section">
             <h2>Why Keep the Original Proportions?</h2>
             <p>
-                Every photo has a width-to-height ratio. If the width and height
-                are changed independently, people or objects can look stretched
-                or squashed. Keeping the original proportions calculates the
+                Every photo has a width-to-height aspect ratio. If the width and height
+                are changed independently, faces or objects can look stretched
+                or squashed. Keeping the original proportions enabled calculates the
                 matching dimension automatically.
             </p>
             <p>
                 For example, if a photo is 1200 × 800 pixels and you change its
-                width to 600 pixels with proportions enabled, its height becomes
+                width to 600 pixels with proportions enabled, its height automatically becomes
                 400 pixels.
-            </p>
-        </section>
-
-        <section class="info-section">
-            <h2>Does Resizing Improve Photo Quality?</h2>
-            <p>
-                Resizing does not restore details that are missing from a small
-                or blurry image. Enlarging a photo may make it look less sharp.
-                Reducing its dimensions can be useful for some online uploads,
-                but the final file size also depends on the image content and
-                JPEG compression.
-            </p>
-            <p>
-                This tool creates a JPEG output. JPEG is convenient for many
-                photos, but it does not preserve transparency. Keep your
-                original file if you need the original format or full quality.
             </p>
         </section>
 
@@ -354,33 +421,19 @@
             <h2>Frequently Asked Questions</h2>
 
             <h3>What does px mean?</h3>
-            <p>
-                Px means pixels, the small units that make up a digital image.
-            </p>
+            <p>Px means pixels, the tiny dots that make up a digital image.</p>
 
             <h3>Will the original photo be deleted?</h3>
-            <p>
-                No. This tool creates a new downloadable image and does not
-                overwrite your selected original file.
-            </p>
+            <p>No. This tool creates a new downloadable image in your browser and never modifies your original file.</p>
 
             <h3>Why does my resized photo look stretched?</h3>
-            <p>
-                The new width and height may have a different ratio from the
-                original. Enable “Keep original photo proportions” to help
-                avoid stretching.
-            </p>
+            <p>The new width and height may have a different ratio from the original. Keep “Keep original photo proportions” checked to avoid stretching.</p>
 
-            <h3>Is the resized photo always smaller in file size?</h3>
-            <p>
-                No. File size depends on the image dimensions, image content,
-                and compression. A resized JPEG may still be large.
-            </p>
+            <h3>How do I keep a transparent background?</h3>
+            <p>Select <strong>PNG (Keep Transparency)</strong> under the Output Format dropdown before resizing.</p>
 
-            <h3>What format will I download?</h3>
-            <p>
-                This tool downloads the resized image as a JPEG file.
-            </p>
+            <h3>How can I reduce the KB file size for online forms?</h3>
+            <p>Reduce the pixel width/height (such as clicking 50% Smaller) and choose <strong>JPG</strong> with Medium or Low quality.</p>
         </section>
 
     </main>
@@ -392,6 +445,7 @@
             <a href="https://easylifetoolbox.com/">Home</a>
             <a href="https://easylifetoolbox.com/about.html">About Us</a>
             <a href="https://easylifetoolbox.com/privacy.html">Privacy Policy</a>
+            <a href="https://easylifetoolbox.com/terms.html">Terms &amp; Conditions</a>
             <a href="https://easylifetoolbox.com/contact.html">Contact Us</a>
         </p>
     </footer>
@@ -400,7 +454,12 @@
         const photoInput = document.getElementById("photo");
         const widthInput = document.getElementById("width");
         const heightInput = document.getElementById("height");
+        const outputFormatSelect = document.getElementById("outputFormat");
+        const qualitySelect = document.getElementById("quality");
         const keepRatioInput = document.getElementById("keepRatio");
+        const presetsBox = document.getElementById("presetsBox");
+        const presetBtns = document.querySelectorAll(".preset-btn");
+
         const originalInfo = document.getElementById("originalInfo");
         const status = document.getElementById("status");
         const preview = document.getElementById("preview");
@@ -411,7 +470,18 @@
         let originalImage = null;
         let originalURL = null;
         let resizedURL = null;
+        let currentExtension = "jpg";
         let updatingDimensions = false;
+
+        function formatBytes(bytes) {
+            if (bytes < 1024) return bytes + " B";
+            if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + " KB";
+            return (bytes / (1024 * 1024)).toFixed(2) + " MB";
+        }
+
+        outputFormatSelect.addEventListener("change", function () {
+            qualitySelect.disabled = outputFormatSelect.value === "image/png";
+        });
 
         photoInput.addEventListener("change", function () {
             const file = photoInput.files[0];
@@ -419,6 +489,7 @@
             originalImage = null;
             preview.style.display = "none";
             downloadButton.hidden = true;
+            presetsBox.hidden = true;
             status.textContent = "";
 
             if (originalURL) {
@@ -449,11 +520,12 @@
                 originalImage = img;
 
                 originalInfo.textContent =
-                    "Original dimensions: " + img.naturalWidth + " × " +
-                    img.naturalHeight + " pixels.";
+                    "Original: " + img.naturalWidth + " × " +
+                    img.naturalHeight + " pixels (" + formatBytes(file.size) + ")";
 
                 widthInput.value = img.naturalWidth;
                 heightInput.value = img.naturalHeight;
+                presetsBox.hidden = false;
 
                 URL.revokeObjectURL(originalURL);
                 originalURL = null;
@@ -470,6 +542,28 @@
             };
 
             img.src = originalURL;
+        });
+
+        presetBtns.forEach(btn => {
+            btn.addEventListener("click", function () {
+                if (!originalImage) return;
+
+                const scale = btn.getAttribute("data-scale");
+                if (scale) {
+                    const factor = parseFloat(scale);
+                    widthInput.value = Math.max(1, Math.round(originalImage.naturalWidth * factor));
+                    heightInput.value = Math.max(1, Math.round(originalImage.naturalHeight * factor));
+                } else {
+                    const w = parseInt(btn.getAttribute("data-w"), 10);
+                    const h = parseInt(btn.getAttribute("data-h"), 10);
+                    widthInput.value = w;
+                    heightInput.value = h;
+                    if (w !== h) {
+                        keepRatioInput.checked = false;
+                    }
+                }
+                status.textContent = "Preset dimensions applied. Click Resize Photo.";
+            });
         });
 
         widthInput.addEventListener("input", function () {
@@ -532,6 +626,10 @@
                 return;
             }
 
+            const mimeType = outputFormatSelect.value;
+            const quality = parseFloat(qualitySelect.value) || 0.95;
+            currentExtension = mimeType === "image/png" ? "png" : "jpg";
+
             canvas.width = width;
             canvas.height = height;
 
@@ -542,6 +640,13 @@
             }
 
             ctx.clearRect(0, 0, width, height);
+
+            // Fill white background for JPEG so transparent PNGs don't turn black
+            if (mimeType === "image/jpeg") {
+                ctx.fillStyle = "#ffffff";
+                ctx.fillRect(0, 0, width, height);
+            }
+
             ctx.drawImage(originalImage, 0, 0, width, height);
 
             canvas.toBlob(function (blob) {
@@ -558,10 +663,13 @@
                 preview.src = resizedURL;
                 preview.style.display = "block";
                 downloadButton.hidden = false;
+                downloadButton.textContent =
+                    "⬇️ Download Resized " + currentExtension.toUpperCase() + " (" + formatBytes(blob.size) + ")";
+
                 status.textContent =
-                    "Resize complete: " + width + " × " + height +
-                    " pixels. Check the preview, then download your photo.";
-            }, "image/jpeg", 0.95);
+                    "✅ Resize complete: " + width + " × " + height +
+                    " px (" + formatBytes(blob.size) + ").";
+            }, mimeType, mimeType === "image/jpeg" ? quality : undefined);
         });
 
         downloadButton.addEventListener("click", function () {
@@ -572,7 +680,7 @@
 
             const link = document.createElement("a");
             link.href = resizedURL;
-            link.download = "EasyLife-Resized-Photo.jpg";
+            link.download = "EasyLife-Resized-Photo." + currentExtension;
             document.body.appendChild(link);
             link.click();
             link.remove();
@@ -586,4 +694,3 @@
 
 </body>
 </html>
-```
