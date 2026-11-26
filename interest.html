@@ -1,116 +1,508 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4584641102876506"
-         crossorigin="anonymous"></script>    
-    <title>EasyLife - Interest Calculator</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Free Simple &amp; Compound Interest Calculator Online | EasyLife</title>
+    <meta name="description" content="Calculate Simple Interest and Compound Interest online for free with EasyLife. Supports time periods in years, months, or days with instant principal and interest breakdown.">
     <link rel="canonical" href="https://easylifetoolbox.com/interest.html">
-         
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4584641102876506"
+        crossorigin="anonymous"></script>
+
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             font-family: Arial, sans-serif;
             background: #f2f7ff;
-            text-align: center;
+            color: #263238;
+            line-height: 1.6;
         }
+
         .header {
-            background: linear-gradient(135deg, #1976d2, #42a5f5);
+            background: linear-gradient(135deg, #0d47a1, #1976d2, #42a5f5);
             color: white;
-            padding: 30px 20px;
+            padding: 30px 16px;
+            text-align: center;
         }
 
         .header h1 {
             margin: 0;
-            font-size: 30px;
+            font-size: clamp(25px, 5vw, 34px);
+        }
+
+        .header p {
+            margin: 8px 0 0;
+        }
+
+        .box,
+        .content-box {
+            background: white;
+            width: calc(100% - 24px);
+            max-width: 760px;
+            margin: 22px auto;
+            padding: 22px;
+            border-radius: 14px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
         }
 
         .box {
-            background: white;
-            max-width: 450px;
-            margin: 25px auto;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+            max-width: 560px;
+            text-align: center;
         }
 
-        input {
-            width: 90%;
-            padding: 13px;
-            margin: 8px;
-            border: 1px solid #ccc;
+        .box h2,
+        .content-box h2 {
+            color: #0d47a1;
+            margin-top: 0;
+        }
+
+        .form-group {
+            text-align: left;
+            margin-bottom: 14px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 6px;
+            font-size: 14px;
+            color: #0d47a1;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #b0c4de;
             border-radius: 8px;
             font-size: 16px;
+            background: white;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #1976d2;
+            box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.15);
+        }
+
+        .time-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 10px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 18px;
         }
 
         button {
+            flex: 1;
             background: #1976d2;
             color: white;
             border: none;
-            padding: 13px 25px;
-            margin: 10px 5px;
+            padding: 13px 18px;
             border-radius: 8px;
             font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
+            min-height: 46px;
         }
 
-        #result {
-            margin-top: 20px;
-            font-size: 18px;
-            line-height: 1.8;
+        button:hover {
+            background: #0d47a1;
+        }
+
+        button:focus-visible {
+            outline: 3px solid #ffb300;
+            outline-offset: 2px;
+        }
+
+        .secondary-btn {
+            background: #526477;
+        }
+
+        .secondary-btn:hover {
+            background: #35485b;
+        }
+
+        .home-btn {
+            width: 100%;
+            margin-top: 14px;
+            background: #16803c;
+        }
+
+        .home-btn:hover {
+            background: #0d642d;
+        }
+
+        .result-card {
+            margin-top: 22px;
+            background: #f4f8ff;
+            border: 1px solid #d0e3ff;
+            border-radius: 12px;
+            padding: 18px;
+            text-align: left;
+        }
+
+        .interest-highlight {
+            background: #eaf3ff;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            margin-bottom: 14px;
+        }
+
+        .interest-highlight span {
+            display: block;
+            font-size: 14px;
+            color: #455a64;
+            font-weight: bold;
+        }
+
+        .interest-highlight strong {
+            font-size: 26px;
+            color: #0d47a1;
+        }
+
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px dashed #cbd5e1;
+            font-size: 15px;
+        }
+
+        .result-row:last-of-type {
+            border-bottom: none;
+            font-weight: bold;
+            color: #0d47a1;
+            font-size: 16px;
+        }
+
+        .ratio-bar {
+            height: 12px;
+            width: 100%;
+            background: #16803c;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-top: 14px;
+            display: flex;
+        }
+
+        .principal-fill {
+            height: 100%;
+            background: #1976d2;
+            transition: width 0.3s ease;
+        }
+
+        .legend {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            margin-top: 6px;
+            color: #455a64;
+        }
+
+        .dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+
+        .dot-principal {
+            background: #1976d2;
+        }
+
+        .dot-interest {
+            background: #16803c;
+        }
+
+        .formula-box {
+            background: #eaf3ff;
+            border-left: 4px solid #1976d2;
+            padding: 12px;
+            border-radius: 6px;
+            font-weight: bold;
+            color: #0d47a1;
+            margin: 12px 0;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #dbe3ee;
+            padding: 12px 0;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-item h3 {
+            color: #174a83;
+            margin-bottom: 5px;
+        }
+
+        .footer {
+            background: #12345a;
+            color: white;
+            text-align: center;
+            padding: 20px 12px;
+            margin-top: 30px;
+        }
+
+        .footer a {
+            color: white;
+            margin: 0 8px;
+        }
+
+        [hidden] {
+            display: none !important;
+        }
+
+        @media (max-width: 480px) {
+            .box,
+            .content-box {
+                padding: 16px;
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
+
+            .result-row {
+                flex-direction: column;
+                gap: 2px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <div class="header">
+    <header class="header">
         <h1>💰 Interest Calculator</h1>
-        <p>Calculate simple interest easily</p>
-    </div>
+        <p>Calculate Simple Interest and Compound Interest quickly and accurately.</p>
+    </header>
 
-    <div class="box">
+    <main>
+        <section class="box" aria-label="Interest Calculator">
 
-        <input type="number" id="amount" placeholder="Principal Amount (₹)">
+            <h2>Calculate Interest</h2>
 
-        <input type="number" id="rate" placeholder="Interest Rate (% per year)">
+            <div class="form-group">
+                <label for="interestType">Interest Type</label>
+                <select id="interestType">
+                    <option value="simple" selected>Simple Interest (SI)</option>
+                    <option value="compound">Compound Interest (CI - Annual)</option>
+                </select>
+            </div>
 
-        <input type="number" id="years" placeholder="Time (Years)">
+            <div class="form-group">
+                <label for="amount">Principal Amount (₹)</label>
+                <input type="number" id="amount" min="1" placeholder="Example: 100000">
+            </div>
 
-        <br>
+            <div class="form-group">
+                <label for="rate">Annual Interest Rate (% per year)</label>
+                <input type="number" id="rate" min="0.1" max="100" step="0.01" placeholder="Example: 7.5">
+            </div>
 
-        <button onclick="calculateInterest()">Calculate Interest</button>
+            <div class="form-group">
+                <label for="timeInput">Time Period</label>
+                <div class="time-row">
+                    <input type="number" id="timeInput" min="1" step="any" placeholder="Example: 3">
+                    <select id="timeUnit" aria-label="Time unit">
+                        <option value="years" selected>Years</option>
+                        <option value="months">Months</option>
+                        <option value="days">Days</option>
+                    </select>
+                </div>
+            </div>
 
-        <div id="result"></div>
+            <div class="btn-group">
+                <button type="button" onclick="calculateInterest()">💰 Calculate Interest</button>
+                <button type="button" class="secondary-btn" onclick="resetInterest()">🗑️ Clear</button>
+            </div>
 
-        <button onclick="goHome()">🏠 Home</button>
+            <div id="resultCard" class="result-card" hidden>
+                <div class="interest-highlight">
+                    <span id="resultLabel">Total Simple Interest</span>
+                    <strong id="interestValue">₹0.00</strong>
+                </div>
 
-    </div>
+                <div class="result-row">
+                    <span>Principal Amount:</span>
+                    <strong id="principalValue">₹0.00</strong>
+                </div>
+
+                <div class="result-row">
+                    <span>Total Interest Earned / Payable:</span>
+                    <strong id="interestSubValue">₹0.00</strong>
+                </div>
+
+                <div class="result-row">
+                    <span>Total Maturity Amount:</span>
+                    <strong id="totalValue">₹0.00</strong>
+                </div>
+
+                <div class="ratio-bar" aria-hidden="true">
+                    <div id="principalBar" class="principal-fill" style="width: 50%;"></div>
+                </div>
+                <div class="legend">
+                    <span><i class="dot dot-principal"></i>Principal (<span id="principalPct">0%</span>)</span>
+                    <span><i class="dot dot-interest"></i>Interest (<span id="interestPct">0%</span>)</span>
+                </div>
+            </div>
+
+            <button type="button" class="home-btn" onclick="goHome()">🏠 Back to Home</button>
+
+        </section>
+
+        <section class="content-box">
+            <h2>What Is an Interest Calculator?</h2>
+            <p>
+                An interest calculator helps you find out how much extra money you earn on savings
+                or pay on a borrowed amount over a specific period. EasyLife's Interest Calculator
+                supports both <strong>Simple Interest</strong> and <strong>Compound Interest</strong>,
+                with flexible time inputs in years, months, or days.
+            </p>
+        </section>
+
+        <section class="content-box">
+            <h2>Interest Formulas Used</h2>
+            <p><strong>1. Simple Interest Formula:</strong></p>
+            <div class="formula-box">
+                Simple Interest (SI) = (P × R × T) / 100
+            </div>
+            <p><strong>2. Compound Interest Formula (Compounded Annually):</strong></p>
+            <div class="formula-box">
+                Total Amount (A) = P × (1 + R / 100)^T &nbsp;|&nbsp; CI = A − P
+            </div>
+            <ul>
+                <li><strong>P:</strong> Principal amount</li>
+                <li><strong>R:</strong> Annual rate of interest (%)</li>
+                <li><strong>T:</strong> Time period in years</li>
+            </ul>
+        </section>
+
+        <section class="content-box">
+            <h2>How to Use This Interest Calculator</h2>
+            <ol>
+                <li>Choose <strong>Simple Interest</strong> or <strong>Compound Interest</strong>.</li>
+                <li>Enter the <strong>Principal Amount</strong> in rupees.</li>
+                <li>Enter the annual <strong>Interest Rate (%)</strong>.</li>
+                <li>Enter the <strong>Time Period</strong> and select <strong>Years</strong>, <strong>Months</strong>, or <strong>Days</strong>.</li>
+                <li>Click <strong>Calculate Interest</strong> to see the total interest and final amount immediately.</li>
+            </ol>
+        </section>
+
+        <section class="content-box">
+            <h2>Frequently Asked Questions</h2>
+
+            <div class="faq-item">
+                <h3>1. What is the difference between Simple Interest and Compound Interest?</h3>
+                <p>Simple interest is calculated only on the original principal amount. Compound interest is calculated on the principal plus any accumulated interest from previous years.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>2. Can I calculate interest for months or days?</h3>
+                <p>Yes. Select <strong>Months</strong> (divided by 12) or <strong>Days</strong> (divided by 365) next to the time period input.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>3. Is this tool free to use?</h3>
+                <p>Yes, EasyLife's Interest Calculator is 100% free and runs directly in your browser without storing any data.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>EasyLife — Simple &amp; Free Tools for Everyday Life</p>
+        <p>
+            <a href="https://easylifetoolbox.com/">Home</a>
+            <a href="https://easylifetoolbox.com/privacy.html">Privacy Policy</a>
+            <a href="https://easylifetoolbox.com/terms.html">Terms &amp; Conditions</a>
+            <a href="https://easylifetoolbox.com/contact.html">Contact Us</a>
+        </p>
+    </footer>
 
     <script>
+        function formatINR(num) {
+            return "₹" + num.toLocaleString("en-IN", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+        }
 
         function calculateInterest() {
+            const type = document.getElementById("interestType").value;
+            const amount = parseFloat(document.getElementById("amount").value);
+            const rate = parseFloat(document.getElementById("rate").value);
+            const timeVal = parseFloat(document.getElementById("timeInput").value);
+            const timeUnit = document.getElementById("timeUnit").value;
 
-            let amount = Number(document.getElementById("amount").value);
-            let rate = Number(document.getElementById("rate").value);
-            let years = Number(document.getElementById("years").value);
-
-            if (!amount || !rate || !years) {
-                alert("Please enter all details");
+            if (isNaN(amount) || amount <= 0 || isNaN(rate) || rate <= 0 || isNaN(timeVal) || timeVal <= 0) {
+                alert("Please enter valid positive numbers for Principal Amount, Interest Rate, and Time Period.");
                 return;
             }
 
-            let interest = (amount * rate * years) / 100;
-            let total = amount + interest;
+            let years = timeVal;
+            if (timeUnit === "months") {
+                years = timeVal / 12;
+            } else if (timeUnit === "days") {
+                years = timeVal / 365;
+            }
 
-            document.getElementById("result").innerHTML =
-                "💰 Interest: ₹" + interest.toFixed(2) +
-                "<br>💵 Total Amount: ₹" + total.toFixed(2);
+            let interest = 0;
+            let total = 0;
+
+            if (type === "simple") {
+                interest = (amount * rate * years) / 100;
+                total = amount + interest;
+                document.getElementById("resultLabel").textContent = "Total Simple Interest";
+            } else {
+                total = amount * Math.pow(1 + rate / 100, years);
+                interest = total - amount;
+                document.getElementById("resultLabel").textContent = "Total Compound Interest";
+            }
+
+            const principalPct = ((amount / total) * 100).toFixed(1);
+            const interestPct = (100 - parseFloat(principalPct)).toFixed(1);
+
+            document.getElementById("interestValue").textContent = formatINR(interest);
+            document.getElementById("principalValue").textContent = formatINR(amount);
+            document.getElementById("interestSubValue").textContent = formatINR(interest);
+            document.getElementById("totalValue").textContent = formatINR(total);
+
+            document.getElementById("principalBar").style.width = principalPct + "%";
+            document.getElementById("principalPct").textContent = principalPct + "%";
+            document.getElementById("interestPct").textContent = interestPct + "%";
+
+            document.getElementById("resultCard").hidden = false;
+        }
+
+        function resetInterest() {
+            document.getElementById("interestType").value = "simple";
+            document.getElementById("amount").value = "";
+            document.getElementById("rate").value = "";
+            document.getElementById("timeInput").value = "";
+            document.getElementById("timeUnit").value = "years";
+            document.getElementById("resultCard").hidden = true;
         }
 
         function goHome() {
-   window.location.href = "https://easylifetoolbox.com/";
-}
-
+            window.location.href = "https://easylifetoolbox.com/";
+        }
     </script>
 
 </body>
