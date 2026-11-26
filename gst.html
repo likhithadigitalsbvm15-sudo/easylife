@@ -1,12 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4584641102876506"
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online GST Calculator by EasyLife. Calculate Add GST or Remove GST with CGST and SGST breakdown easily.">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4584641102876506"
          crossorigin="anonymous"></script>
     <title>GST Calculator - EasyLife</title>
     <link rel="canonical" href="https://easylifetoolbox.com/gst.html">
          
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             font-family: Arial, sans-serif;
@@ -17,30 +24,64 @@
         .header {
             background: linear-gradient(135deg, #1976d2, #42a5f5);
             color: white;
-            padding: 30px 20px;
+            padding: 25px 15px;
         }
 
         .header h1 {
             margin: 0;
-            font-size: 30px;
+            font-size: 28px;
+        }
+
+        .header p {
+            margin: 8px 0 0;
+            font-size: 15px;
+            opacity: 0.9;
         }
 
         .box {
             background: white;
-            max-width: 450px;
-            margin: 30px auto;
-            padding: 25px;
+            max-width: 420px;
+            margin: 25px auto;
+            padding: 25px 20px;
             border-radius: 15px;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 92%;
         }
 
-        input, select, button {
-            margin: 10px;
+        label {
+            display: block;
+            text-align: left;
+            font-weight: bold;
+            color: #333;
+            margin-top: 12px;
+            font-size: 14px;
+        }
+
+        input, select {
+            width: 100%;
+            margin-top: 6px;
             padding: 12px;
             font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            outline: none;
+        }
+
+        input:focus, select:focus {
+            border-color: #1976d2;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
         }
 
         button {
+            flex: 1;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
             background: #1976d2;
             color: white;
             border: none;
@@ -52,31 +93,58 @@
             background: #125ca8;
         }
 
+        .reset-btn {
+            background: #e0e0e0;
+            color: #333;
+        }
+
+        .reset-btn:hover {
+            background: #ccc;
+        }
+
+        .home-btn {
+            width: 100%;
+            margin-top: 15px;
+            background: #2e7d32;
+        }
+
+        .home-btn:hover {
+            background: #1b5e20;
+        }
+
         #result {
             margin-top: 20px;
-            font-size: 18px;
-            font-weight: bold;
+            padding: 15px;
+            background: #f8fbff;
+            border-radius: 10px;
+            border: 1px solid #d0e3ff;
+            font-size: 16px;
             line-height: 1.8;
+            display: none;
+            text-align: left;
+        }
+
+        .highlight {
+            font-size: 19px;
+            font-weight: bold;
+            color: #1976d2;
         }
     </style>
-
 </head>
 
 <body>
 
     <div class="header">
         <h1>💰 GST Calculator</h1>
-        <p>Calculate GST easily</p>
+        <p>Calculate GST easily (Add or Remove GST)</p>
     </div>
 
     <div class="box">
 
-        <h2>Enter Amount</h2>
+        <label for="amount">Enter Amount (₹)</label>
+        <input type="number" id="amount" placeholder=" ఉదా: 1000">
 
-        <input type="number" id="amount" placeholder="Enter amount">
-
-        <br>
-
+        <label for="gst">Select GST Rate (%)</label>
         <select id="gst">
             <option value="5">GST 5%</option>
             <option value="12">GST 12%</option>
@@ -84,43 +152,68 @@
             <option value="28">GST 28%</option>
         </select>
 
-        <br>
+        <label for="type">Calculation Type</label>
+        <select id="type">
+            <option value="exclusive" selected>Add GST (+ Exclusive)</option>
+            <option value="inclusive">Remove GST (- Inclusive)</option>
+        </select>
 
-        <button onclick="calculateGST()">Calculate GST</button>
+        <div class="btn-group">
+            <button onclick="calculateGST()">Calculate</button>
+            <button class="reset-btn" onclick="resetForm()">Clear</button>
+        </div>
 
         <div id="result"></div>
 
-        <br>
-
-        <button onclick="goHome()">🏠 Home</button>
+        <button class="home-btn" onclick="goHome()">🏠 Back to Home</button>
 
     </div>
 
     <script>
-
         function calculateGST() {
-
             const amount = parseFloat(document.getElementById("amount").value);
             const gstRate = parseFloat(document.getElementById("gst").value);
+            const type = document.getElementById("type").value;
+            const resultBox = document.getElementById("result");
 
             if (isNaN(amount) || amount <= 0) {
                 alert("Please enter a valid amount.");
                 return;
             }
 
-            const gstAmount = amount * gstRate / 100;
-            const totalAmount = amount + gstAmount;
+            let netAmount = 0;
+            let gstAmount = 0;
+            let totalAmount = 0;
 
-            document.getElementById("result").innerHTML =
-                "GST Amount: ₹" + gstAmount.toFixed(2) +
-                "<br>Total Amount: ₹" + totalAmount.toFixed(2);
+            if (type === "exclusive") {
+                netAmount = amount;
+                gstAmount = (amount * gstRate) / 100;
+                totalAmount = amount + gstAmount;
+            } else {
+                totalAmount = amount;
+                netAmount = amount / (1 + (gstRate / 100));
+                gstAmount = totalAmount - netAmount;
+            }
 
+            const halfGst = gstAmount / 2;
+
+            resultBox.style.display = "block";
+            resultBox.innerHTML =
+                "Net Amount: <b>₹" + netAmount.toFixed(2) + "</b><br>" +
+                "CGST (" + (gstRate / 2) + "%): <b>₹" + halfGst.toFixed(2) + "</b><br>" +
+                "SGST (" + (gstRate / 2) + "%): <b>₹" + halfGst.toFixed(2) + "</b><br>" +
+                "Total GST (" + gstRate + "%): <b>₹" + gstAmount.toFixed(2) + "</b><hr>" +
+                "<span class='highlight'>Total Amount: ₹" + totalAmount.toFixed(2) + "</span>";
+        }
+
+        function resetForm() {
+            document.getElementById("amount").value = "";
+            document.getElementById("result").style.display = "none";
         }
 
         function goHome() {
             window.location.href = "https://easylifetoolbox.com/";
         }
-
     </script>
 
 </body>
