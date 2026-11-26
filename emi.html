@@ -1,129 +1,495 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4584641102876506"
-         crossorigin="anonymous"></script>   
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>EasyLife - EMI Calculator</title>
+    <title>Free Loan EMI Calculator Online (Home, Car &amp; Personal Loan) | EasyLife</title>
+    <meta name="description" content="Calculate your monthly loan EMI, total interest, and total payment online for free with EasyLife. Supports loan tenure in both years and months with instant breakdown.">
     <link rel="canonical" href="https://easylifetoolbox.com/emi.html">
-         
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4584641102876506"
+        crossorigin="anonymous"></script>
+
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             font-family: Arial, sans-serif;
             background: #f2f7ff;
-            text-align: center;
+            color: #263238;
+            line-height: 1.6;
         }
 
         .header {
-            background: linear-gradient(135deg, #1976d2, #42a5f5);
+            background: linear-gradient(135deg, #0d47a1, #1976d2, #42a5f5);
             color: white;
-            padding: 30px 20px;
+            padding: 30px 16px;
+            text-align: center;
         }
 
         .header h1 {
             margin: 0;
-            font-size: 30px;
+            font-size: clamp(25px, 5vw, 34px);
+        }
+
+        .header p {
+            margin: 8px 0 0;
+        }
+
+        .box,
+        .content-box {
+            background: white;
+            width: calc(100% - 24px);
+            max-width: 760px;
+            margin: 22px auto;
+            padding: 22px;
+            border-radius: 14px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
         }
 
         .box {
-            background: white;
-            max-width: 450px;
-            margin: 25px auto;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+            max-width: 560px;
+            text-align: center;
         }
 
-        input {
-            width: 90%;
-            padding: 13px;
-            margin: 8px;
-            border: 1px solid #ccc;
+        .box h2,
+        .content-box h2 {
+            color: #0d47a1;
+            margin-top: 0;
+        }
+
+        .form-group {
+            text-align: left;
+            margin-bottom: 14px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 6px;
+            font-size: 14px;
+            color: #0d47a1;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #b0c4de;
             border-radius: 8px;
             font-size: 16px;
+            background: white;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #1976d2;
+            box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.15);
+        }
+
+        .tenure-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 10px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 18px;
         }
 
         button {
+            flex: 1;
             background: #1976d2;
             color: white;
             border: none;
-            padding: 13px 25px;
-            margin: 10px 5px;
+            padding: 13px 18px;
             border-radius: 8px;
             font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
+            min-height: 46px;
         }
 
         button:hover {
-            background: #125ca8;
+            background: #0d47a1;
         }
 
-        #result {
-            margin-top: 20px;
-            font-size: 18px;
-            line-height: 1.8;
+        button:focus-visible {
+            outline: 3px solid #ffb300;
+            outline-offset: 2px;
+        }
+
+        .secondary-btn {
+            background: #526477;
+        }
+
+        .secondary-btn:hover {
+            background: #35485b;
+        }
+
+        .home-btn {
+            width: 100%;
+            margin-top: 14px;
+            background: #16803c;
+        }
+
+        .home-btn:hover {
+            background: #0d642d;
+        }
+
+        .result-card {
+            margin-top: 22px;
+            background: #f4f8ff;
+            border: 1px solid #d0e3ff;
+            border-radius: 12px;
+            padding: 18px;
+            text-align: left;
+        }
+
+        .emi-highlight {
+            background: #eaf3ff;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            margin-bottom: 14px;
+        }
+
+        .emi-highlight span {
+            display: block;
+            font-size: 14px;
+            color: #455a64;
+            font-weight: bold;
+        }
+
+        .emi-highlight strong {
+            font-size: 26px;
+            color: #0d47a1;
+        }
+
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px dashed #cbd5e1;
+            font-size: 15px;
+        }
+
+        .result-row:last-of-type {
+            border-bottom: none;
+            font-weight: bold;
+            color: #0d47a1;
+            font-size: 16px;
+        }
+
+        .ratio-bar {
+            height: 12px;
+            width: 100%;
+            background: #ef6c00;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-top: 14px;
+            display: flex;
+        }
+
+        .principal-fill {
+            height: 100%;
+            background: #1976d2;
+            transition: width 0.3s ease;
+        }
+
+        .legend {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            margin-top: 6px;
+            color: #455a64;
+        }
+
+        .dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+
+        .dot-principal {
+            background: #1976d2;
+        }
+
+        .dot-interest {
+            background: #ef6c00;
+        }
+
+        .formula-box {
+            background: #eaf3ff;
+            border-left: 4px solid #1976d2;
+            padding: 12px;
+            border-radius: 6px;
+            font-weight: bold;
+            color: #0d47a1;
+            margin: 12px 0;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #dbe3ee;
+            padding: 12px 0;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-item h3 {
+            color: #174a83;
+            margin-bottom: 5px;
+        }
+
+        .footer {
+            background: #12345a;
+            color: white;
+            text-align: center;
+            padding: 20px 12px;
+            margin-top: 30px;
+        }
+
+        .footer a {
+            color: white;
+            margin: 0 8px;
+        }
+
+        [hidden] {
+            display: none !important;
+        }
+
+        @media (max-width: 480px) {
+            .box,
+            .content-box {
+                padding: 16px;
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
+
+            .result-row {
+                flex-direction: column;
+                gap: 2px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <div class="header">
-        <h1>🧮 EMI Calculator</h1>
-        <p>Calculate your monthly loan EMI</p>
-    </div>
+    <header class="header">
+        <h1>🧮 Loan EMI Calculator</h1>
+        <p>Calculate your monthly EMI, total interest, and total loan repayment instantly.</p>
+    </header>
 
-    <div class="box">
+    <main>
+        <section class="box" aria-label="EMI Calculator">
 
-        <input type="number" id="amount" placeholder="Loan Amount (₹)">
+            <h2>Calculate Your Monthly EMI</h2>
 
-        <input type="number" id="rate" placeholder="Interest Rate (% per year)">
+            <div class="form-group">
+                <label for="amount">Loan Amount (₹)</label>
+                <input type="number" id="amount" min="1" placeholder="Example: 500000">
+            </div>
 
-        <input type="number" id="months" placeholder="Loan Period (Months)">
+            <div class="form-group">
+                <label for="rate">Annual Interest Rate (% per year)</label>
+                <input type="number" id="rate" min="0.1" max="100" step="0.01" placeholder="Example: 8.5">
+            </div>
 
-        <br>
+            <div class="form-group">
+                <label for="tenure">Loan Period (Tenure)</label>
+                <div class="tenure-row">
+                    <input type="number" id="tenure" min="1" placeholder="Example: 5">
+                    <select id="tenureType" aria-label="Tenure unit">
+                        <option value="years" selected>Years</option>
+                        <option value="months">Months</option>
+                    </select>
+                </div>
+            </div>
 
-        <button onclick="calculateEMI()">Calculate EMI</button>
+            <div class="btn-group">
+                <button type="button" onclick="calculateEMI()">🧮 Calculate EMI</button>
+                <button type="button" class="secondary-btn" onclick="resetEMI()">🗑️ Clear</button>
+            </div>
 
-        <div id="result"></div>
+            <div id="resultCard" class="result-card" hidden>
+                <div class="emi-highlight">
+                    <span>Monthly EMI</span>
+                    <strong id="emiValue">₹0.00</strong>
+                </div>
 
-        <button onclick="goHome()">🏠 Home</button>
+                <div class="result-row">
+                    <span>Principal Loan Amount:</span>
+                    <strong id="principalValue">₹0.00</strong>
+                </div>
 
-    </div>
+                <div class="result-row">
+                    <span>Total Interest Payable:</span>
+                    <strong id="interestValue">₹0.00</strong>
+                </div>
+
+                <div class="result-row">
+                    <span>Total Payment (Principal + Interest):</span>
+                    <strong id="totalValue">₹0.00</strong>
+                </div>
+
+                <div class="ratio-bar" aria-hidden="true">
+                    <div id="principalBar" class="principal-fill" style="width: 50%;"></div>
+                </div>
+                <div class="legend">
+                    <span><i class="dot dot-principal"></i>Principal (<span id="principalPct">0%</span>)</span>
+                    <span><i class="dot dot-interest"></i>Interest (<span id="interestPct">0%</span>)</span>
+                </div>
+            </div>
+
+            <button type="button" class="home-btn" onclick="goHome()">🏠 Back to Home</button>
+
+        </section>
+
+        <section class="content-box">
+            <h2>What Is an EMI Calculator?</h2>
+            <p>
+                EMI stands for <strong>Equated Monthly Installment</strong>. It is the fixed amount
+                a borrower pays to a bank or lender every month until the loan is fully repaid.
+                Each monthly payment covers both a portion of the principal loan amount and the
+                interest charged on the remaining balance.
+            </p>
+            <p>
+                EasyLife's EMI Calculator helps you estimate your monthly commitment for Home Loans,
+                Car Loans, Personal Loans, or Education Loans in seconds.
+            </p>
+        </section>
+
+        <section class="content-box">
+            <h2>How Is Loan EMI Calculated?</h2>
+            <p>Banks and financial institutions use the standard reducing-balance EMI formula:</p>
+            <div class="formula-box">
+                EMI = [P × R × (1 + R)^N] / [(1 + R)^N − 1]
+            </div>
+            <ul>
+                <li><strong>P:</strong> Principal loan amount borrowed</li>
+                <li><strong>R:</strong> Monthly interest rate (Annual Rate ÷ 12 ÷ 100)</li>
+                <li><strong>N:</strong> Total loan tenure in months</li>
+            </ul>
+        </section>
+
+        <section class="content-box">
+            <h2>How to Use This EMI Calculator</h2>
+            <ol>
+                <li>Enter the total <strong>Loan Amount</strong> in rupees.</li>
+                <li>Enter the annual <strong>Interest Rate (%)</strong> offered by your bank.</li>
+                <li>Enter the <strong>Loan Period</strong> and select either <strong>Years</strong> or <strong>Months</strong>.</li>
+                <li>Click <strong>Calculate EMI</strong> to view your monthly installment, total interest, and principal-to-interest breakdown.</li>
+            </ol>
+        </section>
+
+        <section class="content-box">
+            <h2>Frequently Asked Questions</h2>
+
+            <div class="faq-item">
+                <h3>1. Can I calculate EMI for Home, Car, and Personal loans?</h3>
+                <p>Yes. The same standard reducing-balance formula applies to home loans, vehicle loans, and personal loans.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>2. How does loan tenure affect my EMI?</h3>
+                <p>A longer tenure reduces your monthly EMI amount, but increases the total interest paid over the life of the loan. A shorter tenure increases monthly EMI while saving significantly on total interest.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>3. Does this calculator include bank processing fees?</h3>
+                <p>No. This tool calculates pure principal and interest repayments. Check with your lender for processing fees, insurance, or GST charges.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>4. Is my financial data saved anywhere?</h3>
+                <p>No. All calculations happen instantly inside your browser and nothing is stored or transmitted.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>EasyLife — Simple &amp; Free Tools for Everyday Life</p>
+        <p>
+            <a href="https://easylifetoolbox.com/">Home</a>
+            <a href="https://easylifetoolbox.com/privacy.html">Privacy Policy</a>
+            <a href="https://easylifetoolbox.com/terms.html">Terms &amp; Conditions</a>
+            <a href="https://easylifetoolbox.com/contact.html">Contact Us</a>
+        </p>
+    </footer>
 
     <script>
+        function formatINR(num) {
+            return "₹" + num.toLocaleString("en-IN", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+        }
 
         function calculateEMI() {
+            const amount = parseFloat(document.getElementById("amount").value);
+            const rate = parseFloat(document.getElementById("rate").value);
+            const tenureInput = parseFloat(document.getElementById("tenure").value);
+            const tenureType = document.getElementById("tenureType").value;
 
-            let amount = Number(document.getElementById("amount").value);
-            let rate = Number(document.getElementById("rate").value);
-            let months = Number(document.getElementById("months").value);
-
-            if (!amount || !rate || !months) {
-                alert("Please enter all details");
+            if (isNaN(amount) || amount <= 0 || isNaN(rate) || rate <= 0 || isNaN(tenureInput) || tenureInput <= 0) {
+                alert("Please enter valid positive numbers for Loan Amount, Interest Rate, and Loan Period.");
                 return;
             }
 
-            let monthlyRate = rate / 12 / 100;
+            const months = tenureType === "years" ? Math.round(tenureInput * 12) : Math.round(tenureInput);
 
-            let emi = amount * monthlyRate *
-                Math.pow(1 + monthlyRate, months) /
-                (Math.pow(1 + monthlyRate, months) - 1);
+            if (months < 1 || months > 600) {
+                alert("Please enter a valid loan period (1 to 50 years / 600 months).");
+                return;
+            }
 
-            let totalPayment = emi * months;
-            let totalInterest = totalPayment - amount;
+            const monthlyRate = rate / 12 / 100;
+            const factor = Math.pow(1 + monthlyRate, months);
+            const emi = (amount * monthlyRate * factor) / (factor - 1);
 
-            document.getElementById("result").innerHTML =
-                "💰 Monthly EMI: ₹" + emi.toFixed(2) +
-                "<br>📊 Total Interest: ₹" + totalInterest.toFixed(2) +
-                "<br>💵 Total Payment: ₹" + totalPayment.toFixed(2);
+            const totalPayment = emi * months;
+            const totalInterest = totalPayment - amount;
+
+            const principalPct = ((amount / totalPayment) * 100).toFixed(1);
+            const interestPct = (100 - parseFloat(principalPct)).toFixed(1);
+
+            document.getElementById("emiValue").textContent = formatINR(emi);
+            document.getElementById("principalValue").textContent = formatINR(amount);
+            document.getElementById("interestValue").textContent = formatINR(totalInterest);
+            document.getElementById("totalValue").textContent = formatINR(totalPayment);
+
+            document.getElementById("principalBar").style.width = principalPct + "%";
+            document.getElementById("principalPct").textContent = principalPct + "%";
+            document.getElementById("interestPct").textContent = interestPct + "%";
+
+            document.getElementById("resultCard").hidden = false;
+        }
+
+        function resetEMI() {
+            document.getElementById("amount").value = "";
+            document.getElementById("rate").value = "";
+            document.getElementById("tenure").value = "";
+            document.getElementById("tenureType").value = "years";
+            document.getElementById("resultCard").hidden = true;
         }
 
         function goHome() {
             window.location.href = "https://easylifetoolbox.com/";
         }
-
     </script>
 
 </body>
