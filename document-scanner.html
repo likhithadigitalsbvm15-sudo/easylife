@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Use EasyLife Document Scanner to upload a document photo, preview it, crop unwanted areas and download the result. Follow the simple scanning and cropping guide.">
+    <meta name="description" content="Use EasyLife Document Scanner to upload a document photo, rotate, crop unwanted areas, apply Black & White scan filters, and download the result for free.">
 
-    <title>EasyLife - Free Document Scanner and Crop Tool</title>
+    <title>Free Document Scanner, Crop &amp; B&amp;W Filter Tool | EasyLife</title>
     <link rel="canonical" href="https://easylifetoolbox.com/document-scanner.html">
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4584641102876506"
@@ -37,7 +37,7 @@
         }
 
         .header p {
-            margin-bottom: 0;
+            margin: 8px 0 0;
         }
 
         .box,
@@ -60,10 +60,11 @@
             background: #0d47a1;
             color: white;
             border: none;
-            padding: 12px 18px;
-            margin: 7px 4px;
+            padding: 12px 16px;
+            margin: 6px 4px;
             border-radius: 8px;
-            font-size: 16px;
+            font-size: 15px;
+            font-weight: bold;
             cursor: pointer;
             min-height: 44px;
         }
@@ -74,12 +75,63 @@
 
         button:focus-visible {
             outline: 3px solid #ffb300;
-            outline-offset: 3px;
+            outline-offset: 2px;
         }
 
         button:disabled {
             opacity: 0.55;
             cursor: not-allowed;
+        }
+
+        .secondary-btn {
+            background: #526477;
+        }
+
+        .secondary-btn:hover {
+            background: #35485b;
+        }
+
+        .download-btn {
+            background: #16803c;
+            font-size: 17px;
+            padding: 13px 24px;
+        }
+
+        .download-btn:hover {
+            background: #0d642d;
+        }
+
+        .filter-bar {
+            background: #f4f8ff;
+            border: 1px solid #d0e3ff;
+            border-radius: 10px;
+            padding: 12px;
+            margin: 15px 0;
+        }
+
+        .filter-bar p {
+            margin: 0 0 8px;
+            font-weight: bold;
+            font-size: 14px;
+            color: #0d47a1;
+        }
+
+        .filter-btn {
+            background: #e3f2fd;
+            color: #0d47a1;
+            border: 1px solid #90caf9;
+            padding: 9px 14px;
+            font-size: 14px;
+        }
+
+        .filter-btn:hover {
+            background: #bbdefb;
+        }
+
+        .filter-btn.active {
+            background: #1976d2;
+            color: white;
+            border-color: #1976d2;
         }
 
         #fileInput {
@@ -89,10 +141,11 @@
         #previewImage {
             display: none;
             max-width: 100%;
-            max-height: 650px;
+            max-height: 600px;
             height: auto;
             margin: 18px auto;
             border-radius: 8px;
+            border: 1px solid #cfd8dc;
             object-fit: contain;
         }
 
@@ -116,7 +169,7 @@
             width: auto;
             height: auto;
             max-width: 100%;
-            max-height: 650px;
+            max-height: 600px;
             pointer-events: none;
             user-select: none;
             -webkit-user-drag: none;
@@ -134,6 +187,7 @@
             margin: 15px 0;
             font-weight: bold;
             overflow-wrap: anywhere;
+            color: #0d47a1;
         }
 
         .hint {
@@ -142,6 +196,7 @@
             padding: 12px;
             border-radius: 6px;
             text-align: left;
+            font-size: 15px;
         }
 
         .content-box h2 {
@@ -183,15 +238,20 @@
             margin: 0 8px;
         }
 
+        [hidden] {
+            display: none !important;
+        }
+
         @media (max-width: 480px) {
             .box,
             .content-box {
                 padding: 16px;
             }
 
-            button {
+            .box > button,
+            .action-group button {
                 width: 100%;
-                margin: 6px 0;
+                margin: 5px 0;
             }
         }
     </style>
@@ -201,40 +261,58 @@
 
     <header class="header">
         <h1>📷 EasyLife Document Scanner</h1>
-        <p>Upload, preview, crop and download a document image.</p>
+        <p>Upload, crop, rotate, apply scan filters, and download a clean document image.</p>
     </header>
 
     <main>
         <section class="box" aria-label="Document scanner tool">
 
             <h2>Scan and Crop Your Document</h2>
-            <p>Select a document photo from your device to get started.</p>
+            <p>Select a document photo from your phone or computer to get started.</p>
 
             <input type="file" id="fileInput" accept="image/*">
 
-            <button type="button" id="selectBtn">
-                📷 Scan / Upload Document
-            </button>
+            <div>
+                <button type="button" id="selectBtn">
+                    📷 Scan / Upload Document
+                </button>
+                <button type="button" id="homeBtn" class="secondary-btn">
+                    🏠 Home
+                </button>
+            </div>
 
             <div id="message" role="status" aria-live="polite">
                 Choose an image to begin.
             </div>
 
-            <img id="previewImage" alt="Selected document preview">
+            <div id="editTools" hidden>
+                <div class="action-group">
+                    <button type="button" id="cropBtn">
+                        ✂️ Crop Document
+                    </button>
 
-            <div>
-                <button type="button" id="previewBtn" hidden>
-                    🖼️ Preview
-                </button>
+                    <button type="button" id="rotateBtn" class="secondary-btn">
+                        🔄 Rotate 90°
+                    </button>
 
-                <button type="button" id="cropBtn" hidden>
-                    ✂️ Crop Document
-                </button>
+                    <button type="button" id="resetBtn" class="secondary-btn">
+                        ↩️ Reset Original
+                    </button>
+                </div>
+
+                <div class="filter-bar">
+                    <p>Scan Enhancement Filter:</p>
+                    <button type="button" class="filter-btn active" data-filter="none">Original Color</button>
+                    <button type="button" class="filter-btn" data-filter="grayscale(100%) contrast(155%) brightness(108%)">Black &amp; White Scan</button>
+                    <button type="button" class="filter-btn" data-filter="contrast(135%) brightness(106%) saturate(110%)">Magic Color</button>
+                </div>
             </div>
+
+            <img id="previewImage" alt="Selected document preview">
 
             <p id="cropInstructions" class="hint" hidden>
                 Drag your mouse or finger over the image to select the area
-                you want to keep. Then choose Apply Crop.
+                you want to keep. Then click <strong>Apply Crop</strong>.
             </p>
 
             <div id="cropArea">
@@ -242,78 +320,52 @@
                 <div id="selection"></div>
             </div>
 
-            <div>
+            <div class="action-group">
                 <button type="button" id="applyCropBtn" hidden>
                     ✅ Apply Crop
                 </button>
 
-                <button type="button" id="cancelCropBtn" hidden>
-                    Cancel Crop
-                </button>
-
-                <button type="button" id="downloadBtn" hidden>
-                    ⬇️ Download Scan
+                <button type="button" id="cancelCropBtn" class="secondary-btn" hidden>
+                    ❌ Cancel Crop
                 </button>
             </div>
 
-            <p class="hint">
-                <strong>Tip:</strong> Use a clear, well-lit photo.
-                Check the preview before downloading your document.
-            </p>
+            <div class="action-group" style="margin-top: 12px;">
+                <button type="button" id="downloadBtn" class="download-btn" hidden>
+                    ⬇️ Download Scanned JPG
+                </button>
+            </div>
 
-            <button type="button" id="homeBtn">
-                🏠 Home
-            </button>
+            <p class="hint" style="margin-top: 18px;">
+                <strong>Tip:</strong> Use <strong>Black &amp; White Scan</strong> for text documents and receipts to make the background white and letters sharp.
+            </p>
         </section>
 
         <section class="content-box">
             <h2>How to Use the Document Scanner</h2>
             <p>
-                This tool helps you prepare a document image by selecting a photo,
-                checking the preview, removing unwanted edges and downloading
-                the result. It works with supported image files from your device.
+                This tool helps you prepare a clean document image directly in your browser by selecting a photo,
+                rotating it, cropping unwanted background edges, applying scan filters, and downloading the final JPEG.
             </p>
 
             <ol>
-                <li><strong>Select a document:</strong> Choose Scan / Upload Document and select an image.</li>
-                <li><strong>Preview the image:</strong> Check that the text and important details are readable.</li>
-                <li><strong>Crop the image:</strong> Choose Crop Document and drag over the part you want to keep.</li>
-                <li><strong>Apply the crop:</strong> Select Apply Crop after marking the required area.</li>
-                <li><strong>Download:</strong> Choose Download Scan to save the prepared image.</li>
+                <li><strong>Select a document:</strong> Click <strong>Scan / Upload Document</strong> and choose an image.</li>
+                <li><strong>Rotate if needed:</strong> Click <strong>Rotate 90°</strong> if your photo is sideways or upside down.</li>
+                <li><strong>Crop the edges:</strong> Click <strong>Crop Document</strong>, drag over the paper edges, and click <strong>Apply Crop</strong>.</li>
+                <li><strong>Apply a scan filter:</strong> Choose <strong>Black &amp; White Scan</strong> or <strong>Magic Color</strong> for clearer text.</li>
+                <li><strong>Download:</strong> Click <strong>Download Scanned JPG</strong> to save the prepared document.</li>
             </ol>
         </section>
 
         <section class="content-box">
             <h2>Tips for Clear Document Scans</h2>
             <ul>
-                <li>Place the paper on a flat surface with good lighting.</li>
-                <li>Keep the camera parallel to the document where possible.</li>
-                <li>Avoid shadows, glare and fingers covering the text.</li>
-                <li>Make sure the full document is in focus before taking the photo.</li>
-                <li>When cropping, leave a small margin around important text, signatures and stamps.</li>
-                <li>Open the downloaded image to confirm it looks correct before sharing or printing.</li>
+                <li>Place the paper on a flat surface with good natural lighting.</li>
+                <li>Keep the camera parallel to the document to avoid angled distortion.</li>
+                <li>Avoid shadows, glare, and fingers covering the text.</li>
+                <li>Leave a small margin around important text, signatures, and stamps when cropping.</li>
+                <li>Open the downloaded image to verify readability before sharing or printing.</li>
             </ul>
-            <p>
-                This page prepares image files. It does not automatically perform
-                optical character recognition (OCR), create a searchable PDF,
-                or certify that a document is legally valid.
-            </p>
-        </section>
-
-        <section class="content-box">
-            <h2>What Does Cropping Do?</h2>
-            <p>
-                Cropping removes unwanted parts around an image. For example,
-                you can remove the table visible around a paper document or
-                exclude empty space around a receipt. Cropping does not improve
-                blurry text or restore details that were not captured in the
-                original photo.
-            </p>
-            <p>
-                The downloaded result is a JPEG image. If a website or office
-                specifically asks for a PDF, use a suitable image-to-PDF tool
-                after checking the required file size and dimensions.
-            </p>
         </section>
 
         <section class="content-box">
@@ -321,54 +373,27 @@
 
             <div class="faq-item">
                 <h3>1. Which files can I select?</h3>
-                <p>
-                    You can select supported image files, such as JPEG and PNG.
-                    The exact files available depend on your browser and device.
-                </p>
+                <p>You can select standard image files such as JPEG, PNG, and WebP from your phone or computer.</p>
             </div>
 
             <div class="faq-item">
-                <h3>2. Can I crop an image on a mobile phone?</h3>
-                <p>
-                    Yes. Open the crop tool and drag your finger over the image
-                    to select the area you want to keep.
-                </p>
+                <h3>2. Can I crop and scan an image on a mobile phone?</h3>
+                <p>Yes. Open the crop tool and drag your finger over the image to select the exact document borders.</p>
             </div>
 
             <div class="faq-item">
-                <h3>3. What happens if my crop selection is too small?</h3>
-                <p>
-                    The tool asks you to select a larger area so the result is
-                    more useful.
-                </p>
+                <h3>3. What does the Black &amp; White Scan filter do?</h3>
+                <p>It removes color shadows and increases contrast so printed or handwritten text looks crisp like a physical scanner.</p>
             </div>
 
             <div class="faq-item">
                 <h3>4. Does this tool create a PDF?</h3>
-                <p>
-                    No. It downloads the cropped image as a JPEG. Use an
-                    image-to-PDF tool if you need a PDF file.
-                </p>
+                <p>It downloads the scanned document as a high-quality JPEG image. You can use our Photo to PDF tool if you need a PDF file.</p>
             </div>
 
             <div class="faq-item">
-                <h3>5. Are my documents uploaded to EasyLife?</h3>
-                <p>
-                    This page uses browser image processing and does not contain
-                    code that sends the selected image to an EasyLife server.
-                    However, your browser, device, extensions or other software
-                    may process data independently. Avoid using a shared device
-                    for sensitive documents and review the site's Privacy Policy.
-                </p>
-            </div>
-
-            <div class="faq-item">
-                <h3>6. Why does the downloaded image look different?</h3>
-                <p>
-                    The cropped image is exported as a JPEG. JPEG compression
-                    may change some image details. Keep the original file if
-                    you need an unchanged copy.
-                </p>
+                <h3>5. Are my documents uploaded to a server?</h3>
+                <p>No. All cropping, rotation, and filtering happen locally inside your web browser for complete privacy.</p>
             </div>
         </section>
     </main>
@@ -378,6 +403,7 @@
         <p>
             <a href="https://easylifetoolbox.com/">Home</a>
             <a href="https://easylifetoolbox.com/privacy.html">Privacy Policy</a>
+            <a href="https://easylifetoolbox.com/terms.html">Terms &amp; Conditions</a>
             <a href="https://easylifetoolbox.com/contact.html">Contact Us</a>
         </p>
     </footer>
@@ -385,9 +411,13 @@
     <script>
         const fileInput = document.getElementById("fileInput");
         const selectBtn = document.getElementById("selectBtn");
+        const editTools = document.getElementById("editTools");
         const previewImage = document.getElementById("previewImage");
-        const previewBtn = document.getElementById("previewBtn");
         const cropBtn = document.getElementById("cropBtn");
+        const rotateBtn = document.getElementById("rotateBtn");
+        const resetBtn = document.getElementById("resetBtn");
+        const filterBtns = document.querySelectorAll(".filter-btn");
+
         const cropArea = document.getElementById("cropArea");
         const cropImage = document.getElementById("cropImage");
         const selection = document.getElementById("selection");
@@ -399,8 +429,8 @@
         const homeBtn = document.getElementById("homeBtn");
 
         let originalURL = "";
-        let currentURL = "";
-        let cropObjectURL = "";
+        let workingURL = "";
+        let activeFilter = "none";
         let selecting = false;
         let startX = 0;
         let startY = 0;
@@ -408,9 +438,12 @@
 
         selectBtn.addEventListener("click", () => fileInput.click());
 
+        homeBtn.addEventListener("click", () => {
+            window.location.href = "https://easylifetoolbox.com/";
+        });
+
         fileInput.addEventListener("change", () => {
             const file = fileInput.files && fileInput.files[0];
-
             if (!file) return;
 
             if (!file.type.startsWith("image/")) {
@@ -422,16 +455,18 @@
             clearCropState();
 
             if (originalURL) URL.revokeObjectURL(originalURL);
-            if (cropObjectURL) URL.revokeObjectURL(cropObjectURL);
+            if (workingURL && workingURL !== originalURL) URL.revokeObjectURL(workingURL);
 
             originalURL = URL.createObjectURL(file);
-            currentURL = originalURL;
-            cropObjectURL = "";
+            workingURL = originalURL;
+            activeFilter = "none";
+            updateFilterButtons();
 
-            previewImage.src = currentURL;
+            previewImage.style.filter = "none";
+            previewImage.src = workingURL;
             previewImage.style.display = "block";
-            previewBtn.hidden = false;
-            cropBtn.hidden = false;
+
+            editTools.hidden = false;
             downloadBtn.hidden = false;
             cropArea.style.display = "none";
             cropInstructions.hidden = true;
@@ -439,20 +474,87 @@
             cancelCropBtn.hidden = true;
 
             message.textContent = "Selected: " + file.name;
+            fileInput.value = "";
         });
 
-        previewBtn.addEventListener("click", () => {
-            if (!currentURL) {
-                message.textContent = "Please select a document first.";
-                return;
-            }
+        filterBtns.forEach(btn => {
+            btn.addEventListener("click", () => {
+                if (!workingURL) return;
+                activeFilter = btn.getAttribute("data-filter");
+                updateFilterButtons();
+                previewImage.style.filter = activeFilter;
+                cropImage.style.filter = activeFilter;
+                message.textContent = "Filter applied: " + btn.textContent;
+            });
+        });
 
+        function updateFilterButtons() {
+            filterBtns.forEach(b => {
+                if (b.getAttribute("data-filter") === activeFilter) {
+                    b.classList.add("active");
+                } else {
+                    b.classList.remove("active");
+                }
+            });
+        }
+
+        rotateBtn.addEventListener("click", () => {
+            if (!workingURL) return;
+
+            const img = new Image();
+            img.onload = () => {
+                const canvas = document.createElement("canvas");
+                canvas.width = img.naturalHeight;
+                canvas.height = img.naturalWidth;
+
+                const ctx = canvas.getContext("2d");
+                ctx.translate(canvas.width / 2, canvas.height / 2);
+                ctx.rotate((90 * Math.PI) / 180);
+                ctx.drawImage(img, -img.naturalWidth / 2, -img.naturalHeight / 2);
+
+                canvas.toBlob((blob) => {
+                    if (!blob) return;
+                    if (workingURL && workingURL !== originalURL) URL.revokeObjectURL(workingURL);
+                    workingURL = URL.createObjectURL(blob);
+
+                    previewImage.src = workingURL;
+                    previewImage.style.display = "block";
+                    cropArea.style.display = "none";
+                    cropInstructions.hidden = true;
+                    applyCropBtn.hidden = true;
+                    cancelCropBtn.hidden = true;
+                    clearCropState();
+
+                    message.textContent = "Rotated 90 degrees.";
+                }, "image/jpeg", 0.95);
+            };
+            img.src = workingURL;
+        });
+
+        resetBtn.addEventListener("click", () => {
+            if (!originalURL) return;
+            if (workingURL && workingURL !== originalURL) {
+                URL.revokeObjectURL(workingURL);
+            }
+            workingURL = originalURL;
+            activeFilter = "none";
+            updateFilterButtons();
+
+            previewImage.style.filter = "none";
+            previewImage.src = workingURL;
             previewImage.style.display = "block";
-            message.textContent = "Preview is ready.";
+
+            cropArea.style.display = "none";
+            cropInstructions.hidden = true;
+            applyCropBtn.hidden = true;
+            cancelCropBtn.hidden = true;
+            clearCropState();
+
+            message.textContent = "Reset to original image.";
         });
 
         cropBtn.addEventListener("click", () => {
-            if (!currentURL) {
+            if (!workingURL) {
                 message.textContent = "Please select a document first.";
                 return;
             }
@@ -460,24 +562,24 @@
             clearCropState();
 
             cropImage.onload = () => {
+                previewImage.style.display = "none";
+                cropImage.style.filter = activeFilter;
                 cropArea.style.display = "block";
                 cropInstructions.hidden = false;
                 applyCropBtn.hidden = false;
                 cancelCropBtn.hidden = false;
-                message.textContent =
-                    "Drag on the image with your mouse or finger to select a crop area.";
+                message.textContent = "Drag on the image with your mouse or finger to select a crop area.";
             };
 
             cropImage.onerror = () => {
                 message.textContent = "Could not load the image. Please select it again.";
             };
 
-            cropImage.src = currentURL;
+            cropImage.src = workingURL;
         });
 
         function getPoint(event) {
             const rect = cropImage.getBoundingClientRect();
-
             return {
                 x: Math.max(0, Math.min(event.clientX - rect.left, rect.width)),
                 y: Math.max(0, Math.min(event.clientY - rect.top, rect.height))
@@ -492,7 +594,6 @@
 
             const point = getPoint(event);
             const rect = cropImage.getBoundingClientRect();
-
             if (!rect.width || !rect.height) return;
 
             startX = point.x;
@@ -508,18 +609,14 @@
 
             try {
                 cropArea.setPointerCapture(event.pointerId);
-            } catch (_) {
-                // Pointer capture may not be available in every browser.
-            }
+            } catch (_) {}
         });
 
         cropArea.addEventListener("pointermove", (event) => {
             if (!selecting) return;
-
             event.preventDefault();
 
             const point = getPoint(event);
-
             const x = Math.min(startX, point.x);
             const y = Math.min(startY, point.y);
             const width = Math.abs(point.x - startX);
@@ -535,7 +632,6 @@
 
         function finishSelection() {
             if (!selecting) return;
-
             selecting = false;
 
             if (!cropRect || cropRect.width < 20 || cropRect.height < 20) {
@@ -545,7 +641,7 @@
                 return;
             }
 
-            message.textContent = "Crop area selected. Choose Apply Crop.";
+            message.textContent = "Crop area selected. Click Apply Crop.";
         }
 
         cropArea.addEventListener("pointerup", finishSelection);
@@ -553,7 +649,7 @@
         cropArea.addEventListener("lostpointercapture", finishSelection);
 
         applyCropBtn.addEventListener("click", async () => {
-            if (!currentURL || !cropRect) {
+            if (!workingURL || !cropRect) {
                 message.textContent = "Please select the crop area first.";
                 return;
             }
@@ -564,7 +660,6 @@
             }
 
             const displayed = cropImage.getBoundingClientRect();
-
             if (!displayed.width || !displayed.height) {
                 message.textContent = "Could not measure the image. Please try again.";
                 return;
@@ -575,14 +670,8 @@
 
             const sx = Math.max(0, Math.round(cropRect.x * scaleX));
             const sy = Math.max(0, Math.round(cropRect.y * scaleY));
-            const sw = Math.min(
-                cropImage.naturalWidth - sx,
-                Math.round(cropRect.width * scaleX)
-            );
-            const sh = Math.min(
-                cropImage.naturalHeight - sy,
-                Math.round(cropRect.height * scaleY)
-            );
+            const sw = Math.min(cropImage.naturalWidth - sx, Math.round(cropRect.width * scaleX));
+            const sh = Math.min(cropImage.naturalHeight - sy, Math.round(cropRect.height * scaleY));
 
             if (sw < 1 || sh < 1) {
                 message.textContent = "The crop area is invalid. Please select it again.";
@@ -598,14 +687,9 @@
                 canvas.height = sh;
 
                 const ctx = canvas.getContext("2d");
-
                 if (!ctx) throw new Error("Canvas is unavailable.");
 
-                ctx.drawImage(
-                    cropImage,
-                    sx, sy, sw, sh,
-                    0, 0, sw, sh
-                );
+                ctx.drawImage(cropImage, sx, sy, sw, sh, 0, 0, sw, sh);
 
                 const blob = await new Promise((resolve, reject) => {
                     canvas.toBlob(
@@ -615,22 +699,20 @@
                     );
                 });
 
-                if (cropObjectURL) URL.revokeObjectURL(cropObjectURL);
+                if (workingURL && workingURL !== originalURL) URL.revokeObjectURL(workingURL);
+                workingURL = URL.createObjectURL(blob);
 
-                cropObjectURL = URL.createObjectURL(blob);
-                currentURL = cropObjectURL;
-
-                previewImage.src = currentURL;
+                previewImage.style.filter = activeFilter;
+                previewImage.src = workingURL;
                 previewImage.style.display = "block";
 
                 cropArea.style.display = "none";
                 cropInstructions.hidden = true;
                 applyCropBtn.hidden = true;
                 cancelCropBtn.hidden = true;
-                cropRect = null;
-                selection.style.display = "none";
+                clearCropState();
 
-                message.textContent = "Crop applied successfully. You can download the image now.";
+                message.textContent = "Crop applied successfully! You can download your scan now.";
             } catch (error) {
                 message.textContent = "Crop failed. Please try again with another image.";
             } finally {
@@ -643,28 +725,44 @@
             cropInstructions.hidden = true;
             applyCropBtn.hidden = true;
             cancelCropBtn.hidden = true;
+            previewImage.style.display = "block";
             clearCropState();
-            message.textContent = "Crop cancelled. Your current image is unchanged.";
+            message.textContent = "Crop cancelled.";
         });
 
         downloadBtn.addEventListener("click", () => {
-            if (!currentURL) {
+            if (!workingURL) {
                 message.textContent = "Please select a document first.";
                 return;
             }
 
-            const link = document.createElement("a");
-            link.href = currentURL;
-            link.download = "EasyLife-Document-Scan.jpg";
-            document.body.appendChild(link);
-            link.click();
-            link.remove();
+            // Render final image with active scan filter baked in
+            const img = new Image();
+            img.onload = () => {
+                const canvas = document.createElement("canvas");
+                canvas.width = img.naturalWidth;
+                canvas.height = img.naturalHeight;
 
-            message.textContent = "Download started. Check your device's downloads.";
-        });
+                const ctx = canvas.getContext("2d");
+                if (activeFilter !== "none") {
+                    ctx.filter = activeFilter;
+                }
+                ctx.drawImage(img, 0, 0);
 
-        homeBtn.addEventListener("click", () => {
-            window.location.href = "https://easylifetoolbox.com/";
+                canvas.toBlob((blob) => {
+                    if (!blob) return;
+                    const dlUrl = URL.createObjectURL(blob);
+                    const link = document.createElement("a");
+                    link.href = dlUrl;
+                    link.download = "EasyLife-Document-Scan.jpg";
+                    document.body.appendChild(link);
+                    link.click();
+                    link.remove();
+                    setTimeout(() => URL.revokeObjectURL(dlUrl), 1000);
+                    message.textContent = "Download started! Check your downloads folder.";
+                }, "image/jpeg", 0.94);
+            };
+            img.src = workingURL;
         });
 
         function clearCropState() {
@@ -677,9 +775,8 @@
 
         window.addEventListener("beforeunload", () => {
             if (originalURL) URL.revokeObjectURL(originalURL);
-            if (cropObjectURL) URL.revokeObjectURL(cropObjectURL);
+            if (workingURL && workingURL !== originalURL) URL.revokeObjectURL(workingURL);
         });
     </script>
 </body>
 </html>
-```
