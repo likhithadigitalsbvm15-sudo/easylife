@@ -1,142 +1,456 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4584641102876506"
-         crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Discount Calculator - EasyLife</title>
+    <title>Free Discount Calculator Online (Sale Price &amp; Double Discount) | EasyLife</title>
+    <meta name="description" content="Calculate shopping discounts, sale prices, and extra coupon discounts online for free with EasyLife. Find out exactly how much money you save instantly.">
+    <link rel="canonical" href="https://easylifetoolbox.com/discount.html">
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4584641102876506"
+        crossorigin="anonymous"></script>
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: #eef5ff;
+            background: #f2f7ff;
+            color: #263238;
+            line-height: 1.6;
         }
 
         .header {
-            background: linear-gradient(135deg, #0d47a1, #2196f3);
+            background: linear-gradient(135deg, #0d47a1, #1976d2, #42a5f5);
             color: white;
-            padding: 30px 20px;
+            padding: 30px 16px;
             text-align: center;
         }
 
         .header h1 {
             margin: 0;
-            font-size: 32px;
+            font-size: clamp(25px, 5vw, 34px);
         }
 
-        .container {
-            max-width: 500px;
-            margin: 25px auto;
-            padding: 20px;
+        .header p {
+            margin: 8px 0 0;
         }
 
-        .card {
+        .box,
+        .content-box {
             background: white;
+            width: calc(100% - 24px);
+            max-width: 760px;
+            margin: 22px auto;
             padding: 22px;
-            border-radius: 15px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.10);
+            border-radius: 14px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
         }
 
-        label {
+        .box {
+            max-width: 540px;
+            text-align: center;
+        }
+
+        .box h2,
+        .content-box h2 {
+            color: #0d47a1;
+            margin-top: 0;
+        }
+
+        .form-group {
+            text-align: left;
+            margin-bottom: 14px;
+        }
+
+        .form-group label {
             display: block;
-            margin-top: 15px;
             font-weight: bold;
+            margin-bottom: 6px;
+            font-size: 14px;
+            color: #0d47a1;
+        }
+
+        .discount-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
         }
 
         input {
             width: 100%;
-            padding: 13px;
-            margin-top: 7px;
-            box-sizing: border-box;
-            border: 2px solid #bbdefb;
-            border-radius: 10px;
-            font-size: 17px;
+            padding: 12px;
+            border: 1px solid #b0c4de;
+            border-radius: 8px;
+            font-size: 16px;
+            background: white;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #1976d2;
+            box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.15);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 18px;
         }
 
         button {
-            width: 100%;
-            margin-top: 20px;
-            padding: 14px;
-            border: none;
-            border-radius: 10px;
-            background: #2196f3;
+            flex: 1;
+            background: #1976d2;
             color: white;
-            font-size: 17px;
+            border: none;
+            padding: 13px 18px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
+            min-height: 46px;
         }
 
         button:hover {
             background: #0d47a1;
         }
 
-        .result {
-            margin-top: 20px;
-            padding: 15px;
-            background: #e3f2fd;
-            border-radius: 10px;
-            font-size: 18px;
+        button:focus-visible {
+            outline: 3px solid #ffb300;
+            outline-offset: 2px;
         }
 
-        .back {
-            display: block;
-            margin-top: 20px;
+        .secondary-btn {
+            background: #526477;
+        }
+
+        .secondary-btn:hover {
+            background: #35485b;
+        }
+
+        .home-btn {
+            width: 100%;
+            margin-top: 14px;
+            background: #16803c;
+        }
+
+        .home-btn:hover {
+            background: #0d642d;
+        }
+
+        .result-card {
+            margin-top: 22px;
+            background: #f4f8ff;
+            border: 1px solid #d0e3ff;
+            border-radius: 12px;
+            padding: 18px;
+            text-align: left;
+        }
+
+        .final-highlight {
+            background: #eaf3ff;
+            border-radius: 8px;
+            padding: 14px;
             text-align: center;
-            text-decoration: none;
-            color: #0d47a1;
+            margin-bottom: 14px;
+        }
+
+        .final-highlight span {
+            display: block;
+            font-size: 14px;
+            color: #455a64;
             font-weight: bold;
+            margin-bottom: 4px;
+        }
+
+        .final-highlight strong {
+            font-size: 26px;
+            color: #0d47a1;
+        }
+
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px dashed #cbd5e1;
+            font-size: 15px;
+        }
+
+        .result-row:last-of-type {
+            border-bottom: none;
+        }
+
+        .savings-badge {
+            background: #e8f5e9;
+            border: 1px solid #a5d6a7;
+            color: #1b5e20;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            margin-top: 12px;
+            font-size: 15px;
+        }
+
+        .formula-box {
+            background: #eaf3ff;
+            border-left: 4px solid #1976d2;
+            padding: 12px;
+            border-radius: 6px;
+            font-weight: bold;
+            color: #0d47a1;
+            margin: 12px 0;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #dbe3ee;
+            padding: 12px 0;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-item h3 {
+            color: #174a83;
+            margin-bottom: 5px;
+        }
+
+        .footer {
+            background: #12345a;
+            color: white;
+            text-align: center;
+            padding: 20px 12px;
+            margin-top: 30px;
+        }
+
+        .footer a {
+            color: white;
+            margin: 0 8px;
+        }
+
+        [hidden] {
+            display: none !important;
+        }
+
+        @media (max-width: 480px) {
+            .box,
+            .content-box {
+                padding: 16px;
+            }
+
+            .discount-row,
+            .btn-group {
+                grid-template-columns: 1fr;
+                flex-direction: column;
+            }
+
+            .result-row {
+                flex-direction: column;
+                gap: 2px;
+            }
         }
     </style>
-
 </head>
 
 <body>
 
-    <div class="header">
+    <header class="header">
         <h1>🏷️ Discount Calculator</h1>
-        <p>Calculate discounts and final prices easily</p>
-    </div>
+        <p>Calculate sale discounts, extra coupon discounts, and final payable price easily.</p>
+    </header>
 
-    <div class="container">
+    <main>
+        <section class="box" aria-label="Discount Calculator">
 
-        <div class="card">
+            <h2>Calculate Discount &amp; Savings</h2>
 
-            <label>Original Price</label>
-            <input type="number" id="price" placeholder="Example: 1000">
-
-            <label>Discount (%)</label>
-            <input type="number" id="discount" placeholder="Example: 20">
-
-            <button onclick="calculateDiscount()">Calculate</button>
-
-            <div class="result" id="result">
-                Discount: 0<br>
-                Final Price: 0
+            <div class="form-group">
+                <label for="price">Original Price / MRP (₹)</label>
+                <input type="number" id="price" min="0.01" step="any" placeholder="Example: 1000">
             </div>
 
-        </div>
+            <div class="discount-row">
+                <div class="form-group">
+                    <label for="discount">Discount (%)</label>
+                    <input type="number" id="discount" min="0" max="100" step="any" placeholder="Example: 20">
+                </div>
 
-        <a class="back" href="https://easylifetoolbox.com/">
-            ← Back to EasyLife
-        </a>
+                <div class="form-group">
+                    <label for="extraDiscount">Extra Discount (% Optional)</label>
+                    <input type="number" id="extraDiscount" min="0" max="100" step="any" placeholder="Example: 10">
+                </div>
+            </div>
 
-    </div>
+            <div class="btn-group">
+                <button type="button" onclick="calculateDiscount()">🏷️ Calculate Discount</button>
+                <button type="button" class="secondary-btn" onclick="resetDiscount()">🗑️ Clear</button>
+            </div>
+
+            <div id="resultCard" class="result-card" hidden>
+                <div class="final-highlight">
+                    <span>Final Payable Price</span>
+                    <strong id="finalPriceText">₹0.00</strong>
+                </div>
+
+                <div class="result-row">
+                    <span>Original Price (MRP):</span>
+                    <strong id="origPriceText">₹0.00</strong>
+                </div>
+
+                <div class="result-row">
+                    <span>Primary Discount:</span>
+                    <strong id="primaryDiscText">- ₹0.00</strong>
+                </div>
+
+                <div class="result-row" id="extraDiscRow" hidden>
+                    <span>Extra Discount:</span>
+                    <strong id="extraDiscText">- ₹0.00</strong>
+                </div>
+
+                <div id="savingsBadge" class="savings-badge">
+                    🎉 You Save ₹0.00 (0% Off)
+                </div>
+            </div>
+
+            <button type="button" class="home-btn" onclick="goHome()">🏠 Back to Home</button>
+
+        </section>
+
+        <section class="content-box">
+            <h2>What Is a Discount Calculator?</h2>
+            <p>
+                A discount calculator helps shoppers quickly determine the final price of an item
+                after applying percentage discounts during festive sales, clearance offers, or coupon
+                promotions. EasyLife's Discount Calculator also supports stacked (double) discounts,
+                such as "20% Off + Extra 10% Off", showing your exact total savings.
+            </p>
+        </section>
+
+        <section class="content-box">
+            <h2>How Are Discounts Calculated?</h2>
+            <p><strong>1. Single Discount Formula:</strong></p>
+            <div class="formula-box">
+                Discount Amount = (Original Price × Discount%) / 100 &nbsp;|&nbsp; Final Price = Original Price − Discount Amount
+            </div>
+            <p><strong>2. Double / Stacked Discount Formula:</strong></p>
+            <div class="formula-box">
+                Price After 1st Discount = Original Price − First Discount &nbsp;|&nbsp; Final Price = Price After 1st Discount − Extra Discount
+            </div>
+        </section>
+
+        <section class="content-box">
+            <h2>How to Use This Discount Calculator</h2>
+            <ol>
+                <li>Enter the item's <strong>Original Price (MRP)</strong> in rupees.</li>
+                <li>Enter the main <strong>Discount (%)</strong> offered on the product.</li>
+                <li>If you have an additional bank or coupon discount, enter it in <strong>Extra Discount (%)</strong> (or leave it blank).</li>
+                <li>Click <strong>Calculate Discount</strong> to see the Final Payable Price and Total Savings.</li>
+            </ol>
+        </section>
+
+        <section class="content-box">
+            <h2>Frequently Asked Questions</h2>
+
+            <div class="faq-item">
+                <h3>1. Is "20% + 10% off" the same as 30% off?</h3>
+                <p>No. In stacked discounts, the extra 10% is applied to the already discounted price (not the original MRP), which equals an effective total discount of 28%.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>2. Can I use this tool for wholesale or invoice discounts?</h3>
+                <p>Yes. Shopkeepers and buyers can calculate trade discounts on any price amount accurately.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>3. Is this Discount Calculator free to use?</h3>
+                <p>Yes, it is 100% free and works instantly in your browser on mobile phones and computers.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>EasyLife — Simple &amp; Free Tools for Everyday Life</p>
+        <p>
+            <a href="https://easylifetoolbox.com/">Home</a>
+            <a href="https://easylifetoolbox.com/privacy.html">Privacy Policy</a>
+            <a href="https://easylifetoolbox.com/terms.html">Terms &amp; Conditions</a>
+            <a href="https://easylifetoolbox.com/contact.html">Contact Us</a>
+        </p>
+    </footer>
 
     <script>
-
-        function calculateDiscount() {
-
-            const price = Number(document.getElementById("price").value);
-            const discount = Number(document.getElementById("discount").value);
-
-            const discountAmount = (price * discount) / 100;
-            const finalPrice = price - discountAmount;
-
-            document.getElementById("result").innerHTML =
-                "Discount: ₹" + discountAmount.toFixed(2) +
-                "<br>Final Price: ₹" + finalPrice.toFixed(2);
+        function formatINR(num) {
+            return "₹" + num.toLocaleString("en-IN", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
         }
 
+        function calculateDiscount() {
+            const price = parseFloat(document.getElementById("price").value);
+            const discount = parseFloat(document.getElementById("discount").value);
+            const extraInput = document.getElementById("extraDiscount").value;
+            const extraDiscount = extraInput === "" ? 0 : parseFloat(extraInput);
+
+            if (isNaN(price) || price <= 0) {
+                alert("Please enter a valid Original Price.");
+                return;
+            }
+
+            if (isNaN(discount) || discount < 0 || discount > 100) {
+                alert("Please enter a valid Discount percentage between 0 and 100.");
+                return;
+            }
+
+            if (isNaN(extraDiscount) || extraDiscount < 0 || extraDiscount > 100) {
+                alert("Please enter a valid Extra Discount percentage between 0 and 100.");
+                return;
+            }
+
+            const primaryDiscAmount = (price * discount) / 100;
+            const afterPrimary = price - primaryDiscAmount;
+
+            const extraDiscAmount = (afterPrimary * extraDiscount) / 100;
+            const finalPrice = afterPrimary - extraDiscAmount;
+
+            const totalSavings = primaryDiscAmount + extraDiscAmount;
+            const effectivePct = (totalSavings / price) * 100;
+
+            document.getElementById("finalPriceText").textContent = formatINR(finalPrice);
+            document.getElementById("origPriceText").textContent = formatINR(price);
+            document.getElementById("primaryDiscText").textContent =
+                "- " + formatINR(primaryDiscAmount) + " (" + discount + "%)";
+
+            const extraRow = document.getElementById("extraDiscRow");
+            if (extraDiscount > 0) {
+                extraRow.hidden = false;
+                document.getElementById("extraDiscText").textContent =
+                    "- " + formatINR(extraDiscAmount) + " (" + extraDiscount + "%)";
+            } else {
+                extraRow.hidden = true;
+            }
+
+            document.getElementById("savingsBadge").textContent =
+                "🎉 You Save " + formatINR(totalSavings) + " (" + effectivePct.toFixed(1) + "% Total Off)";
+
+            document.getElementById("resultCard").hidden = false;
+        }
+
+        function resetDiscount() {
+            document.getElementById("price").value = "";
+            document.getElementById("discount").value = "";
+            document.getElementById("extraDiscount").value = "";
+            document.getElementById("resultCard").hidden = true;
+        }
+
+        function goHome() {
+            window.location.href = "https://easylifetoolbox.com/";
+        }
     </script>
 
 </body>
