@@ -1,32 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4584641102876506"
-         crossorigin="anonymous"></script>
-   <!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-WYXT0CE68W"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-WYXT0CE68W');
-</script>
-    <title>EasyLife - Free Online PDF, Image & Calculator Tools</title>
-    
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description" content="EasyLife offers free online PDF, image, calculator, translator and utility tools.">
-<link rel="canonical" href="https://easylifetoolbox.com/">
-  <meta property="og:title" content="EasyLife - Free Online Tools">
-<meta property="og:description" content="Simple, fast and free online PDF, image, calculator and utility tools.">
-<meta property="og:url" content="https://easylifetoolbox.com/">
-<meta property="og:type" content="website">
-<meta property="og:image" content="https://easylifetoolbox.com/icon-512.png">    
-    <link rel="manifest" href="manifest.json">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4584641102876506"
+        crossorigin="anonymous"></script>
 
-    <style>        * {
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WYXT0CE68W"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-WYXT0CE68W');
+    </script>
+
+    <title>EasyLife - Free Online PDF, Image, Calculator &amp; Utility Tools</title>
+    <meta name="description" content="EasyLife offers 17+ free, fast, and privacy-friendly online tools for PDF conversion, image resizing, EMI, GST, age, percentage calculations, QR codes, voice typing, and translation.">
+    <link rel="canonical" href="https://easylifetoolbox.com/">
+
+    <meta property="og:title" content="EasyLife - Free Online PDF, Image &amp; Calculator Tools">
+    <meta property="og:description" content="Simple, fast and free online PDF, image, calculator and utility tools that run directly in your browser.">
+    <meta property="og:url" content="https://easylifetoolbox.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://easylifetoolbox.com/icon-512.png">
+
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="icon-192.png">
+
+    <style>
+        * {
             box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
@@ -34,10 +43,10 @@ gtag('config', 'G-WYXT0CE68W');
             font-family: Arial, sans-serif;
             background: #f4f8ff;
             color: #1f2937;
+            line-height: 1.6;
         }
 
         /* HEADER */
-
         .header {
             background: linear-gradient(135deg, #0d47a1, #1976d2, #42a5f5);
             color: white;
@@ -46,30 +55,57 @@ gtag('config', 'G-WYXT0CE68W');
         }
 
         .logo {
-            font-size: 38px;
+            font-size: clamp(30px, 6vw, 40px);
             font-weight: bold;
             margin-bottom: 8px;
         }
 
         .tagline {
             font-size: 16px;
-            margin-bottom: 25px;
+            margin-bottom: 24px;
             opacity: 0.95;
+        }
+
+        .search-wrap {
+            position: relative;
+            max-width: 540px;
+            margin: 0 auto;
         }
 
         .search {
             width: 100%;
-            max-width: 520px;
-            padding: 16px 20px;
+            padding: 16px 45px 16px 20px;
             border: none;
             border-radius: 30px;
             font-size: 16px;
             outline: none;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .search:focus {
+            box-shadow: 0 0 0 3px #ffb300, 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .clear-search {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #e2e8f0;
+            color: #334155;
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
         }
 
         /* MAIN */
-
         .container {
             max-width: 1050px;
             margin: 35px auto;
@@ -81,30 +117,47 @@ gtag('config', 'G-WYXT0CE68W');
             margin-bottom: 35px;
         }
 
+        .welcome h1,
         .welcome h2 {
             margin: 0;
             color: #0d47a1;
-            font-size: 28px;
+            font-size: clamp(22px, 4vw, 28px);
         }
 
         .welcome p {
-    color: #334155;
-    margin-top: 8px;
-}
+            color: #334155;
+            margin-top: 8px;
+        }
+
+        .badges {
+            margin-top: 18px;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            padding: 9px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+        }
 
         /* CATEGORY */
-
-        .category {
-            margin-bottom: 35px;
+        .info-section,
+        .tool-category {
+            margin-bottom: 36px;
         }
 
         .category-title {
             display: flex;
             align-items: center;
             gap: 10px;
-            margin-bottom: 15px;
+            margin-bottom: 16px;
         }
 
+        .category-title h2,
         .category-title h3 {
             margin: 0;
             color: #0d47a1;
@@ -117,8 +170,53 @@ gtag('config', 'G-WYXT0CE68W');
             background: #dbeafe;
         }
 
-        /* TOOLS */
+        .four-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+        }
 
+        .mini-card {
+            background: white;
+            padding: 18px 12px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid #e5edf8;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .mini-card.clickable {
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .mini-card.clickable:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(13, 71, 161, 0.14);
+            border-color: #90caf9;
+        }
+
+        .mini-icon {
+            font-size: 26px;
+        }
+
+        .mini-title {
+            font-weight: bold;
+            margin-top: 7px;
+            color: #0d47a1;
+            font-size: 15px;
+        }
+
+        .mini-sub {
+            font-size: 13px;
+            color: #475569;
+            margin-top: 4px;
+        }
+
+        /* TOOLS */
         .tools {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -129,19 +227,26 @@ gtag('config', 'G-WYXT0CE68W');
             background: white;
             padding: 20px;
             border-radius: 16px;
-            box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.07);
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: space-between;
             transition: all 0.25s ease;
             border: 1px solid #e5edf8;
+            text-decoration: none;
+            color: inherit;
         }
 
         .tool:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 28px rgba(13,71,161,0.18);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 26px rgba(13, 71, 161, 0.16);
             border-color: #90caf9;
+        }
+
+        .tool:focus-visible {
+            outline: 3px solid #ffb300;
+            outline-offset: 2px;
         }
 
         .tool-left {
@@ -169,22 +274,59 @@ gtag('config', 'G-WYXT0CE68W');
         }
 
         .tool-description {
-            font-size: 12px;
+            font-size: 13px;
             color: #64748b;
-            margin-top: 4px;
+            margin-top: 3px;
         }
 
         .tool-arrow {
-            font-size: 22px;
+            font-size: 20px;
             color: #1976d2;
             font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .no-results {
+            display: none;
+            text-align: center;
+            background: white;
+            padding: 30px 20px;
+            border-radius: 16px;
+            border: 1px solid #dbeafe;
+            margin: 20px 0;
+        }
+
+        .no-results button {
+            background: #1976d2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .about-box {
+            background: white;
+            padding: 24px;
+            border-radius: 16px;
+            border: 1px solid #e5edf8;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+            margin-top: 40px;
+        }
+
+        .about-box h2 {
+            color: #0d47a1;
+            margin-top: 0;
+            font-size: 22px;
         }
 
         /* FOOTER */
-
         .footer {
             margin-top: 50px;
-            background: #0d47a1;
+            background: #12345a;
             color: white;
             text-align: center;
             padding: 28px 15px;
@@ -195,21 +337,27 @@ gtag('config', 'G-WYXT0CE68W');
         }
 
         .footer p {
-            margin: 5px;
+            margin: 6px;
             font-size: 14px;
-            opacity: 0.9;
+            opacity: 0.92;
+        }
+
+        .footer a {
+            color: white;
+            margin: 0 8px;
+            text-decoration: underline;
         }
 
         /* MOBILE */
+        @media (max-width: 720px) {
+            .four-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
 
         @media (max-width: 650px) {
-
             .header {
                 padding: 35px 15px;
-            }
-
-            .logo {
-                font-size: 32px;
             }
 
             .container {
@@ -221,885 +369,435 @@ gtag('config', 'G-WYXT0CE68W');
                 grid-template-columns: 1fr;
             }
 
+            .category-title h2,
             .category-title h3 {
                 font-size: 19px;
             }
 
             .tool {
-                padding: 18px;
+                padding: 16px;
             }
-
         }
-
     </style>
-
 </head>
 
 <body>
 
-
 <!-- HEADER -->
+<header class="header">
+    <div class="logo">EasyLife ❤️</div>
+    <div class="tagline">Simple, Fast &amp; Free Online Tools for Everyday Life</div>
 
-<div class="header">
-
-    <div class="logo">
-        EasyLife ❤️
+    <div class="search-wrap">
+        <input
+            id="searchBox"
+            class="search"
+            type="text"
+            aria-label="Search tools"
+            placeholder="🔍 Search a tool (e.g. PDF, EMI, GST, Resize, QR)..."
+            oninput="searchTools()"
+        >
+        <button type="button" id="clearSearchBtn" class="clear-search" onclick="clearSearch()" aria-label="Clear search">✕</button>
     </div>
-
-    <div class="tagline">
-        Simple & Free Tools for Everyday Life
-    </div>
-
-    <input
-        id="searchBox"
-        class="search"
-        type="text"
-        placeholder="🔍 Search a tool..."
-        oninput="searchTools()"
-    >
-
-</div>
-
+</header>
 
 <!-- MAIN -->
-
 <main class="container">
 
     <section class="welcome">
-    <h2>Everything You Need, In One Place 🚀</h2>
-
-    <p>
-        EasyLife brings simple, fast and free online tools for PDFs,
-        images, calculators, translation, QR codes and everyday tasks.
-    </p>
-
-    <p>
-        No complicated setup. Just choose a tool and get started.
-    </p>
-
-    <div style="
-        margin-top:20px;
-        display:flex;
-        justify-content:center;
-        gap:12px;
-        flex-wrap:wrap;
-    ">
-        <span style="
-            background:#e3f2fd;
-            color:#0d47a1;
-            padding:10px 16px;
-            border-radius:20px;
-            font-weight:bold;
-        ">
-            🧰 17+ Free Tools
-        </span>
-
-        <span style="
-            background:#e8f5e9;
-            color:#1b5e20;
-            padding:10px 16px;
-            border-radius:20px;
-            font-weight:bold;
-        ">
-            ⚡ Fast & Simple
-        </span>
-
-        <span style="
-            background:#fff3e0;
-            color:#e65100;
-            padding:10px 16px;
-            border-radius:20px;
-            font-weight:bold;
-        ">
-            📱 Mobile Friendly
-        </span>
-    </div>
-</section>
-    <!-- ఇక్కడ నీ existing tools code ఉంటుంది -->
-<!-- QUICK CATEGORIES -->
-
-<div class="category">
-
-    <div class="category-title">
-        <h3>⚡ Quick Categories</h3>
-        <div class="category-line"></div>
-    </div>
-
-    <div style="
-        display:grid;
-        grid-template-columns:repeat(4,1fr);
-        gap:14px;
-    ">
-
-        <div onclick="document.getElementById('searchBox').value='PDF'; searchTools();"
-             style="
-                background:white;
-                padding:18px;
-                border-radius:15px;
-                text-align:center;
-                cursor:pointer;
-                border:1px solid #e5edf8;
-                box-shadow:0 4px 14px rgba(0,0,0,0.06);
-             ">
-            📄
-            <div style="font-weight:bold; margin-top:7px;">PDF Tools</div>
-        </div>
-
-        <div onclick="document.getElementById('searchBox').value='Image'; searchTools();"
-             style="
-                background:white;
-                padding:18px;
-                border-radius:15px;
-                text-align:center;
-                cursor:pointer;
-                border:1px solid #e5edf8;
-                box-shadow:0 4px 14px rgba(0,0,0,0.06);
-             ">
-            🖼️
-            <div style="font-weight:bold; margin-top:7px;">Image Tools</div>
-        </div>
-
-        <div onclick="document.getElementById('searchBox').value='Calculator'; searchTools();"
-             style="
-                background:white;
-                padding:18px;
-                border-radius:15px;
-                text-align:center;
-                cursor:pointer;
-                border:1px solid #e5edf8;
-                box-shadow:0 4px 14px rgba(0,0,0,0.06);
-             ">
-            🧮
-            <div style="font-weight:bold; margin-top:7px;">Calculators</div>
-        </div>
-
-        <div onclick="document.getElementById('searchBox').value='Utility'; searchTools();"
-             style="
-                background:white;
-                padding:18px;
-                border-radius:15px;
-                text-align:center;
-                cursor:pointer;
-                border:1px solid #e5edf8;
-                box-shadow:0 4px 14px rgba(0,0,0,0.06);
-             ">
-            🛠️
-            <div style="font-weight:bold; margin-top:7px;">Utility Tools</div>
-        </div>
-
-    </div>
-
-</div>
-<!-- WHY CHOOSE EASYLIFE -->
-
-<div class="category">
-
-    <div class="category-title">
-        <h3>💙 Why Choose EasyLife?</h3>
-        <div class="category-line"></div>
-    </div>
-
-    <div style="
-        display:grid;
-        grid-template-columns:repeat(4,1fr);
-        gap:14px;
-    ">
-
-        <div style="
-            background:white;
-            padding:18px;
-            border-radius:15px;
-            text-align:center;
-            border:1px solid #e5edf8;
-        ">
-            ⚡
-            <div style="font-weight:bold;margin-top:7px;">
-                Fast
-            </div>
-            <div style="font-size:13px;margin-top:5px;">
-                Quick and simple tools
-            </div>
-        </div>
-
-        <div style="
-            background:white;
-            padding:18px;
-            border-radius:15px;
-            text-align:center;
-            border:1px solid #e5edf8;
-        ">
-            🆓
-            <div style="font-weight:bold;margin-top:7px;">
-                Free
-            </div>
-            <div style="font-size:13px;margin-top:5px;">
-                Useful tools at no cost
-            </div>
-        </div>
-
-        <div style="
-            background:white;
-            padding:18px;
-            border-radius:15px;
-            text-align:center;
-            border:1px solid #e5edf8;
-        ">
-            📱
-            <div style="font-weight:bold;margin-top:7px;">
-                Mobile Friendly
-            </div>
-            <div style="font-size:13px;margin-top:5px;">
-                Works on phones and computers
-            </div>
-        </div>
-
-        <div style="
-            background:white;
-            padding:18px;
-            border-radius:15px;
-            text-align:center;
-            border:1px solid #e5edf8;
-        ">
-            🔒
-            <div style="font-weight:bold;margin-top:7px;">
-                Easy to Use
-            </div>
-            <div style="font-size:13px;margin-top:5px;">
-                Simple and beginner friendly
-            </div>
-        </div>
-
-    </div>
-
-</div>
-    <div class="welcome">
-
-        <h2>🧰 Explore Our Tools</h2>
-
+        <h1>Everything You Need, In One Place 🚀</h1>
         <p>
-            Simple, fast and useful tools for everyday needs
+            EasyLife brings simple, fast and free online tools for PDFs,
+            images, financial calculators, translation, QR codes and everyday tasks.
         </p>
+        <p>No sign-up or installation required. Just pick a tool and get started.</p>
 
+        <div class="badges">
+            <span class="badge" style="background:#e3f2fd; color:#0d47a1;">🧰 17 Free Tools</span>
+            <span class="badge" style="background:#e8f5e9; color:#1b5e20;">⚡ 100% Browser Based</span>
+            <span class="badge" style="background:#fff3e0; color:#e65100;">📱 Mobile Friendly</span>
+        </div>
+    </section>
+
+    <!-- QUICK CATEGORIES -->
+    <section class="info-section" aria-label="Quick Categories">
+        <div class="category-title">
+            <h2>⚡ Quick Categories</h2>
+            <div class="category-line"></div>
+        </div>
+
+        <div class="four-grid">
+            <a href="#pdf-tools" class="mini-card clickable">
+                <div class="mini-icon">📄</div>
+                <div class="mini-title">PDF Tools</div>
+                <div class="mini-sub">4 Tools</div>
+            </a>
+
+            <a href="#image-tools" class="mini-card clickable">
+                <div class="mini-icon">🖼️</div>
+                <div class="mini-title">Image Tools</div>
+                <div class="mini-sub">2 Tools</div>
+            </a>
+
+            <a href="#calculators" class="mini-card clickable">
+                <div class="mini-icon">🧮</div>
+                <div class="mini-title">Calculators</div>
+                <div class="mini-sub">6 Tools</div>
+            </a>
+
+            <a href="#utility-tools" class="mini-card clickable">
+                <div class="mini-icon">🛠️</div>
+                <div class="mini-title">Utility Tools</div>
+                <div class="mini-sub">5 Tools</div>
+            </a>
+        </div>
+    </section>
+
+    <!-- WHY CHOOSE EASYLIFE -->
+    <section class="info-section" aria-label="Why Choose EasyLife">
+        <div class="category-title">
+            <h2>💙 Why Choose EasyLife?</h2>
+            <div class="category-line"></div>
+        </div>
+
+        <div class="four-grid">
+            <div class="mini-card">
+                <div class="mini-icon">⚡</div>
+                <div class="mini-title">Fast</div>
+                <div class="mini-sub">Instant results with zero lag</div>
+            </div>
+
+            <div class="mini-card">
+                <div class="mini-icon">🆓</div>
+                <div class="mini-title">100% Free</div>
+                <div class="mini-sub">All tools free with no limits</div>
+            </div>
+
+            <div class="mini-card">
+                <div class="mini-icon">📱</div>
+                <div class="mini-title">Mobile Ready</div>
+                <div class="mini-sub">Works smoothly on any device</div>
+            </div>
+
+            <div class="mini-card">
+                <div class="mini-icon">🔒</div>
+                <div class="mini-title">Privacy First</div>
+                <div class="mini-sub">Files stay safely in your browser</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="welcome">
+        <h2>🧰 Explore All Tools</h2>
+        <p>Click any tool below to open it immediately</p>
     </div>
 
+    <div id="noResults" class="no-results">
+        <h3>No matching tools found 🔍</h3>
+        <p>Try searching with another keyword like PDF, Image, EMI, GST, or QR.</p>
+        <button type="button" onclick="clearSearch()">Show All Tools</button>
+    </div>
 
     <!-- PDF & DOCUMENT TOOLS -->
-
-    <div class="category">
-
+    <section id="pdf-tools" class="tool-category">
         <div class="category-title">
-
-            <h3>📄 PDF & Document Tools</h3>
-
+            <h3>📄 PDF &amp; Document Tools</h3>
             <div class="category-line"></div>
-
         </div>
-
 
         <div class="tools">
-
-
-            <div class="tool"
-                 onclick="window.location.href='photo-pdf.html'">
-
+            <a class="tool" href="photo-pdf.html">
                 <div class="tool-left">
-
                     <div class="icon">📄</div>
-
                     <div>
-
-                        <div class="tool-name">
-                            Photo → PDF
-                        </div>
-
-                        <div class="tool-description">
-                            Convert photos into PDF
-                        </div>
-
+                        <div class="tool-name">Photo → PDF</div>
+                        <div class="tool-description">Combine JPG/PNG photos into one PDF with A4/Letter &amp; compression options</div>
                     </div>
-
                 </div>
-
                 <div class="tool-arrow">→</div>
+            </a>
 
-            </div>
-
-
-            <div class="tool"
-                 onclick="window.location.href='pdf-image.html'">
-
+            <a class="tool" href="pdf-image.html">
                 <div class="tool-left">
-
                     <div class="icon">🖼️</div>
-
                     <div>
-
-                        <div class="tool-name">
-                            PDF → Image
-                        </div>
-
-                        <div class="tool-description">
-                            Convert PDF pages to images
-                        </div>
-
+                        <div class="tool-name">PDF → Image</div>
+                        <div class="tool-description">Convert PDF pages into PNG or JPG images in standard or HD quality</div>
                     </div>
-
                 </div>
-
                 <div class="tool-arrow">→</div>
+            </a>
 
-            </div>
-
-
-            <div class="tool"
-                 onclick="window.location.href='pdf-compress.html'">
-
+            <a class="tool" href="pdf-compress.html">
                 <div class="tool-left">
-
                     <div class="icon">📦</div>
-
                     <div>
-
-                        <div class="tool-name">
-                            PDF Compress
-                        </div>
-
-                        <div class="tool-description">
-                            Reduce PDF file size
-                        </div>
-
+                        <div class="tool-name">PDF Optimizer &amp; Compress</div>
+                        <div class="tool-description">Optimize PDF structure and compare file size savings</div>
                     </div>
-
                 </div>
-
                 <div class="tool-arrow">→</div>
+            </a>
 
-            </div>
-
-
-            <div class="tool"
-     onclick="window.location.href='document-scanner.html'">
-
+            <a class="tool" href="document-scanner.html">
                 <div class="tool-left">
-
                     <div class="icon">📑</div>
-
                     <div>
-
-                        <div class="tool-name">
-                            Document Scanner
-                        </div>
-
-                        <div class="tool-description">
-                            Scan documents easily
-                        </div>
-
+                        <div class="tool-name">Document Scanner</div>
+                        <div class="tool-description">Crop, rotate, and apply Black &amp; White scan filters to document photos</div>
                     </div>
-
                 </div>
-
                 <div class="tool-arrow">→</div>
-
-            </div>
-
-
+            </a>
         </div>
-
-    </div>
-
+    </section>
 
     <!-- IMAGE TOOLS -->
-
-    <div class="category">
-
+    <section id="image-tools" class="tool-category">
         <div class="category-title">
-
             <h3>🖼️ Image Tools</h3>
-
             <div class="category-line"></div>
-
         </div>
-
 
         <div class="tools">
-
-
-            <div class="tool"
-                 onclick="window.location.href='photo-resize.html'">
-
+            <a class="tool" href="photo-resize.html">
                 <div class="tool-left">
-
                     <div class="icon">📏</div>
-
                     <div>
-
-                        <div class="tool-name">
-                            Photo Resize
-                        </div>
-
-                        <div class="tool-description">
-                            Resize your photos
-                        </div>
-
+                        <div class="tool-name">Photo Resizer</div>
+                        <div class="tool-description">Resize photos by custom pixels or presets and download as JPG or PNG</div>
                     </div>
-
                 </div>
-
                 <div class="tool-arrow">→</div>
+            </a>
 
-            </div>
-
-
-            <div class="tool"
-                 onclick="window.location.href='image-converter.html'">
-
+            <a class="tool" href="image-converter.html">
                 <div class="tool-left">
-
-                    <div class="icon">🖼️</div>
-
+                    <div class="icon">🔄</div>
                     <div>
-
-                        <div class="tool-name">
-                            Image → JPG/PNG
-                        </div>
-
-                        <div class="tool-description">
-                            Convert image formats
-                        </div>
-
+                        <div class="tool-name">Image Converter (JPG/PNG/WebP)</div>
+                        <div class="tool-description">Convert images between JPG, PNG, and WebP formats instantly</div>
                     </div>
-
                 </div>
-
                 <div class="tool-arrow">→</div>
-
-            </div>
-
-
+            </a>
         </div>
-
-    </div>
-
+    </section>
 
     <!-- CALCULATORS -->
-
-    <div class="category">
-
+    <section id="calculators" class="tool-category">
         <div class="category-title">
-
             <h3>🧮 Calculators</h3>
-
             <div class="category-line"></div>
-
         </div>
-
 
         <div class="tools">
-
-
-            <div class="tool"
-                 onclick="window.location.href='emi.html'">
-
+            <a class="tool" href="emi.html">
                 <div class="tool-left">
-
-                    <div class="icon">🧮</div>
-
+                    <div class="icon">🏦</div>
                     <div>
-
-                        <div class="tool-name">
-                            EMI Calculator
-                        </div>
-
-                        <div class="tool-description">
-                            Calculate monthly EMI
-                        </div>
-
+                        <div class="tool-name">EMI Calculator</div>
+                        <div class="tool-description">Calculate monthly loan EMI, total interest, and principal breakdown</div>
                     </div>
-
                 </div>
-
                 <div class="tool-arrow">→</div>
+            </a>
 
-            </div>
-
-
-            <div class="tool"
-                 onclick="window.location.href='interest.html'">
-
+            <a class="tool" href="interest.html">
                 <div class="tool-left">
-
                     <div class="icon">💰</div>
-
                     <div>
-
-                        <div class="tool-name">
-                            Interest Calculator
-                        </div>
-
-                        <div class="tool-description">
-                            Calculate simple interest
-                        </div>
-
+                        <div class="tool-name">Interest Calculator</div>
+                        <div class="tool-description">Calculate Simple &amp; Compound Interest for years, months, or days</div>
                     </div>
-
                 </div>
-
                 <div class="tool-arrow">→</div>
+            </a>
 
-            </div>
-
-
-            <div class="tool"
-                 onclick="window.location.href='age.html'">
-
+            <a class="tool" href="age.html">
                 <div class="tool-left">
-
                     <div class="icon">🎂</div>
-
                     <div>
-
-                        <div class="tool-name">
-                            Age Calculator
-                        </div>
-
-                        <div class="tool-description">
-                            Calculate your exact age
-                        </div>
-
+                        <div class="tool-name">Age Calculator</div>
+                        <div class="tool-description">Find exact age in years, months, days, weeks, and next birthday</div>
                     </div>
-
                 </div>
-
                 <div class="tool-arrow">→</div>
+            </a>
 
-            </div>
-
-
-            <div class="tool"
-                 onclick="window.location.href='gst.html'">
-
+            <a class="tool" href="gst.html">
                 <div class="tool-left">
-
-                    <div class="icon">💰</div>
-
+                    <div class="icon">🧾</div>
                     <div>
-
-                        <div class="tool-name">
-                            GST Calculator
-                        </div>
-
-                        <div class="tool-description">
-                            Calculate GST amounts
-                        </div>
-
+                        <div class="tool-name">GST Calculator</div>
+                        <div class="tool-description">Add or remove GST with instant CGST, SGST, and IGST breakdown</div>
                     </div>
-
                 </div>
-
                 <div class="tool-arrow">→</div>
+            </a>
 
-            </div>
-
-
-            <div class="tool"
-                 onclick="window.location.href='percentage.html'">
-
+            <a class="tool" href="percentage.html">
                 <div class="tool-left">
-
                     <div class="icon">📊</div>
-
                     <div>
-
-                        <div class="tool-name">
-                            Percentage Calculator
-                        </div>
-
-                        <div class="tool-description">
-                            Calculate percentages quickly
-                        </div>
-
+                        <div class="tool-name">Percentage Calculator</div>
+                        <div class="tool-description">Calculate X% of Y, exam marks percentage, and % increase/decrease</div>
                     </div>
-
                 </div>
-
                 <div class="tool-arrow">→</div>
+            </a>
 
-            </div>
-
-
-            <div class="tool"
-                 onclick="window.location.href='discount.html'">
-
+            <a class="tool" href="discount.html">
                 <div class="tool-left">
-
                     <div class="icon">🏷️</div>
-
                     <div>
-
-                        <div class="tool-name">
-                            Discount Calculator
-                        </div>
-
-                        <div class="tool-description">
-                            Calculate discounts and prices
-                        </div>
-
+                        <div class="tool-name">Discount Calculator</div>
+                        <div class="tool-description">Calculate sale prices, stacked discounts, and total money saved</div>
                     </div>
-
                 </div>
-
                 <div class="tool-arrow">→</div>
-
-            </div>
-
-
+            </a>
         </div>
-
-    </div>
-
+    </section>
 
     <!-- UTILITY TOOLS -->
-
-    <div class="category">
-
+    <section id="utility-tools" class="tool-category">
         <div class="category-title">
-
             <h3>🛠️ Utility Tools</h3>
-
             <div class="category-line"></div>
-
         </div>
-
 
         <div class="tools">
-
-
-            <div class="tool"
-                 onclick="window.location.href='translator.html'">
-
+            <a class="tool" href="translator.html">
                 <div class="tool-left">
-
                     <div class="icon">🌐</div>
-
                     <div>
-
-                        <div class="tool-name">
-                            Telugu ↔ English Translator
-                        </div>
-
-                        <div class="tool-description">
-                            Translate Telugu and English
-                        </div>
-
+                        <div class="tool-name">Telugu ↔ English Translator</div>
+                        <div class="tool-description">Translate between Telugu and English text quickly</div>
                     </div>
-
                 </div>
-
                 <div class="tool-arrow">→</div>
+            </a>
 
-            </div>
-
-
-            <div class="tool"
-                 onclick="window.location.href='qr.html'">
-
+            <a class="tool" href="qr.html">
                 <div class="tool-left">
-
                     <div class="icon">📱</div>
-
                     <div>
-
-                        <div class="tool-name">
-                            QR Code Generator
-                        </div>
-
-                        <div class="tool-description">
-                            Create QR codes instantly
-                        </div>
-
+                        <div class="tool-name">QR Code Generator</div>
+                        <div class="tool-description">Create custom colored QR codes and download high-res PNGs</div>
                     </div>
-
                 </div>
-
                 <div class="tool-arrow">→</div>
+            </a>
 
-            </div>
-
-
-            <div class="tool"
-                 onclick="window.location.href='word-counter.html'">
-
+            <a class="tool" href="word-counter.html">
                 <div class="tool-left">
-
                     <div class="icon">📝</div>
-
                     <div>
-
-                        <div class="tool-name">
-                            Word Counter
-                        </div>
-
-                        <div class="tool-description">
-                            Count words and characters
-                        </div>
-
+                        <div class="tool-name">Word Counter</div>
+                        <div class="tool-description">Count words, characters, sentences, paragraphs, and reading time</div>
                     </div>
-
                 </div>
-
                 <div class="tool-arrow">→</div>
+            </a>
 
-            </div>
-
-
-            <div class="tool"
-                 onclick="window.location.href='password.html'">
-
+            <a class="tool" href="password.html">
                 <div class="tool-left">
-
                     <div class="icon">🔐</div>
-
                     <div>
-
-                        <div class="tool-name">
-                            Password Generator
-                        </div>
-
-                        <div class="tool-description">
-                            Generate strong passwords
-                        </div>
-
+                        <div class="tool-name">Password Generator</div>
+                        <div class="tool-description">Generate cryptographically strong random passwords with strength meter</div>
                     </div>
-
                 </div>
-
                 <div class="tool-arrow">→</div>
+            </a>
 
-            </div>
-
-<div class="tool"
-     onclick="window.location.href='voice-text.html'">
-
-    <div class="tool-left">
-
-        <div class="icon">🎤</div>
-
-        <div>
-
-            <div class="tool-name">
-                Voice → Text
-            </div>
-
-            <div class="tool-description">
-                Convert your voice into text
-            </div>
-
+            <a class="tool" href="voice-text.html">
+                <div class="tool-left">
+                    <div class="icon">🎤</div>
+                    <div>
+                        <div class="tool-name">Voice → Text</div>
+                        <div class="tool-description">Speech-to-text typing in Telugu, English, Hindi, and more</div>
+                    </div>
+                </div>
+                <div class="tool-arrow">→</div>
+            </a>
         </div>
+    </section>
 
-    </div>
-
-    <div class="tool-arrow">→</div>
-
-</div>
-        </div>
-
-    </div>
-
+    <!-- ABOUT SECTION FOR SEO -->
+    <section class="about-box">
+        <h2>About EasyLife Online Toolbox</h2>
+        <p>
+            EasyLife (<strong>easylifetoolbox.com</strong>) is a free, all-in-one collection of everyday
+            digital utilities designed for students, professionals, business owners, and mobile users.
+            Unlike traditional online tools that require uploading your sensitive files to remote servers,
+            EasyLife processes PDFs, photos, and calculations directly inside your web browser—ensuring
+            instant speed and complete privacy.
+        </p>
+    </section>
 
 </main>
 
-
 <!-- FOOTER -->
-
-<div class="footer">
-
+<footer class="footer">
     <h3>EasyLife ❤️</h3>
-
+    <p>Simple &amp; Free Tools for Everyday Life</p>
+    <p>© 2026 EasyLife. All rights reserved.</p>
     <p>
-        Simple & Free Tools for Everyday Life
+        <a href="about.html">About Us</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms &amp; Conditions</a>
+        <a href="contact.html">Contact Us</a>
     </p>
-
-    <p>
-        © 2026 EasyLife. All rights reserved.
-    </p>
-
-  <p>
-    <a href="about.html" style="color:white; margin:0 8px;">
-        About Us
-    </a>
-
-    <a href="privacy.html" style="color:white; margin:0 8px;">
-        Privacy Policy
-    </a>
-
-    <a href="terms.html" style="color:white; margin:0 8px;">
-        Terms & Conditions
-    </a>
-
-    <a href="contact.html" style="color:white; margin:0 8px;">
-        Contact Us
-    </a>
-</p>
-
-</div>
-
+</footer>
 
 <script>
+    function searchTools() {
+        const searchBox = document.getElementById("searchBox");
+        const clearBtn = document.getElementById("clearSearchBtn");
+        const query = searchBox.value.toLowerCase().trim();
 
-function searchTools() {
+        clearBtn.style.display = query.length > 0 ? "flex" : "none";
 
-    const query =
-        document
-        .getElementById("searchBox")
-        .value
-        .toLowerCase()
-        .trim();
+        const categories = document.querySelectorAll(".tool-category");
+        let totalVisible = 0;
 
-    const categories =
-        document.querySelectorAll(".category");
+        categories.forEach(function (category) {
+            const tools = category.querySelectorAll(".tool");
+            let visibleInCategory = 0;
 
-    categories.forEach(function(category) {
+            tools.forEach(function (tool) {
+                const text = tool.innerText.toLowerCase();
+                if (text.includes(query)) {
+                    tool.style.display = "flex";
+                    visibleInCategory++;
+                    totalVisible++;
+                } else {
+                    tool.style.display = "none";
+                }
+            });
 
-        const tools =
-            category.querySelectorAll(".tool");
-
-        let visibleTools = 0;
-
-        tools.forEach(function(tool) {
-
-            const text =
-                tool.innerText.toLowerCase();
-
-            if (text.includes(query)) {
-
-                tool.style.display = "flex";
-
-                visibleTools++;
-
-            } else {
-
-                tool.style.display = "none";
-
-            }
-
+            category.style.display = visibleInCategory === 0 ? "none" : "block";
         });
 
-        if (visibleTools === 0) {
+        document.getElementById("noResults").style.display = totalVisible === 0 ? "block" : "none";
+    }
 
-            category.style.display = "none";
+    function clearSearch() {
+        const searchBox = document.getElementById("searchBox");
+        searchBox.value = "";
+        searchTools();
+        searchBox.focus();
+    }
 
-        } else {
-
-            category.style.display = "block";
-
-        }
-
-    });
-
-}
-
+    // Register PWA Service Worker
+    if ("serviceWorker" in navigator) {
+        window.addEventListener("load", function () {
+            navigator.serviceWorker.register("sw.js").catch(function () {});
+        });
+    }
 </script>
-
 
 </body>
 </html>
