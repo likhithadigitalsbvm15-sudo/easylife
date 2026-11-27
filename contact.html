@@ -1,123 +1,343 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4584641102876506"
-         crossorigin="anonymous"></script>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Contact Us - EasyLife ❤️</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4584641102876506"
+        crossorigin="anonymous"></script>
 
-    <meta name="description" content="Contact EasyLife for questions, feedback and suggestions.">
+    <title>Contact Us - EasyLife Online Toolbox</title>
+    <link rel="canonical" href="https://easylifetoolbox.com/contact.html">
+    <meta name="description" content="Contact EasyLife (easylifetoolbox.com) for questions, feedback, bug reports, or tool suggestions. Reach out to our team easily.">
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: #f4f8ff;
-            color: #222;
+            background: #f2f7ff;
+            color: #263238;
+            line-height: 1.7;
         }
 
-        header {
-            background: #0d47a1;
+        .header {
+            background: linear-gradient(135deg, #0d47a1, #1976d2, #42a5f5);
             color: white;
             text-align: center;
-            padding: 25px 15px;
+            padding: 32px 16px;
         }
 
-        header h1 {
+        .header h1 {
+            margin: 0 0 8px;
+            font-size: clamp(26px, 5vw, 34px);
+        }
+
+        .header p {
             margin: 0;
+            opacity: 0.95;
         }
 
         .container {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 0 20px;
+            width: calc(100% - 24px);
+            max-width: 780px;
+            margin: 28px auto;
         }
 
         .card {
             background: white;
             padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-radius: 14px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
         }
 
         h2 {
             color: #0d47a1;
+            margin-top: 0;
+            font-size: 23px;
         }
 
-        p {
-            line-height: 1.7;
+        h3 {
+            color: #1559a6;
+            margin-top: 24px;
+            margin-bottom: 10px;
+            font-size: 18px;
         }
 
-        .email {
+        .email-box {
+            background: #f4f8ff;
+            border: 1px solid #d0e3ff;
+            border-radius: 10px;
+            padding: 16px;
+            margin: 18px 0;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .email-link {
             font-weight: bold;
+            font-size: 16px;
             color: #0d47a1;
+            text-decoration: none;
+            overflow-wrap: anywhere;
+        }
+
+        .email-link:hover {
+            text-decoration: underline;
+        }
+
+        .copy-btn {
+            background: #1976d2;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            min-height: 40px;
+        }
+
+        .copy-btn:hover {
+            background: #0d47a1;
+        }
+
+        #copyStatus {
+            font-size: 14px;
+            font-weight: bold;
+            color: #16803c;
+            margin: -8px 0 14px;
+            min-height: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            font-size: 14px;
+            color: #0d47a1;
+            margin-bottom: 6px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #b0c4de;
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: Arial, sans-serif;
+            background: white;
+        }
+
+        textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #1976d2;
+            box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.15);
+        }
+
+        .btn-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .submit-btn {
+            flex: 2;
+            background: #16803c;
+            color: white;
+            border: none;
+            padding: 13px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            min-height: 46px;
+        }
+
+        .submit-btn:hover {
+            background: #0d642d;
+        }
+
+        .home-btn {
+            flex: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #526477;
+            color: white;
+            padding: 13px 18px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            min-height: 46px;
+        }
+
+        .home-btn:hover {
+            background: #35485b;
         }
 
         .footer {
-            margin-top: 50px;
-            background: #0d47a1;
+            margin-top: 45px;
+            background: #12345a;
             color: white;
             text-align: center;
-            padding: 28px 15px;
+            padding: 24px 12px;
+        }
+
+        .footer h3 {
+            color: white;
+            margin: 0 0 6px;
+        }
+
+        .footer p {
+            margin: 6px 0;
+            font-size: 14px;
         }
 
         .footer a {
             color: white;
             margin: 0 8px;
-            text-decoration: none;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 560px) {
+            .card {
+                padding: 18px;
+            }
+
+            .btn-row {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
 
 <body>
 
-<header>
-    <h1>EasyLife ❤️</h1>
-    <p>Free Online Tools for Everyday Life</p>
-</header>
+    <header class="header">
+        <h1>Contact Us</h1>
+        <p>EasyLife ❤️ — Questions, Feedback &amp; Tool Suggestions</p>
+    </header>
 
-<main class="container">
+    <main class="container">
+        <section class="card">
 
-    <section class="card">
+            <h2>Get in Touch With EasyLife</h2>
 
-        <h2>Contact Us</h2>
+            <p>
+                Have a question about any of our PDF, image, calculator, or utility tools?
+                Found a bug or want to suggest a new tool for <strong>easylifetoolbox.com</strong>?
+                We welcome your feedback and will get back to you as soon as possible.
+            </p>
 
+            <div class="email-box">
+                <div>
+                    <div style="font-size:13px;color:#455a64;font-weight:bold;">Direct Support Email:</div>
+                    <a class="email-link" id="supportEmail" href="mailto:likhithadigitalsbvm15@gmail.com">
+                        likhithadigitalsbvm15@gmail.com
+                    </a>
+                </div>
+                <button type="button" class="copy-btn" onclick="copyEmail()">📋 Copy Email</button>
+            </div>
+
+            <div id="copyStatus" role="status" aria-live="polite"></div>
+
+            <h3>Send Us a Quick Message</h3>
+
+            <form onsubmit="sendEmailMessage(event)">
+                <div class="form-group">
+                    <label for="senderName">Your Name</label>
+                    <input type="text" id="senderName" required placeholder="Enter your name">
+                </div>
+
+                <div class="form-group">
+                    <label for="topic">Topic</label>
+                    <select id="topic">
+                        <option value="General Feedback">General Feedback</option>
+                        <option value="New Tool Suggestion">New Tool Suggestion</option>
+                        <option value="Report an Issue">Report an Issue / Bug</option>
+                        <option value="Business / Partnership">Business / Partnership Inquiry</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="messageBody">Your Message</label>
+                    <textarea id="messageBody" required placeholder="Write your message or suggestion here..."></textarea>
+                </div>
+
+                <div class="btn-row">
+                    <button type="submit" class="submit-btn">✉️ Compose &amp; Send Email</button>
+                    <a href="https://easylifetoolbox.com/" class="home-btn">🏠 Home</a>
+                </div>
+            </form>
+
+        </section>
+    </main>
+
+    <footer class="footer">
+        <h3>EasyLife ❤️</h3>
+        <p>Simple &amp; Free Tools for Everyday Life</p>
+        <p>© 2026 EasyLife. All rights reserved.</p>
         <p>
-            If you have any questions, feedback, suggestions or need help
-            with our tools, feel free to contact us.
+            <a href="https://easylifetoolbox.com/">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms &amp; Conditions</a>
+            <a href="contact.html">Contact Us</a>
         </p>
+    </footer>
 
-        <p>
-            We welcome your feedback and suggestions to improve EasyLife.
-        </p>
+    <script>
+        function copyEmail() {
+            const email = document.getElementById("supportEmail").textContent.trim();
+            const status = document.getElementById("copyStatus");
 
-        <p>
-            <strong>Email:</strong>
-            <span class="email">likhithadigitalsbvm15@gmail.com</span>
-        </p>
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(email).then(function () {
+                    status.textContent = "✅ Email address copied to clipboard!";
+                });
+            } else {
+                const temp = document.createElement("input");
+                temp.value = email;
+                document.body.appendChild(temp);
+                temp.select();
+                document.execCommand("copy");
+                temp.remove();
+                status.textContent = "✅ Email address copied to clipboard!";
+            }
+        }
 
-    </section>
+        function sendEmailMessage(event) {
+            event.preventDefault();
+            const name = document.getElementById("senderName").value.trim();
+            const topic = document.getElementById("topic").value;
+            const message = document.getElementById("messageBody").value.trim();
 
-</main>
+            const subject = encodeURIComponent("[EasyLife] " + topic + " from " + name);
+            const body = encodeURIComponent("Name: " + name + "\nTopic: " + topic + "\n\nMessage:\n" + message);
 
-<footer class="footer">
-
-    <p>
-        <a href="home.html">Home</a>
-
-        <a href="about.html">About Us</a>
-
-        <a href="privacy.html">Privacy Policy</a>
-
-        <a href="terms.html">Terms &amp; Conditions</a>
-    </p>
-
-    <p>© 2026 EasyLife. All rights reserved.</p>
-
-</footer>
+            window.location.href = "mailto:likhithadigitalsbvm15@gmail.com?subject=" + subject + "&body=" + body;
+        }
+    </script>
 
 </body>
 </html>
