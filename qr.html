@@ -1,143 +1,453 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4584641102876506"
-         crossorigin="anonymous"></script>
-    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>QR Code Generator - EasyLife</title>
+    <title>Free QR Code Generator Online (Link, Text, Wi-Fi &amp; PNG Download) | EasyLife</title>
+    <meta name="description" content="Create custom QR codes for website links, text, phone numbers, and messages online for free with EasyLife. Customize size and color, and download high-resolution PNG QR codes instantly.">
     <link rel="canonical" href="https://easylifetoolbox.com/qr.html">
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4584641102876506"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             font-family: Arial, sans-serif;
             background: #f2f7ff;
-            text-align: center;
+            color: #263238;
+            line-height: 1.6;
         }
 
         .header {
-            background: linear-gradient(135deg, #1976d2, #42a5f5);
+            background: linear-gradient(135deg, #0d47a1, #1976d2, #42a5f5);
             color: white;
-            padding: 30px 20px;
+            padding: 30px 16px;
+            text-align: center;
         }
 
         .header h1 {
             margin: 0;
-            font-size: 30px;
+            font-size: clamp(25px, 5vw, 34px);
+        }
+
+        .header p {
+            margin: 8px 0 0;
+        }
+
+        .box,
+        .content-box {
+            background: white;
+            width: calc(100% - 24px);
+            max-width: 760px;
+            margin: 22px auto;
+            padding: 22px;
+            border-radius: 14px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
         }
 
         .box {
+            max-width: 540px;
+            text-align: center;
+        }
+
+        .box h2,
+        .content-box h2 {
+            color: #0d47a1;
+            margin-top: 0;
+        }
+
+        .form-group {
+            text-align: left;
+            margin-bottom: 14px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 6px;
+            font-size: 14px;
+            color: #0d47a1;
+        }
+
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #b0c4de;
+            border-radius: 8px;
             background: white;
-            max-width: 450px;
-            margin: 30px auto;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+            font-family: Arial, sans-serif;
         }
 
         textarea {
-            width: 90%;
-            height: 100px;
-            padding: 12px;
-            font-size: 16px;
-            box-sizing: border-box;
+            height: 105px;
             resize: vertical;
         }
 
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: #1976d2;
+            box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.15);
+        }
+
+        .options-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
         button {
-            width: 90%;
-            margin: 10px auto;
-            padding: 12px;
-            font-size: 16px;
+            flex: 1;
             background: #1976d2;
             color: white;
             border: none;
+            padding: 13px 18px;
             border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
+            min-height: 46px;
         }
 
         button:hover {
-            background: #125ca8;
+            background: #0d47a1;
         }
 
-        #qrcode {
+        button:focus-visible {
+            outline: 3px solid #ffb300;
+            outline-offset: 2px;
+        }
+
+        .secondary-btn {
+            background: #526477;
+        }
+
+        .secondary-btn:hover {
+            background: #35485b;
+        }
+
+        .download-btn {
+            width: 100%;
+            background: #16803c;
+            margin-top: 14px;
+            font-size: 17px;
+        }
+
+        .download-btn:hover {
+            background: #0d642d;
+        }
+
+        .home-btn {
+            width: 100%;
+            margin-top: 12px;
+            background: #455a64;
+        }
+
+        .home-btn:hover {
+            background: #263238;
+        }
+
+        .qr-preview-box {
             margin-top: 20px;
+            padding: 18px;
+            background: #f4f8ff;
+            border: 1px solid #d0e3ff;
+            border-radius: 12px;
+            text-align: center;
         }
 
-        #qrcode img {
-            width: 250px;
-            height: 250px;
+        #qrCanvas,
+        #fallbackImg {
+            max-width: 100%;
+            height: auto;
+            border: 8px solid white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background: white;
+        }
+
+        .qr-caption {
+            font-size: 13px;
+            color: #455a64;
+            margin: 10px 0 0;
+        }
+
+        .hint {
+            background: #eaf3ff;
+            border-left: 4px solid #1976d2;
+            padding: 12px;
+            border-radius: 6px;
+            text-align: left;
+            font-size: 14px;
+            margin-top: 16px;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #dbe3ee;
+            padding: 12px 0;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-item h3 {
+            color: #174a83;
+            margin-bottom: 5px;
+        }
+
+        .footer {
+            background: #12345a;
+            color: white;
+            text-align: center;
+            padding: 20px 12px;
+            margin-top: 30px;
+        }
+
+        .footer a {
+            color: white;
+            margin: 0 8px;
+        }
+
+        [hidden] {
+            display: none !important;
+        }
+
+        @media (max-width: 480px) {
+            .box,
+            .content-box {
+                padding: 16px;
+            }
+
+            .options-row,
+            .btn-group {
+                grid-template-columns: 1fr;
+                flex-direction: column;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <div class="header">
+    <header class="header">
         <h1>📱 QR Code Generator</h1>
-        <p>Create QR codes easily</p>
-    </div>
+        <p>Create and download custom QR codes for links, text, phone numbers, and more.</p>
+    </header>
 
-    <div class="box">
+    <main>
+        <section class="box" aria-label="QR Code Generator">
 
-        <h2>Enter Text or Link</h2>
+            <h2>Create Your QR Code</h2>
 
-        <textarea id="text"
-            placeholder="Enter text or website link"></textarea>
+            <div class="form-group">
+                <label for="text">Enter Website Link, Text, or Number</label>
+                <textarea id="text" placeholder="Example: https://easylifetoolbox.com/ or Hello World"></textarea>
+            </div>
 
-        <button onclick="generateQR()">
-            Generate QR Code
-        </button>
+            <div class="options-row">
+                <div class="form-group">
+                    <label for="qrSize">QR Code Size</label>
+                    <select id="qrSize">
+                        <option value="250" selected>Standard (250 × 250 px)</option>
+                        <option value="400">Large (400 × 400 px)</option>
+                        <option value="600">HD Print (600 × 600 px)</option>
+                    </select>
+                </div>
 
-        <div id="qrcode"></div>
+                <div class="form-group">
+                    <label for="qrColor">QR Code Color</label>
+                    <select id="qrColor">
+                        <option value="#000000" selected>Classic Black</option>
+                        <option value="#0d47a1">Royal Blue</option>
+                        <option value="#1b5e20">Dark Green</option>
+                    </select>
+                </div>
+            </div>
 
-        <button id="openBtn"
-            onclick="openQR()"
-            style="display:none;">
-            Open QR Code
-        </button>
+            <div class="btn-group">
+                <button type="button" onclick="generateQR()">📱 Generate QR Code</button>
+                <button type="button" class="secondary-btn" onclick="clearQR()">🗑️ Clear</button>
+            </div>
 
-        <button onclick="goHome()">
-            🏠 Home
-        </button>
+            <div id="qrPreviewBox" class="qr-preview-box" hidden>
+                <canvas id="qrCanvas"></canvas>
+                <img id="fallbackImg" alt="Generated QR Code" hidden>
+                <p class="qr-caption">Scan with your phone camera to test before printing.</p>
+                <button type="button" id="downloadBtn" class="download-btn" onclick="downloadQR()">
+                    ⬇️ Download QR Code (PNG)
+                </button>
+            </div>
 
-    </div>
+            <p class="hint">
+                <strong>Tip:</strong> For WhatsApp links, enter <code>https://wa.me/919876543210</code>. For phone calls, enter <code>tel:+919876543210</code>.
+            </p>
+
+            <button type="button" class="home-btn" onclick="goHome()">🏠 Back to Home</button>
+
+        </section>
+
+        <section class="content-box">
+            <h2>What Is a QR Code Generator?</h2>
+            <p>
+                A QR (Quick Response) Code is a two-dimensional barcode that smartphones can scan
+                instantly using their camera. EasyLife's QR Code Generator converts any URL,
+                plain text, contact number, or message into a downloadable high-resolution PNG
+                QR code without watermarks or expiration dates.
+            </p>
+        </section>
+
+        <section class="content-box">
+            <h2>How to Create and Download a QR Code</h2>
+            <ol>
+                <li>Type or paste your <strong>website URL, text, or phone number</strong> into the box above.</li>
+                <li>Choose your preferred <strong>QR Code Size</strong> (Standard, Large, or HD Print) and <strong>Color</strong>.</li>
+                <li>Click <strong>Generate QR Code</strong> to create your scannable code immediately.</li>
+                <li>Test the QR code with your phone camera, then click <strong>Download QR Code (PNG)</strong> to save it.</li>
+            </ol>
+        </section>
+
+        <section class="content-box">
+            <h2>Popular Ways to Use QR Codes</h2>
+            <ul>
+                <li><strong>Business Cards &amp; Flyers:</strong> Link directly to your website, portfolio, or Google Maps location.</li>
+                <li><strong>Shop Counter &amp; Posters:</strong> Share social media pages, product catalogs, or digital menus.</li>
+                <li><strong>Quick Contact &amp; WhatsApp:</strong> Let customers start a WhatsApp chat or call you with a single scan.</li>
+                <li><strong>Event Invitations:</strong> Embed venue directions or RSVP links onto wedding and event cards.</li>
+            </ul>
+        </section>
+
+        <section class="content-box">
+            <h2>Frequently Asked Questions</h2>
+
+            <div class="faq-item">
+                <h3>1. Do these QR codes expire?</h3>
+                <p>No. Static QR codes store your link or text directly inside the pattern, so they work forever without expiring.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>2. Can I use the downloaded PNG QR code for commercial printing?</h3>
+                <p>Yes. Select the <strong>HD Print (600 × 600 px)</strong> option for crisp results on posters, stickers, and brochures.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>3. Is my text or link stored on any server?</h3>
+                <p>No. When generated locally in your browser, your data stays private and is never saved.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>EasyLife — Simple &amp; Free Tools for Everyday Life</p>
+        <p>
+            <a href="https://easylifetoolbox.com/">Home</a>
+            <a href="https://easylifetoolbox.com/privacy.html">Privacy Policy</a>
+            <a href="https://easylifetoolbox.com/terms.html">Terms &amp; Conditions</a>
+            <a href="https://easylifetoolbox.com/contact.html">Contact Us</a>
+        </p>
+    </footer>
 
     <script>
-
-        let qrUrl = "";
+        let currentFallbackUrl = "";
+        let usingCanvas = true;
 
         function generateQR() {
-
             const text = document.getElementById("text").value.trim();
+            const size = parseInt(document.getElementById("qrSize").value, 10) || 250;
+            const color = document.getElementById("qrColor").value || "#000000";
 
             if (text === "") {
-                alert("Please enter text or a link.");
+                alert("Please enter text or a website link.");
                 return;
             }
 
-            qrUrl =
-                "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data="
-                + encodeURIComponent(text);
+            const previewBox = document.getElementById("qrPreviewBox");
+            const canvas = document.getElementById("qrCanvas");
+            const fallbackImg = document.getElementById("fallbackImg");
 
-            document.getElementById("qrcode").innerHTML =
-                "<img src='" + qrUrl + "' alt='QR Code'>";
+            if (window.QRious) {
+                usingCanvas = true;
+                canvas.hidden = false;
+                fallbackImg.hidden = true;
 
-            document.getElementById("openBtn").style.display = "block";
-        }
+                new QRious({
+                    element: canvas,
+                    value: text,
+                    size: size,
+                    foreground: color,
+                    background: "#ffffff",
+                    level: "M"
+                });
+            } else {
+                // Fallback if external script is blocked
+                usingCanvas = false;
+                canvas.hidden = true;
+                fallbackImg.hidden = false;
 
-        function openQR() {
+                const hexColor = color.replace("#", "");
+                currentFallbackUrl =
+                    "https://api.qrserver.com/v1/create-qr-code/?size=" +
+                    size + "x" + size +
+                    "&color=" + hexColor +
+                    "&data=" + encodeURIComponent(text);
 
-            if (qrUrl !== "") {
-                window.open(qrUrl, "_blank");
+                fallbackImg.src = currentFallbackUrl;
             }
 
+            previewBox.hidden = false;
+        }
+
+        function downloadQR() {
+            const canvas = document.getElementById("qrCanvas");
+
+            if (usingCanvas && canvas) {
+                canvas.toBlob(function (blob) {
+                    if (!blob) {
+                        alert("Could not create PNG file. Please try again.");
+                        return;
+                    }
+                    const url = URL.createObjectURL(blob);
+                    const link = document.createElement("a");
+                    link.href = url;
+                    link.download = "EasyLife-QR-Code.png";
+                    document.body.appendChild(link);
+                    link.click();
+                    link.remove();
+                    setTimeout(() => URL.revokeObjectURL(url), 1000);
+                }, "image/png");
+            } else if (currentFallbackUrl) {
+                window.open(currentFallbackUrl, "_blank");
+            }
+        }
+
+        function clearQR() {
+            document.getElementById("text").value = "";
+            document.getElementById("qrSize").value = "250";
+            document.getElementById("qrColor").value = "#000000";
+            document.getElementById("qrPreviewBox").hidden = true;
+            currentFallbackUrl = "";
         }
 
         function goHome() {
             window.location.href = "https://easylifetoolbox.com/";
         }
-
     </script>
 
 </body>
