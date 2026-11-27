@@ -1,192 +1,506 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4584641102876506"
-         crossorigin="anonymous"></script>   
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>EasyLife - Voice to Text</title>
+    <title>Free Voice to Text Online (Telugu, English, Hindi Speech Typing) | EasyLife</title>
+    <meta name="description" content="Convert your voice into text online for free with EasyLife. Supports Telugu, English, Hindi, Tamil, Kannada, and Malayalam speech-to-text typing with instant copy and download.">
     <link rel="canonical" href="https://easylifetoolbox.com/voice-text.html">
-    <style> 
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4584641102876506"
+        crossorigin="anonymous"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             font-family: Arial, sans-serif;
             background: #f2f7ff;
-            text-align: center;
+            color: #263238;
+            line-height: 1.6;
         }
 
         .header {
-            background: linear-gradient(135deg, #1976d2, #42a5f5);
+            background: linear-gradient(135deg, #0d47a1, #1976d2, #42a5f5);
             color: white;
-            padding: 30px 20px;
+            padding: 30px 16px;
+            text-align: center;
         }
 
         .header h1 {
             margin: 0;
-            font-size: 30px;
+            font-size: clamp(25px, 5vw, 34px);
+        }
+
+        .header p {
+            margin: 8px 0 0;
+        }
+
+        .box,
+        .content-box {
+            background: white;
+            width: calc(100% - 24px);
+            max-width: 760px;
+            margin: 22px auto;
+            padding: 22px;
+            border-radius: 14px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
         }
 
         .box {
-            background: white;
-            max-width: 500px;
-            margin: 25px auto;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+            max-width: 620px;
+            text-align: center;
+        }
+
+        .box h2,
+        .content-box h2 {
+            color: #0d47a1;
+            margin-top: 0;
+        }
+
+        .form-group {
+            text-align: left;
+            margin-bottom: 14px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 6px;
+            font-size: 14px;
+            color: #0d47a1;
         }
 
         select {
-            width: 90%;
+            width: 100%;
             padding: 12px;
-            margin: 10px;
-            border: 1px solid #ccc;
+            border: 1px solid #b0c4de;
             border-radius: 8px;
             font-size: 16px;
+            background: white;
         }
 
-        textarea {
-            width: 90%;
-            height: 180px;
-            padding: 12px;
-            margin: 10px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            font-size: 17px;
-            resize: none;
+        select:focus {
+            outline: none;
+            border-color: #1976d2;
+            box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.15);
+        }
+
+        .mic-controls {
+            display: flex;
+            gap: 10px;
+            margin: 14px 0;
         }
 
         button {
+            flex: 1;
             background: #1976d2;
             color: white;
             border: none;
-            padding: 13px 25px;
-            margin: 8px 5px;
+            padding: 13px 16px;
             border-radius: 8px;
             font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
+            min-height: 46px;
         }
 
         button:hover {
-            background: #125ca8;
+            background: #0d47a1;
+        }
+
+        button:focus-visible,
+        select:focus-visible,
+        textarea:focus-visible {
+            outline: 3px solid #ffb300;
+            outline-offset: 2px;
+        }
+
+        button:disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
+        }
+
+        .stop-btn {
+            background: #c62828;
+        }
+
+        .stop-btn:hover {
+            background: #8e0000;
+        }
+
+        .secondary-btn {
+            background: #526477;
+        }
+
+        .secondary-btn:hover {
+            background: #35485b;
+        }
+
+        .download-btn {
+            background: #0d47a1;
+        }
+
+        .home-btn {
+            width: 100%;
+            margin-top: 14px;
+            background: #16803c;
+        }
+
+        .home-btn:hover {
+            background: #0d642d;
         }
 
         #status {
-            margin: 10px;
-            font-size: 16px;
+            margin: 12px 0;
+            padding: 10px;
+            border-radius: 8px;
+            background: #f4f8ff;
+            border: 1px solid #d0e3ff;
+            font-size: 15px;
+            font-weight: bold;
+            color: #0d47a1;
+        }
+
+        #status.listening {
+            background: #ffebee;
+            border-color: #ef9a9a;
+            color: #c62828;
+        }
+
+        textarea {
+            width: 100%;
+            height: 220px;
+            padding: 14px;
+            margin-top: 8px;
+            border: 2px solid #bbdefb;
+            border-radius: 10px;
+            font-size: 17px;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            resize: vertical;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #1976d2;
+        }
+
+        .meta-bar {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: #526477;
+            margin: 6px 2px 14px;
+        }
+
+        .action-row {
+            display: flex;
+            gap: 8px;
+        }
+
+        .hint {
+            background: #eaf3ff;
+            border-left: 4px solid #1976d2;
+            padding: 12px;
+            border-radius: 6px;
+            text-align: left;
+            font-size: 14px;
+            margin-top: 16px;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #dbe3ee;
+            padding: 12px 0;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-item h3 {
+            color: #174a83;
+            margin-bottom: 5px;
+        }
+
+        .footer {
+            background: #12345a;
+            color: white;
+            text-align: center;
+            padding: 20px 12px;
+            margin-top: 30px;
+        }
+
+        .footer a {
+            color: white;
+            margin: 0 8px;
+        }
+
+        @media (max-width: 480px) {
+            .box,
+            .content-box {
+                padding: 16px;
+            }
+
+            .mic-controls,
+            .action-row {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <div class="header">
-        <h1>🎤 Voice → Text</h1>
-        <p>Speak and convert your voice into text</p>
-    </div>
+    <header class="header">
+        <h1>🎤 Voice to Text Converter</h1>
+        <p>Speak into your microphone and convert your speech into written text instantly.</p>
+    </header>
 
-    <div class="box">
+    <main>
+        <section class="box" aria-label="Voice to Text Tool">
 
-        <select id="language">
-            <option value="te-IN">తెలుగు</option>
-            <option value="en-IN">English</option>
-            <option value="hi-IN">हिंदी</option>
-        </select>
+            <h2>Speak &amp; Convert to Text</h2>
 
-        <br>
+            <div class="form-group">
+                <label for="language">Select Speaking Language</label>
+                <select id="language">
+                    <option value="te-IN">తెలుగు (Telugu)</option>
+                    <option value="en-IN" selected>English (India)</option>
+                    <option value="en-US">English (US)</option>
+                    <option value="hi-IN">हिंदी (Hindi)</option>
+                    <option value="ta-IN">தமிழ் (Tamil)</option>
+                    <option value="kn-IN">ಕನ್ನಡ (Kannada)</option>
+                    <option value="ml-IN">മലയാളം (Malayalam)</option>
+                </select>
+            </div>
 
-        <button onclick="startVoice()">🎤 Start Speaking</button>
+            <div class="mic-controls">
+                <button type="button" id="startBtn" onclick="startVoice()">🎤 Start Speaking</button>
+                <button type="button" id="stopBtn" class="stop-btn" onclick="stopVoice()" disabled>⏹️ Stop</button>
+            </div>
 
-        <button onclick="stopVoice()">⏹️ Stop</button>
+            <div id="status" role="status" aria-live="polite">Ready — Select your language and click Start Speaking.</div>
 
-        <div id="status">Ready</div>
+            <label for="result" style="position:absolute;left:-9999px;">Transcribed speech text</label>
+            <textarea id="result" placeholder="Your speech will appear here... You can also type or edit manually." oninput="updateCounts()"></textarea>
 
-        <textarea id="result" placeholder="Your speech will appear here..."></textarea>
+            <div class="meta-bar">
+                <span id="wordCount">Words: 0</span>
+                <span id="charCount">Characters: 0</span>
+            </div>
 
-        <br>
+            <div class="action-row">
+                <button type="button" onclick="copyText()">📋 Copy Text</button>
+                <button type="button" class="download-btn" onclick="downloadText()">⬇️ Download TXT</button>
+                <button type="button" class="secondary-btn" onclick="clearText()">🗑️ Clear</button>
+            </div>
 
-        <button onclick="copyText()">📋 Copy Text</button>
+            <p class="hint">
+                <strong>Tip:</strong> Allow microphone access when your browser prompts you. Speak clearly in a quiet place for the best accuracy.
+            </p>
 
-        <button onclick="goHome()">🏠 Home</button>
+            <button type="button" class="home-btn" onclick="goHome()">🏠 Back to Home</button>
 
-    </div>
+        </section>
+
+        <section class="content-box">
+            <h2>What Is a Voice to Text Converter?</h2>
+            <p>
+                A Voice to Text (Speech-to-Text) converter uses your device's microphone and
+                browser speech recognition technology to transcribe spoken words into digital text
+                in real time. EasyLife's Voice Typing tool supports Telugu, English, Hindi, Tamil,
+                Kannada, and Malayalam without requiring any software installation.
+            </p>
+        </section>
+
+        <section class="content-box">
+            <h2>How to Use Voice Typing Online</h2>
+            <ol>
+                <li>Choose your preferred speaking language from the dropdown menu.</li>
+                <li>Click <strong>Start Speaking</strong> and click <strong>Allow</strong> if your browser asks for microphone permission.</li>
+                <li>Speak clearly into your microphone; your words will appear in the text box automatically.</li>
+                <li>Click <strong>Stop</strong> when you are finished speaking.</li>
+                <li>Edit the text if needed, then click <strong>Copy Text</strong> or <strong>Download TXT</strong> to save your notes.</li>
+            </ol>
+        </section>
+
+        <section class="content-box">
+            <h2>Frequently Asked Questions</h2>
+
+            <div class="faq-item">
+                <h3>1. Which browsers support Voice to Text?</h3>
+                <p>Google Chrome, Microsoft Edge, and Safari on desktop and Android devices provide the best support for Web Speech Recognition.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>2. Can I type in Telugu or Hindi using my voice?</h3>
+                <p>Yes. Select <strong>తెలుగు (Telugu)</strong> or <strong>हिंदी (Hindi)</strong> from the language selector before clicking Start Speaking.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>3. Is my voice recorded or stored by EasyLife?</h3>
+                <p>No. EasyLife does not record or store your audio or transcribed text on any server.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>EasyLife — Simple &amp; Free Tools for Everyday Life</p>
+        <p>
+            <a href="https://easylifetoolbox.com/">Home</a>
+            <a href="https://easylifetoolbox.com/privacy.html">Privacy Policy</a>
+            <a href="https://easylifetoolbox.com/terms.html">Terms &amp; Conditions</a>
+            <a href="https://easylifetoolbox.com/contact.html">Contact Us</a>
+        </p>
+    </footer>
 
     <script>
+        let recognition = null;
+        let isListening = false;
+        let savedTranscript = "";
 
-        let recognition;
+        const startBtn = document.getElementById("startBtn");
+        const stopBtn = document.getElementById("stopBtn");
+        const statusEl = document.getElementById("status");
+        const resultArea = document.getElementById("result");
+
+        function updateCounts() {
+            const text = resultArea.value;
+            const trimmed = text.trim();
+            const words = trimmed ? trimmed.split(/\s+/).length : 0;
+            document.getElementById("wordCount").textContent = "Words: " + words;
+            document.getElementById("charCount").textContent = "Characters: " + text.length;
+        }
 
         function startVoice() {
-
-            const SpeechRecognition =
-                window.SpeechRecognition ||
-                window.webkitSpeechRecognition;
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
             if (!SpeechRecognition) {
-                alert("Voice recognition is not supported in this browser.");
+                alert("Voice recognition is not supported in this browser. Please try Google Chrome or Microsoft Edge.");
                 return;
             }
 
+            if (isListening) return;
+
+            // Preserve any existing text in the textarea before starting
+            savedTranscript = resultArea.value;
+            if (savedTranscript && !savedTranscript.endsWith(" ") && !savedTranscript.endsWith("\n")) {
+                savedTranscript += " ";
+            }
+
             recognition = new SpeechRecognition();
-
-            recognition.lang =
-                document.getElementById("language").value;
-
+            recognition.lang = document.getElementById("language").value;
             recognition.continuous = true;
             recognition.interimResults = true;
 
-            recognition.onstart = function() {
-                document.getElementById("status").innerText =
-                    "🎤 Listening...";
+            recognition.onstart = function () {
+                isListening = true;
+                startBtn.disabled = true;
+                stopBtn.disabled = false;
+                statusEl.className = "listening";
+                statusEl.textContent = "🔴 Listening... Speak now";
             };
 
-            recognition.onresult = function(event) {
-
-                let text = "";
+            recognition.onresult = function (event) {
+                let interimTranscript = "";
+                let newFinal = "";
 
                 for (let i = event.resultIndex; i < event.results.length; i++) {
-                    text += event.results[i][0].transcript;
+                    const transcript = event.results[i][0].transcript;
+                    if (event.results[i].isFinal) {
+                        newFinal += transcript + " ";
+                    } else {
+                        interimTranscript += transcript;
+                    }
                 }
 
-                document.getElementById("result").value = text;
+                savedTranscript += newFinal;
+                resultArea.value = savedTranscript + interimTranscript;
+                updateCounts();
             };
 
-            recognition.onerror = function() {
-                document.getElementById("status").innerText =
-                    "Voice recognition error";
+            recognition.onerror = function (event) {
+                statusEl.className = "";
+                if (event.error === "not-allowed") {
+                    statusEl.textContent = "⚠️ Microphone permission denied. Please allow mic access in browser settings.";
+                } else if (event.error === "no-speech") {
+                    statusEl.textContent = "No speech detected. Please try speaking closer to the mic.";
+                } else {
+                    statusEl.textContent = "Voice recognition error: " + event.error;
+                }
             };
 
-            recognition.onend = function() {
-                document.getElementById("status").innerText =
-                    "Stopped";
+            recognition.onend = function () {
+                isListening = false;
+                startBtn.disabled = false;
+                stopBtn.disabled = true;
+                statusEl.className = "";
+                statusEl.textContent = "⏹️ Stopped. Click Start Speaking to continue.";
             };
 
             recognition.start();
         }
 
         function stopVoice() {
-
-            if (recognition) {
+            if (recognition && isListening) {
                 recognition.stop();
             }
         }
 
         function copyText() {
-
-            const text =
-                document.getElementById("result").value;
-
-            if (!text) {
-                alert("No text to copy");
+            const text = resultArea.value;
+            if (!text.trim()) {
+                alert("No text to copy.");
                 return;
             }
+            resultArea.select();
+            resultArea.setSelectionRange(0, 99999);
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(() => {
+                    statusEl.textContent = "✅ Text copied to clipboard!";
+                });
+            } else {
+                document.execCommand("copy");
+                statusEl.textContent = "✅ Text copied to clipboard!";
+            }
+        }
 
-            navigator.clipboard.writeText(text);
+        function downloadText() {
+            const text = resultArea.value;
+            if (!text.trim()) {
+                alert("No text to download.");
+                return;
+            }
+            const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = "EasyLife-Voice-Text.txt";
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+            setTimeout(() => URL.revokeObjectURL(url), 1000);
+            statusEl.textContent = "✅ Downloaded EasyLife-Voice-Text.txt";
+        }
 
-            alert("Text copied");
+        function clearText() {
+            if (isListening && recognition) {
+                recognition.stop();
+            }
+            savedTranscript = "";
+            resultArea.value = "";
+            updateCounts();
+            statusEl.textContent = "Ready — Select your language and click Start Speaking.";
         }
 
         function goHome() {
             window.location.href = "https://easylifetoolbox.com/";
         }
-
     </script>
 
 </body>
