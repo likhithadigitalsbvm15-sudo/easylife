@@ -1,114 +1,408 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4584641102876506"
-         crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Word Counter - EasyLife</title>
+    <title>Free Word Counter Online (Words, Characters, Sentences &amp; Reading Time) | EasyLife</title>
+    <meta name="description" content="Count words, characters (with and without spaces), sentences, paragraphs, and estimated reading time instantly online for free with EasyLife's Word Counter tool.">
     <link rel="canonical" href="https://easylifetoolbox.com/word-counter.html">
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4584641102876506"
+        crossorigin="anonymous"></script>
+
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: #eef5ff;
+            background: #f2f7ff;
+            color: #263238;
+            line-height: 1.6;
         }
 
         .header {
-            background: linear-gradient(135deg, #0d47a1, #2196f3);
+            background: linear-gradient(135deg, #0d47a1, #1976d2, #42a5f5);
             color: white;
-            padding: 30px 20px;
+            padding: 30px 16px;
             text-align: center;
         }
 
         .header h1 {
             margin: 0;
-            font-size: 32px;
+            font-size: clamp(25px, 5vw, 34px);
         }
 
-        .container {
-            max-width: 600px;
-            margin: 25px auto;
-            padding: 20px;
+        .header p {
+            margin: 8px 0 0;
+        }
+
+        .box,
+        .content-box {
+            background: white;
+            width: calc(100% - 24px);
+            max-width: 780px;
+            margin: 22px auto;
+            padding: 22px;
+            border-radius: 14px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .box h2,
+        .content-box h2 {
+            color: #0d47a1;
+            margin-top: 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .stat-card {
+            background: #f4f8ff;
+            border: 1px solid #d0e3ff;
+            border-radius: 10px;
+            padding: 12px 8px;
+            text-align: center;
+        }
+
+        .stat-card span {
+            display: block;
+            font-size: 12px;
+            font-weight: bold;
+            color: #455a64;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .stat-card strong {
+            font-size: 22px;
+            color: #0d47a1;
         }
 
         textarea {
             width: 100%;
-            height: 250px;
+            height: 240px;
             padding: 15px;
-            box-sizing: border-box;
             border: 2px solid #bbdefb;
-            border-radius: 15px;
-            font-size: 17px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
             resize: vertical;
             outline: none;
         }
 
         textarea:focus {
-            border-color: #2196f3;
+            border-color: #1976d2;
+            box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.15);
         }
 
-        .result {
-            margin-top: 20px;
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.10);
-            font-size: 18px;
+        .toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 14px;
         }
 
-        .back {
-            display: block;
-            margin-top: 20px;
-            text-align: center;
-            text-decoration: none;
-            color: #0d47a1;
+        button {
+            flex: 1 1 auto;
+            background: #1976d2;
+            color: white;
+            border: none;
+            padding: 11px 15px;
+            border-radius: 8px;
+            font-size: 15px;
             font-weight: bold;
+            cursor: pointer;
+            min-height: 44px;
+        }
+
+        button:hover {
+            background: #0d47a1;
+        }
+
+        button:focus-visible {
+            outline: 3px solid #ffb300;
+            outline-offset: 2px;
+        }
+
+        .case-btn {
+            background: #e3f2fd;
+            color: #0d47a1;
+            border: 1px solid #90caf9;
+        }
+
+        .case-btn:hover {
+            background: #bbdefb;
+        }
+
+        .clear-btn {
+            background: #526477;
+        }
+
+        .clear-btn:hover {
+            background: #35485b;
+        }
+
+        .home-btn {
+            width: 100%;
+            margin-top: 14px;
+            background: #16803c;
+            font-size: 16px;
+        }
+
+        .home-btn:hover {
+            background: #0d642d;
+        }
+
+        #copyStatus {
+            margin: 10px 0 0;
+            font-size: 14px;
+            font-weight: bold;
+            color: #16803c;
+            min-height: 20px;
+            text-align: center;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #dbe3ee;
+            padding: 12px 0;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-item h3 {
+            color: #174a83;
+            margin-bottom: 5px;
+        }
+
+        .footer {
+            background: #12345a;
+            color: white;
+            text-align: center;
+            padding: 20px 12px;
+            margin-top: 30px;
+        }
+
+        .footer a {
+            color: white;
+            margin: 0 8px;
+        }
+
+        @media (max-width: 560px) {
+            .box,
+            .content-box {
+                padding: 16px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .toolbar button {
+                width: 100%;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <div class="header">
+    <header class="header">
         <h1>📝 Word Counter</h1>
-        <p>Count words, characters and sentences</p>
-    </div>
+        <p>Count words, characters, sentences, paragraphs, and reading time in real time.</p>
+    </header>
 
-    <div class="container">
+    <main>
+        <section class="box" aria-label="Word Counter Tool">
 
-        <textarea id="textBox"
-            placeholder="Type or paste your text here..."
-            oninput="countText()"></textarea>
+            <h2>Type or Paste Your Text Below</h2>
 
-        <div class="result">
-            <p>📝 Words: <b id="words">0</b></p>
-            <p>🔤 Characters: <b id="characters">0</b></p>
-            <p>📄 Sentences: <b id="sentences">0</b></p>
-        </div>
+            <div class="stats-grid" aria-live="polite">
+                <div class="stat-card">
+                    <span>Words</span>
+                    <strong id="words">0</strong>
+                </div>
+                <div class="stat-card">
+                    <span>Characters</span>
+                    <strong id="characters">0</strong>
+                </div>
+                <div class="stat-card">
+                    <span>No Spaces</span>
+                    <strong id="noSpaces">0</strong>
+                </div>
+                <div class="stat-card">
+                    <span>Sentences</span>
+                    <strong id="sentences">0</strong>
+                </div>
+                <div class="stat-card">
+                    <span>Paragraphs</span>
+                    <strong id="paragraphs">0</strong>
+                </div>
+                <div class="stat-card">
+                    <span>Read Time</span>
+                    <strong id="readTime">0 sec</strong>
+                </div>
+            </div>
 
-        <a class="back" href="https://easylifetoolbox.com/";
-            ← Back to EasyLife
-        </a>
+            <label for="textBox" style="position:absolute;left:-9999px;">Enter text to count words</label>
+            <textarea id="textBox"
+                placeholder="Start typing or paste your article, essay, or social media post here..."
+                oninput="countText()"></textarea>
 
-    </div>
+            <div class="toolbar">
+                <button type="button" onclick="copyText()">📋 Copy Text</button>
+                <button type="button" class="case-btn" onclick="toUpper()">AA UPPERCASE</button>
+                <button type="button" class="case-btn" onclick="toLower()">aa lowercase</button>
+                <button type="button" class="clear-btn" onclick="clearText()">🗑️ Clear</button>
+            </div>
+
+            <p id="copyStatus" role="status" aria-live="polite"></p>
+
+            <button type="button" class="home-btn" onclick="goHome()">🏠 Back to Home</button>
+
+        </section>
+
+        <section class="content-box">
+            <h2>What Is a Word Counter?</h2>
+            <p>
+                A word counter is an essential writing tool that calculates the exact number of
+                words, characters, sentences, and paragraphs in any text. Whether you are writing
+                a school essay, blog article, YouTube description, or social media post with strict
+                character limits, EasyLife's Word Counter gives instant feedback as you type.
+            </p>
+        </section>
+
+        <section class="content-box">
+            <h2>How to Use This Word Counter</h2>
+            <ol>
+                <li>Click inside the text box above and start typing, or paste copied text from another document.</li>
+                <li>Watch the live counters update automatically for <strong>Words</strong>, <strong>Characters</strong>, <strong>Characters (No Spaces)</strong>, <strong>Sentences</strong>, <strong>Paragraphs</strong>, and <strong>Estimated Reading Time</strong>.</li>
+                <li>Use the quick action buttons below the box to convert text to <strong>UPPERCASE</strong> or <strong>lowercase</strong>, copy your text, or clear the editor.</li>
+            </ol>
+        </section>
+
+        <section class="content-box">
+            <h2>Common Character &amp; Word Limits</h2>
+            <ul>
+                <li><strong>Meta Description (SEO):</strong> 150 – 160 characters</li>
+                <li><strong>X (Twitter) Post:</strong> Up to 280 characters</li>
+                <li><strong>Instagram Caption:</strong> Up to 2,200 characters</li>
+                <li><strong>YouTube Video Title:</strong> Up to 100 characters (70 recommended)</li>
+                <li><strong>Standard Blog Post:</strong> 800 – 1,500+ words</li>
+            </ul>
+        </section>
+
+        <section class="content-box">
+            <h2>Frequently Asked Questions</h2>
+
+            <div class="faq-item">
+                <h3>1. How is estimated reading time calculated?</h3>
+                <p>Reading time is estimated based on an average adult reading speed of 200 words per minute.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>2. Does this tool save or upload the text I paste?</h3>
+                <p>No. Everything runs locally inside your web browser—your essays, articles, and notes are never sent to any server.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>3. Does it work on mobile phones?</h3>
+                <p>Yes. It works smoothly on Android, iPhone, tablets, and desktop computers.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>EasyLife — Simple &amp; Free Tools for Everyday Life</p>
+        <p>
+            <a href="https://easylifetoolbox.com/">Home</a>
+            <a href="https://easylifetoolbox.com/privacy.html">Privacy Policy</a>
+            <a href="https://easylifetoolbox.com/terms.html">Terms &amp; Conditions</a>
+            <a href="https://easylifetoolbox.com/contact.html">Contact Us</a>
+        </p>
+    </footer>
 
     <script>
         function countText() {
             const text = document.getElementById("textBox").value;
+            const trimmed = text.trim();
 
-            const words = text.trim()
-                ? text.trim().split(/\s+/).length
-                : 0;
-
+            const words = trimmed ? trimmed.split(/\s+/).length : 0;
             const characters = text.length;
+            const noSpaces = text.replace(/\s/g, "").length;
+            const sentences = trimmed ? text.split(/[.!?]+/).filter(s => s.trim().length > 0).length : 0;
+            const paragraphs = trimmed ? text.split(/\n+/).filter(p => p.trim().length > 0).length : 0;
 
-            const sentences = text.trim()
-                ? text.split(/[.!?]+/).filter(s => s.trim()).length
-                : 0;
+            // Reading time based on 200 words per minute
+            let readTimeStr = "0 sec";
+            if (words > 0) {
+                const totalSeconds = Math.ceil((words / 200) * 60);
+                if (totalSeconds < 60) {
+                    readTimeStr = totalSeconds + " sec";
+                } else {
+                    const mins = Math.floor(totalSeconds / 60);
+                    const secs = totalSeconds % 60;
+                    readTimeStr = secs > 0 ? mins + "m " + secs + "s" : mins + " min";
+                }
+            }
 
-            document.getElementById("words").innerText = words;
-            document.getElementById("characters").innerText = characters;
-            document.getElementById("sentences").innerText = sentences;
+            document.getElementById("words").textContent = words.toLocaleString("en-IN");
+            document.getElementById("characters").textContent = characters.toLocaleString("en-IN");
+            document.getElementById("noSpaces").textContent = noSpaces.toLocaleString("en-IN");
+            document.getElementById("sentences").textContent = sentences.toLocaleString("en-IN");
+            document.getElementById("paragraphs").textContent = paragraphs.toLocaleString("en-IN");
+            document.getElementById("readTime").textContent = readTimeStr;
+        }
+
+        function copyText() {
+            const textBox = document.getElementById("textBox");
+            const status = document.getElementById("copyStatus");
+            if (!textBox.value.trim()) {
+                status.textContent = "Nothing to copy yet!";
+                return;
+            }
+            textBox.select();
+            textBox.setSelectionRange(0, 99999);
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(textBox.value).then(() => {
+                    status.textContent = "✅ Text copied to clipboard!";
+                });
+            } else {
+                document.execCommand("copy");
+                status.textContent = "✅ Text copied to clipboard!";
+            }
+        }
+
+        function toUpper() {
+            const textBox = document.getElementById("textBox");
+            textBox.value = textBox.value.toUpperCase();
+            countText();
+        }
+
+        function toLower() {
+            const textBox = document.getElementById("textBox");
+            textBox.value = textBox.value.toLowerCase();
+            countText();
+        }
+
+        function clearText() {
+            document.getElementById("textBox").value = "";
+            document.getElementById("copyStatus").textContent = "";
+            countText();
+        }
+
+        function goHome() {
+            window.location.href = "https://easylifetoolbox.com/";
         }
     </script>
 
